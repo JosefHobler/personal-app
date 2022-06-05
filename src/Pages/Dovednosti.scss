@@ -1,0 +1,74 @@
+.scene {
+  width: 20vw;
+  height: 20vw;
+  perspective: 600px;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+  transform-origin: 10vw 10vw 0;
+  animation: rotatingCube 12s infinite ease-in-out;
+}
+
+.cube-face {
+  position: absolute;
+  width: 20vw;
+  height: 20vw;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.4);
+  text-align: center;
+  font-size: 10vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px 0px lightyellow;
+}
+
+.cube-face-front {
+  transform: rotateY(0deg) translateZ(10vw);
+}
+
+.cube-face-right {
+  transform: rotateY(90deg) translateZ(10vw);
+}
+
+.cube-face-back {
+  transform: rotateY(180deg) translateZ(10vw);
+}
+
+.cube-face-left {
+  transform: rotateY(-90deg) translateZ(10vw);
+}
+
+.cube-face-top {
+  transform: rotateX(90deg) translateZ(10vw);
+}
+
+.cube-face-bottom {
+  transform: rotateX(-90deg) translateZ(10vw);
+}
+
+@keyframes rotatingCube {
+  from,
+  to {
+    transform: rotateX(0deg) rotateY(0deg), rotateZ(0);
+  }
+  16% {
+    transform: rotateY(-90deg);
+  }
+  33% {
+    transform: rotateY(-90deg) rotateZ(90deg);
+  }
+  50% {
+    transform: rotateY(-180deg) rotateZ(90deg);
+  }
+  66% {
+    transform: rotateY(-270deg) rotateX(90deg);
+  }
+  83% {
+    transform: rotateX(90deg);
+  }
+}

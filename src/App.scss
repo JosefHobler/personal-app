@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+
 :root {
   --primary-color: #2a2727;
   --secondary-color: #ff3300;
@@ -13,6 +14,10 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+.animation-fade {
+  animation: fadeOut 0.5s linear both;
 }
 
 .custom-resolution {
@@ -42,5 +47,8 @@
 }
 
 .orange-shadow {
-  box-shadow: 0px 10px 13px -7px #000000, 0px 17px 8px -3px rgba(255, 51, 0, 0.07) !important;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000,
+    0px 17px 8px -3px rgba(255, 51, 0, 0.07) !important;
+  box-shadow: 0px 10px 13px -7px #000000,
+    0px 17px 8px -3px rgba(255, 51, 0, 0.07) !important;
 }

@@ -1,0 +1,71 @@
+.down {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-name: down;
+}
+
+@keyframes down {
+  from {
+    top: 100vh;
+  }
+  to {
+    top: -100vh;
+  }
+}
+
+.up {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-name: up;
+}
+
+@keyframes up {
+  from {
+    top: -100vh;
+  }
+  to {
+    top: 100vh;
+  }
+}
+
+.right {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-name: right;
+}
+
+@keyframes right {
+  from {
+    top: 0vh;
+    bottom: 0vh;
+    right: -100vw;
+    left: 100vw;
+  }
+  to {
+    top: 0vh;
+    bottom: 0vh;
+    right: 100vw;
+    left: -100vw;
+  }
+}
+
+.left {
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-name: left;
+}
+
+@keyframes left {
+  from {
+    top: 0vh;
+    bottom: 0vh;
+    right: 100vw;
+    left: -100vw;
+  }
+  to {
+    top: 0vh;
+    bottom: 0vh;
+    right: -100vw;
+    left: 100vw;
+  }
+}
