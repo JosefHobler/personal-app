@@ -1,6 +1,6 @@
 .down {
   animation-duration: 2s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: down;
 }
 
@@ -15,7 +15,7 @@
 
 .up {
   animation-duration: 2s;
-  animation-timing-function: ease-in-out;
+  animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: up;
 }
 
@@ -24,13 +24,15 @@
     top: -100vh;
   }
   to {
+  }
+  100% {
     top: 100vh;
   }
 }
 
 .right {
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
+  animation-duration: 1.75s;
+  animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: right;
 }
 
@@ -50,8 +52,8 @@
 }
 
 .left {
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
+  animation-duration: 1.75s;
+  animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: left;
 }
 

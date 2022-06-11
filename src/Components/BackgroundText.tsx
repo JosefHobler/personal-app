@@ -7,8 +7,8 @@ interface Props {
 const BackgroundText: FC<Props> = ({ text }) => {
   return (
     <div
-      style={{ fontSize: `20vw`, color: "rgb(36,40,44)" }}
-      className="bg-font position-absolute h-100 w-100 bg-font d-flex justify-content-center align-items-center"
+      style={{ fontSize: `16vw`, color: "rgb(36,40,44)" }}
+      className="bg-font position-absolute h-100 w-100 bg-font d-flex justify-content-center align-items-center animation-bg"
     >
       {text}
     </div>

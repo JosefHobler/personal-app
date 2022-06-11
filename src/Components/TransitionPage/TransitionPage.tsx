@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import "./TransitionPage.scss";
-import { Scroll } from "../App";
+import { Scroll } from "../../App";
 interface Props {
   text: string;
   direction: Scroll;
@@ -19,10 +19,10 @@ const TransitionPage: FC<Props> = ({ text, direction }) => {
   }
   return (
     <div
-      className={`${animationClass} position-absolute w-100 h-100 bg-dark text-light d-flex align-items-center justify-content-center`}
+      className={`${animationClass} position-absolute w-100 h-100 bg-dark text-light bg-font d-flex align-items-center justify-content-center`}
       style={{
         zIndex: 100000,
-        fontSize: "20vw",
+        fontSize: "16vw",
         top: "100vh",
       }}
     >

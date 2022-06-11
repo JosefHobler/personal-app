@@ -1,16 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, {
+  createContext,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { Link, Route, Routes } from "react-router-dom";
 import "./App.scss";
-import About from "./Pages/About";
-import Domů from "./Pages/Domů";
-import Dovednosti from "./Pages/Dovednosti";
-import Kontakt from "./Pages/Kontakt";
-import Koníčky from "./Pages/Koníčky";
-import Omně from "./Pages/Omně";
-import Projekty from "./Pages/Projekty";
+import About from "./Pages/About/About";
+import Domů from "./Pages/Domů/Domů";
+import Dovednosti from "./Pages/Dovednosti/Dovednosti";
+import Kontakt from "./Pages/Kontakt/Kontakt";
+import Koníčky from "./Pages/Koníčky/Koníčky";
+import Omně from "./Pages/Omně/Omně";
+import Projekty from "./Pages/Projekty/Projekty";
 import { useNavigate } from "react-router";
-import TransitionPage from "./Components/TransitionPage";
-import { useRefresh } from "./hooks";
+import TransitionPage from "./Components/TransitionPage/TransitionPage";
+import { useRefresh } from "./Hooks/useRefresh";
+import Logo from "./Assets/SVGs/logo.svg";
+
+export type contextTypes = { previousPage: number; firstLoad: boolean };
+
+export const UserContext = createContext<contextTypes>({
+  previousPage: 1,
+  firstLoad: true,
+});
 //import Logo from "./Images/logo.svg";
 
 export const MAIN_PAGES = [
@@ -44,6 +58,7 @@ function App() {
   const waitScroll: Wait = useRef({ wait: false, scroll: Scroll.null });
   const history = useNavigate();
   const previousPage = useRef(1);
+  const [firstLoad, setFirstLoad] = useState(true);
 
   const sidewaysScroll = (scroll: Scroll) => {
     if (waitScroll.current.wait) return;
@@ -55,6 +70,7 @@ function App() {
   };
 
   const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
+    setFirstLoad(false);
     if (waitScroll.current.wait) return;
     const { deltaY } = e;
     previousPage.current = currentPage;
@@ -99,82 +115,96 @@ function App() {
 
   return (
     <>
-      {waitScroll.current.wait && (
-        <TransitionPage
-          direction={waitScroll.current.scroll}
-          text={NAMES[currentPage]}
-        />
-      )}
-      <div
-        onWheel={handleScroll}
-        className="bg-dark custom-resolution text-light text-font"
+      <UserContext.Provider
+        value={{ previousPage: previousPage.current, firstLoad: firstLoad }}
       >
-        <div style={{ zIndex: 100000000 }} className="position-fixed m-2">
-          <img src="" alt="Josef" />
-        </div>
-        <div className="h-100">
-          <Routes>
-            <Route
-              element={
-                <Domů unmounting={MAIN_PAGES[previousPage.current] === "/"} />
-              }
-              path="/"
-            />
-            <Route element={<About />} path="/Omne">
+        {waitScroll.current.wait && (
+          <TransitionPage
+            direction={waitScroll.current.scroll}
+            text={NAMES[currentPage]}
+          />
+        )}
+        <div
+          onWheel={handleScroll}
+          className="bg-dark custom-resolution text-light"
+        >
+          <Link
+            to="/"
+            onClick={() => setCurrentPage(0)}
+            style={{ zIndex: 10000000 }}
+            className="position-fixed m-2"
+          >
+            <img src={Logo} alt="logo-josef-hobler" />
+          </Link>
+          <div className="h-100">
+            <Routes>
               <Route
                 element={
-                  <Omně
-                    sidewaysScroll={sidewaysScroll}
+                  <Domů
+                    unmounting={MAIN_PAGES[previousPage.current] === "/"}
                     setCurrentPage={setCurrentPage}
-                    unmounting={MAIN_PAGES[previousPage.current] === "/Omne"}
                   />
                 }
-                path="/Omne"
+                path="/"
               />
-              <Route
-                element={
-                  <Dovednosti
-                    unmounting={
-                      MAIN_PAGES[previousPage.current] === "/Omne/Dovednosti"
-                    }
-                    setCurrentPage={setCurrentPage}
-                    sidewaysScroll={sidewaysScroll}
-                  />
-                }
-                path="/Omne/Dovednosti"
-              />
-              <Route
-                element={
-                  <Koníčky
-                    setCurrentPage={setCurrentPage}
-                    unmounting={
-                      MAIN_PAGES[previousPage.current] === "/Omne/Konicky"
-                    }
-                    sidewaysScroll={sidewaysScroll}
-                  />
-                }
-                path="/Omne/Konicky"
-              />
-            </Route>
-            <Route
-              element={
-                <Projekty
-                  unmounting={MAIN_PAGES[previousPage.current] === "/Projekty"}
+              <Route element={<About />} path="/Omne">
+                <Route
+                  element={
+                    <Omně
+                      sidewaysScroll={sidewaysScroll}
+                      setCurrentPage={setCurrentPage}
+                      unmounting={MAIN_PAGES[previousPage.current] === "/Omne"}
+                    />
+                  }
+                  path="/Omne"
                 />
-              }
-              path="/Projekty"
-            />
-            <Route
-              element={
-                <Kontakt
-                  unmounting={MAIN_PAGES[previousPage.current] === "/Kontakt"}
+                <Route
+                  element={
+                    <Dovednosti
+                      unmounting={
+                        MAIN_PAGES[previousPage.current] === "/Omne/Dovednosti"
+                      }
+                      setCurrentPage={setCurrentPage}
+                      sidewaysScroll={sidewaysScroll}
+                    />
+                  }
+                  path="/Omne/Dovednosti"
                 />
-              }
-              path="/Kontakt"
-            />
-          </Routes>
+                <Route
+                  element={
+                    <Koníčky
+                      setCurrentPage={setCurrentPage}
+                      unmounting={
+                        MAIN_PAGES[previousPage.current] === "/Omne/Konicky"
+                      }
+                      sidewaysScroll={sidewaysScroll}
+                    />
+                  }
+                  path="/Omne/Konicky"
+                />
+              </Route>
+              <Route
+                element={
+                  <Projekty
+                    unmounting={
+                      MAIN_PAGES[previousPage.current] === "/Projekty"
+                    }
+                  />
+                }
+                path="/Projekty"
+              />
+              <Route
+                element={
+                  <Kontakt
+                    unmounting={MAIN_PAGES[previousPage.current] === "/Kontakt"}
+                  />
+                }
+                path="/Kontakt"
+              />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </UserContext.Provider>
     </>
   );
 }
