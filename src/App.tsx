@@ -18,6 +18,7 @@ import { useNavigate } from "react-router";
 import TransitionPage from "./Components/TransitionPage/TransitionPage";
 import { useRefresh } from "./Hooks/useRefresh";
 import Logo from "./Assets/SVGs/logo.svg";
+import { useSwipeable } from "react-swipeable";
 
 export type contextTypes = { previousPage: number; firstLoad: boolean };
 
@@ -60,6 +61,12 @@ function App() {
   const previousPage = useRef(1);
   const [firstLoad, setFirstLoad] = useState(true);
 
+  // Handle mobile swipe
+  const handlersUp = useSwipeable({
+    onSwipedUp: (eventData) => handleScroll("Up"),
+    onSwipedDown: (eventData) => handleScroll("Down"),
+  });
+
   const sidewaysScroll = (scroll: Scroll) => {
     if (waitScroll.current.wait) return;
 
@@ -69,32 +76,63 @@ function App() {
     return undefined;
   };
 
-  const handleScroll = (e: React.WheelEvent<HTMLDivElement>) => {
-    setFirstLoad(false);
+  function handleScroll(e: string): void;
+  function handleScroll(e: React.WheelEvent<HTMLDivElement>): void;
+  function handleScroll(e: unknown): void {
     if (waitScroll.current.wait) return;
-    const { deltaY } = e;
+    setFirstLoad(false);
     previousPage.current = currentPage;
-    if (deltaY > 0) {
-      setCurrentPage((currentPage) =>
-        currentPage === 4 || currentPage === 5
-          ? 2
-          : currentPage + 1 > 3
-          ? 0
-          : currentPage + 1
-      );
-      waitScroll.current.scroll = Scroll.down;
-    } else {
-      setCurrentPage((currentPage) =>
-        currentPage === 4 || currentPage === 5
-          ? 0
-          : currentPage - 1 < 0
-          ? 3
-          : currentPage - 1
-      );
-      waitScroll.current.scroll = Scroll.up;
+
+    if (typeof e === "string") {
+      switch (e) {
+        case "Up":
+          setCurrentPage((currentPage) =>
+            currentPage === 4 || currentPage === 5
+              ? 2
+              : currentPage + 1 > 3
+              ? 0
+              : currentPage + 1
+          );
+          waitScroll.current.scroll = Scroll.down;
+
+          break;
+        case "Down":
+          setCurrentPage((currentPage) =>
+            currentPage === 4 || currentPage === 5
+              ? 0
+              : currentPage - 1 < 0
+              ? 3
+              : currentPage - 1
+          );
+          waitScroll.current.scroll = Scroll.up;
+
+          break;
+      }
+    }
+    if (typeof e === "object") {
+      const { deltaY } = e as React.WheelEvent<HTMLDivElement>;
+      if (deltaY > 0) {
+        setCurrentPage((currentPage) =>
+          currentPage === 4 || currentPage === 5
+            ? 2
+            : currentPage + 1 > 3
+            ? 0
+            : currentPage + 1
+        );
+        waitScroll.current.scroll = Scroll.down;
+      } else {
+        setCurrentPage((currentPage) =>
+          currentPage === 4 || currentPage === 5
+            ? 0
+            : currentPage - 1 < 0
+            ? 3
+            : currentPage - 1
+        );
+        waitScroll.current.scroll = Scroll.up;
+      }
     }
     waitScroll.current.wait = true;
-  };
+  }
 
   if (waitScroll.current.wait === true) {
     setTimeout(() => {
@@ -125,6 +163,7 @@ function App() {
           />
         )}
         <div
+          {...handlersUp}
           onWheel={handleScroll}
           className="bg-dark custom-resolution text-light"
         >

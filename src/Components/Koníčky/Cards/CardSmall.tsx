@@ -1,25 +1,18 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, Typography } from "@mui/material";
 import { FC } from "react";
 
 interface Props {
-  image: string;
   text: {
     heading: string;
     body: string;
   };
 }
 
-const CardVerticalLarge: FC<Props> = ({ image, text }) => {
+const CardSmall: FC<Props> = ({ text }) => {
   const { heading, body } = text;
+
   return (
     <Card className="w-100 h-100">
-      <CardMedia
-        className="image-fadeIn"
-        component="img"
-        alt="green iguana"
-        style={{ height: "25vh" }}
-        image={image}
-      />
       <CardContent className="text-fadeIn">
         <Typography
           gutterBottom
@@ -31,7 +24,7 @@ const CardVerticalLarge: FC<Props> = ({ image, text }) => {
         </Typography>
         <Typography
           variant="body2"
-          className="text-font"
+          className="text-font custom-text d-none d-xl-block"
           color="text.secondary"
         >
           {body}
@@ -41,4 +34,4 @@ const CardVerticalLarge: FC<Props> = ({ image, text }) => {
   );
 };
 
-export default CardVerticalLarge;
+export default CardSmall;

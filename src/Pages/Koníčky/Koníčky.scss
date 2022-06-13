@@ -40,3 +40,14 @@
 .grid-fadeIn {
   animation: fadeIn 600ms both ease-in;
 }
+
+.md-card-animation {
+  animation: fadeIn 1s both;
+}
+.md-card-animation2 {
+  animation: fadeOut 1s both;
+}
+
+.an-fadeIn {
+  animation: fadeIn 800ms 300ms both;
+}

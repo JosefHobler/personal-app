@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import MouseScroll from "../MouseScrollDown/MouseScroll";
 import MouseScroll2 from "../MouseScrollUp/MouseScroll2";
 

@@ -1,14 +1,10 @@
 import React, { FC } from "react";
 import "./MouseScroll.scss";
 
-interface Props {
-  delay?: string;
-}
-
-const MouseScroll: FC<Props> = ({ delay }) => {
+const MouseScroll: FC = () => {
   return (
     <div className="mouse_scroll fadeIn-animation">
-      <div className="mouse">
+      <div className="mouse d-none d-md-block">
         <div className="wheel"></div>
       </div>
       <div>

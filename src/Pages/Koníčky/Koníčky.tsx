@@ -1,15 +1,17 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import BackgroundText from "../../Components/BackgroundText";
 import "./Koníčky.scss";
 import { Scroll } from "../../App";
-import CardVerticalLarge from "../../Components/KoníčkyPage/CardVerticalLarge";
-import CardHorizontalLarge from "../../Components/KoníčkyPage/CardHorizontalLarge";
-import CardSmall from "../../Components/KoníčkyPage/CardSmall";
+import CardVerticalLarge from "../../Components/Koníčky/Cards/CardVerticalLarge";
+import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
+import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
 import data from "../../Data/KoníčkyData";
 import Arrow from "../../Components/Arrow/Arrow";
 import MouseScroll2 from "../../Components/MouseScrollUp/MouseScroll2";
 import MouseScroll from "../../Components/MouseScrollDown/MouseScroll";
 import MouseComponent from "../../Components/MouseComponent/MouseComponent";
+import { Card } from "@mui/material";
+import SimpleAccordion from "../../Components/Accordion/Accordion";
 
 interface Props {
   unmounting: boolean;
@@ -28,6 +30,52 @@ const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) =>
     sidewaysScroll(Scroll.left);
   };
 
+  const [cards, setCards] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  const [prevClickIndex, setPrevClickIndex] = useState<number | null>(null);
+
+  const handleCardClick = (index: number) => {
+    const arr = [...cards];
+    arr[prevClickIndex!] = false;
+    arr[index] = !arr[index];
+    setPrevClickIndex(index);
+    setCards(arr);
+  };
+
+  const customJSXLoop = (lowerLimit: number, upperLimit: number) => {
+    let content = [];
+    for (let i = lowerLimit; i < upperLimit; i++) {
+      content.push(
+        <Card
+          onClick={() => handleCardClick(i)}
+          style={{ height: "17.5vw", width: "17.5vw", cursor: "pointer" }}
+        >
+          {cards[i] ? (
+            <div className="md-card-animation">
+              <h5 className="text-center pt-2" style={{ fontSize: "0.9rem" }}>
+                {data[i].text.heading}
+              </h5>
+              <p className="px-2 pb-2" style={{ fontSize: "0.65rem" }}>
+                {data[i].text.body}
+              </p>
+            </div>
+          ) : (
+            <img src={data[i].image} className="img-fluid an-fadeIn" alt="" />
+          )}
+        </Card>
+      );
+    }
+    return content;
+  };
+
   return (
     <>
       <div className={animations}>
@@ -37,10 +85,35 @@ const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) =>
       <div
         className={`${animations} grid-fadeIn  h-100 w-100 d-flex flex-column justify-content-center position-relative`}
       >
-        <div className="container px-5">
+        <div className="container px-5 d-flex flex-column align-items-center justify-content-center">
+          {/*Flex template, XS*/}
+          <div
+            style={{ height: "80vh", width: "70vw" }}
+            className=" d-block d-md-none"
+          >
+            <SimpleAccordion data={data} />
+          </div>
+          {/*Grid template, MD*/}
+          <div
+            style={{ height: "80vh", width: "70vw" }}
+            className="d-md-block d-none d-xl-none md-card-animation"
+          >
+            <div className="row h-100 g-5">
+              <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                {customJSXLoop(0, 2)}
+              </div>
+              <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                {customJSXLoop(2, 5)}
+              </div>
+              <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                {customJSXLoop(5, 7)}
+              </div>
+            </div>
+          </div>
+          {/* Grid template, XL */}
           <div
             style={{ height: "75vh", width: "75vw" }}
-            className="d-md-grid custom-grid"
+            className="d-xl-grid d-none custom-grid"
           >
             <div className="grid-1">
               <CardVerticalLarge image={data[0].image} text={data[0].text} />
@@ -69,7 +142,7 @@ const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) =>
           onClick={handleClick}
           style={{
             all: "unset",
-            left: "5px",
+            left: "5vw",
             cursor: "pointer",
             transform: "rotate(180deg",
           }}

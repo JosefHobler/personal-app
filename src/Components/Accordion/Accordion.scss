@@ -1,0 +1,9 @@
+.animation-accordion {
+  animation: fadeInRight 500ms both;
+}
+
+@for $i from 0 through 6 {
+  ._#{$i}dl {
+    animation-delay: $i * 100ms;
+  }
+}

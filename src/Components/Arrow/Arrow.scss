@@ -1,16 +1,24 @@
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+
 #arrowAnim {
-  width: 10vw;
   height: 10vh;
+  width: 10vw;
+  max-width: 50px;
+  max-height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: rotate(180deg) scale(0.2);
+  transform: rotate(180deg);
 }
 
 .arrow {
-  width: 5vw;
-  height: 5vw;
-  border: 2.5vw solid;
+  width: 50%;
+  height: 50%;
+  border: 1.5vw solid;
   border-color: var(--secondary-color) transparent transparent
     var(--secondary-color);
   transform: rotate(-45deg);
@@ -46,7 +54,7 @@
   }
   80% {
     opacity: 1;
-    transform: translateX(-9vw);
+    transform: translateX(9vw);
   }
   100% {
     opacity: 0;
@@ -56,18 +64,48 @@
 @keyframes slide {
   0% {
     opacity: 0;
-    transform: translateX(15vw);
+    transform: translateX(5vw);
   }
   20% {
     opacity: 1;
-    transform: translateX(9vw);
+    transform: translateX(3vw);
   }
   80% {
     opacity: 1;
-    transform: translateX(-9vw);
+    transform: translateX(-3vw);
   }
   100% {
     opacity: 0;
-    transform: translateX(-15vw);
+    transform: translateX(-5vw);
+  }
+}
+
+@media (min-width: $sm) and (max-width: $md) {
+  .arrow {
+    border-width: 1vw;
+  }
+}
+
+@media (min-width: $md) and (max-width: $lg) {
+  .arrow {
+    border-width: 0.8vw;
+  }
+}
+
+@media (min-width: $lg) and (max-width: $xl) {
+  .arrow {
+    border-width: 0.7vw;
+  }
+}
+
+@media (min-width: $xl) and (max-width: $xxl) {
+  .arrow {
+    border-width: 0.6vw;
+  }
+}
+
+@media (min-width: $xxl) {
+  .arrow {
+    border-width: 0.55vw;
   }
 }

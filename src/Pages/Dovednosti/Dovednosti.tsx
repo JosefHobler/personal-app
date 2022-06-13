@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Rating } from "@mui/material";
-import { FC, useContext, useRef } from "react";
 import { contextTypes, Scroll, UserContext } from "../../App";
 import BackgroundText from "../../Components/BackgroundText";
 import "./Dovednosti.scss";
@@ -16,14 +15,16 @@ import Arrow from "../../Components/Arrow/Arrow";
 import MouseScroll from "../../Components/MouseScrollDown/MouseScroll";
 import MouseScroll2 from "../../Components/MouseScrollUp/MouseScroll2";
 import MouseComponent from "../../Components/MouseComponent/MouseComponent";
+import uuid from "react-native-uuid";
+import { FC, useContext, useRef, useState } from "react";
 
 const PRIMARY_TECHNOLOGIES = [
-  { name: "HTML", rating: 4 },
-  { name: "CSS", rating: 3.5 },
-  { name: "Javascript", rating: 4 },
-  { name: "React", rating: 4 },
+  { name: "HTML", rating: 3.5 },
+  { name: "CSS", rating: 3 },
+  { name: "Javascript", rating: 3.5 },
+  { name: "React", rating: 3.5 },
   { name: "Git", rating: 3 },
-  { name: "Sass", rating: 3 },
+  { name: "Sass", rating: 2.5 },
 ];
 
 const OTHER_TECHNOLOGIES = [
@@ -32,7 +33,6 @@ const OTHER_TECHNOLOGIES = [
   "Redux Toolkit",
   "MUI",
   "NPM",
-  "GSAP",
 ];
 
 interface Props {
@@ -69,7 +69,6 @@ const Dovednosti: FC<Props> = ({
     setCurrentPage((page) => 5);
     sidewaysScroll(Scroll.right);
   };
-
   return (
     <>
       <div className={animations}>
@@ -91,7 +90,16 @@ const Dovednosti: FC<Props> = ({
               >
                 {PRIMARY_TECHNOLOGIES.map(({ name, rating }) => {
                   return (
-                    <li className="text-color text-font d-flex mx-auto mx-md-0 ps-sm-3 ps-md-0 justify-content-between w-50 custom-text">
+                    <li
+                      key={uuid.v4() as string}
+                      className={`text-color text-font d-flex mx-auto mx-md-0 ps-sm-3 ps-4 ps-md-0 justify-content-between ${
+                        window.innerWidth < 342
+                          ? "w-100"
+                          : window.innerWidth < 480
+                          ? "w-75"
+                          : "w-50"
+                      } custom-text`}
+                    >
                       <p className="mb-1">{name}</p>
                       <Rating
                         name="half-rating-read"
@@ -116,7 +124,10 @@ const Dovednosti: FC<Props> = ({
                 >
                   {OTHER_TECHNOLOGIES.map((tech) => {
                     return (
-                      <li className="text-font text-color custom-text">
+                      <li
+                        key={uuid.v4() as string}
+                        className="text-font text-color custom-text"
+                      >
                         {tech}
                       </li>
                     );
@@ -167,7 +178,7 @@ const Dovednosti: FC<Props> = ({
           onClick={handleLeft}
           style={{
             all: "unset",
-            left: "5px",
+            left: "5vw",
             cursor: "pointer",
             transform: "rotate(180deg)",
           }}
@@ -177,7 +188,11 @@ const Dovednosti: FC<Props> = ({
         </button>
         <button
           onClick={handleRight}
-          style={{ all: "unset", right: "5px", cursor: "pointer" }}
+          style={{
+            all: "unset",
+            right: "5vw",
+            cursor: "pointer",
+          }}
           className="position-absolute align-self-center text-center"
         >
           <Arrow />

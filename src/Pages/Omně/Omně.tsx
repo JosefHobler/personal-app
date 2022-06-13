@@ -131,7 +131,7 @@ const Omně: FC<Props> = ({ unmounting, setCurrentPage, sidewaysScroll }) => {
         </div>
         <button
           onClick={handleClick}
-          style={{ all: "unset", right: "5px", cursor: "pointer" }}
+          style={{ all: "unset", right: "5vw", cursor: "pointer" }}
           className="position-absolute align-self-center text-center"
         >
           <Arrow />

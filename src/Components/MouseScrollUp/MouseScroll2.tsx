@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC, useEffect } from "react";
 import "./MouseScroll2.scss";
 
-function MouseScroll2() {
+const MouseScroll2: FC = () => {
   return (
     <div className="mouse_scroll2 fadeIn-animation">
       <div>
@@ -9,11 +9,11 @@ function MouseScroll2() {
         <span className="m_scroll_arrows2 doi2"></span>
         <span className="m_scroll_arrows2 unu2"></span>
       </div>
-      <div className="mouse">
+      <div className="mouse d-none d-md-block">
         <div className="wheel"></div>
       </div>
     </div>
   );
-}
+};
 
 export default MouseScroll2;

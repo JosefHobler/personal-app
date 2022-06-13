@@ -34,7 +34,7 @@ const CardHorizontalLarge: FC<Props> = ({ image, text }) => {
           <Typography
             variant="body2"
             color="text.secondary"
-            className="text-font custom-text"
+            className="text-font custom-text d-none d-xl-block"
           >
             {body}
           </Typography>
