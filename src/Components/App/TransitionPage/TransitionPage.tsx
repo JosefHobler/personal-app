@@ -1,20 +1,20 @@
 import React, { FC } from "react";
+import { SCROLL } from "../../../setup";
 import "./TransitionPage.scss";
-import { Scroll } from "../../App";
 interface Props {
   text: string;
-  direction: Scroll;
+  direction: SCROLL;
 }
 
 const TransitionPage: FC<Props> = ({ text, direction }) => {
   let animationClass = "";
-  if (direction === Scroll.down) {
+  if (direction === SCROLL.down) {
     animationClass = "down";
-  } else if (direction === Scroll.up) {
+  } else if (direction === SCROLL.up) {
     animationClass = "up";
-  } else if (direction === Scroll.left) {
+  } else if (direction === SCROLL.left) {
     animationClass = "left";
-  } else if (direction === Scroll.right) {
+  } else if (direction === SCROLL.right) {
     animationClass = "right";
   }
   return (

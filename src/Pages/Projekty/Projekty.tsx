@@ -4,11 +4,10 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper";
-import BackgroundText from "../../Components/BackgroundText";
 import { contextTypes, UserContext } from "../../App";
 import "./Projekty.scss";
-import MouseComponent from "../../Components/MouseComponent/MouseComponent";
-import { useRefresh } from "../../Hooks/useRefresh";
+import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 
 interface Props {
   unmounting: boolean;
@@ -81,8 +80,8 @@ const Projekty: FC<Props> = ({ unmounting }) => {
             </div>
           </SwiperSlide>
         </Swiper>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
       <div
         className={`${animations} ${fadeTopOrBottom} d-md-flex d-xl-none d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
@@ -133,8 +132,8 @@ const Projekty: FC<Props> = ({ unmounting }) => {
             </div>
           </SwiperSlide>
         </Swiper>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
       <div
         className={`${animations} ${fadeTopOrBottom} d-xl-flex d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
@@ -185,8 +184,8 @@ const Projekty: FC<Props> = ({ unmounting }) => {
             </div>
           </SwiperSlide>
         </Swiper>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
     </>
   );

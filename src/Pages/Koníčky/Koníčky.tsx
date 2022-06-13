@@ -1,21 +1,19 @@
 import React, { FC, useState } from "react";
-import BackgroundText from "../../Components/BackgroundText";
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import "./Koníčky.scss";
-import { Scroll } from "../../App";
-import CardVerticalLarge from "../../Components/Koníčky/Cards/CardVerticalLarge";
-import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
-import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
-import data from "../../Data/KoníčkyData";
-import Arrow from "../../Components/Arrow/Arrow";
-import MouseScroll2 from "../../Components/MouseScrollUp/MouseScroll2";
-import MouseScroll from "../../Components/MouseScrollDown/MouseScroll";
-import MouseComponent from "../../Components/MouseComponent/MouseComponent";
+import data from "../../Data/Koníčky/data";
+import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import { Card } from "@mui/material";
-import SimpleAccordion from "../../Components/Accordion/Accordion";
+import SimpleAccordion from "../../Components/Koníčky/Accordion/Accordion";
+import CardVerticalLarge from "../../Components/Koníčky/Cards/CardVerticalLarge";
+import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
+import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
+import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
+import { SCROLL } from "../../setup";
 
 interface Props {
   unmounting: boolean;
-  sidewaysScroll: (scroll: Scroll) => undefined;
+  sidewaysScroll: (scroll: SCROLL) => undefined;
   setCurrentPage: (value: React.SetStateAction<number>) => void;
 }
 
@@ -27,7 +25,7 @@ const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) =>
 
   const handleClick = () => {
     setCurrentPage(4);
-    sidewaysScroll(Scroll.left);
+    sidewaysScroll(SCROLL.left);
   };
 
   const [cards, setCards] = useState([
@@ -150,8 +148,8 @@ const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) =>
         >
           <Arrow />
         </button>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
     </>
   );

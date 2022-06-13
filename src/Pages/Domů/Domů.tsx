@@ -1,13 +1,11 @@
 import { FC, useContext } from "react";
-import BackgroundText from "../../Components/BackgroundText";
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import Konzultant from "../../Assets/Images/Konzultant.png";
 import { Link } from "react-router-dom";
-import CTAButton from "../../Components/CTAButton";
-import MouseScroll from "../../Components/MouseScrollDown/MouseScroll";
-import MouseScroll2 from "../../Components/MouseScrollUp/MouseScroll2";
+import CTAButton from "../../Components/Global/CallToAction/CTAButton";
+import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import "./Domů.scss";
 import { contextTypes, UserContext } from "../../App";
-import MouseComponent from "../../Components/MouseComponent/MouseComponent";
 
 interface Props {
   unmounting: boolean;
@@ -79,8 +77,8 @@ const Domů: FC<Props> = ({ unmounting, setCurrentPage }) => {
             />
           </div>
         </div>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
     </>
   );

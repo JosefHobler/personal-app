@@ -15,10 +15,11 @@ import Koníčky from "./Pages/Koníčky/Koníčky";
 import Omně from "./Pages/Omně/Omně";
 import Projekty from "./Pages/Projekty/Projekty";
 import { useNavigate } from "react-router";
-import TransitionPage from "./Components/TransitionPage/TransitionPage";
 import { useRefresh } from "./Hooks/useRefresh";
 import Logo from "./Assets/SVGs/logo.svg";
 import { useSwipeable } from "react-swipeable";
+import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
+import { MAIN_PAGES, NAMES, SCROLL } from "./setup";
 
 export type contextTypes = { previousPage: number; firstLoad: boolean };
 
@@ -28,35 +29,17 @@ export const UserContext = createContext<contextTypes>({
 });
 //import Logo from "./Images/logo.svg";
 
-export const MAIN_PAGES = [
-  "/",
-  "/Omne",
-  "/Projekty",
-  "/Kontakt",
-  "/Omne/Dovednosti",
-  "/Omne/Konicky",
-];
-const NAMES = ["Domů", "O mně", "Projekty", "Kontakt", "Dovednosti", "Koníčky"];
-
-export enum Scroll {
-  down = "down",
-  up = "up",
-  right = "right",
-  left = "left",
-  null = "null",
-}
-
 type Wait = {
   current: {
     wait: boolean;
-    scroll: Scroll;
+    scroll: SCROLL;
   };
 };
 
 function App() {
   const refresh = useRefresh();
   const [currentPage, setCurrentPage] = useState(0);
-  const waitScroll: Wait = useRef({ wait: false, scroll: Scroll.null });
+  const waitScroll: Wait = useRef({ wait: false, scroll: SCROLL.null });
   const history = useNavigate();
   const previousPage = useRef(1);
   const [firstLoad, setFirstLoad] = useState(true);
@@ -67,7 +50,7 @@ function App() {
     onSwipedDown: (eventData) => handleScroll("Down"),
   });
 
-  const sidewaysScroll = (scroll: Scroll) => {
+  const sidewaysScroll = (scroll: SCROLL) => {
     if (waitScroll.current.wait) return;
 
     previousPage.current = currentPage;
@@ -93,7 +76,7 @@ function App() {
               ? 0
               : currentPage + 1
           );
-          waitScroll.current.scroll = Scroll.down;
+          waitScroll.current.scroll = SCROLL.down;
 
           break;
         case "Down":
@@ -104,7 +87,7 @@ function App() {
               ? 3
               : currentPage - 1
           );
-          waitScroll.current.scroll = Scroll.up;
+          waitScroll.current.scroll = SCROLL.up;
 
           break;
       }
@@ -119,7 +102,7 @@ function App() {
             ? 0
             : currentPage + 1
         );
-        waitScroll.current.scroll = Scroll.down;
+        waitScroll.current.scroll = SCROLL.down;
       } else {
         setCurrentPage((currentPage) =>
           currentPage === 4 || currentPage === 5
@@ -128,7 +111,7 @@ function App() {
             ? 3
             : currentPage - 1
         );
-        waitScroll.current.scroll = Scroll.up;
+        waitScroll.current.scroll = SCROLL.up;
       }
     }
     waitScroll.current.wait = true;

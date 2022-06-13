@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Rating } from "@mui/material";
-import { contextTypes, Scroll, UserContext } from "../../App";
-import BackgroundText from "../../Components/BackgroundText";
+import { contextTypes, UserContext } from "../../App";
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import "./Dovednosti.scss";
 import {
   faSass,
@@ -11,12 +11,11 @@ import {
   faJsSquare,
   faReact,
 } from "@fortawesome/free-brands-svg-icons";
-import Arrow from "../../Components/Arrow/Arrow";
-import MouseScroll from "../../Components/MouseScrollDown/MouseScroll";
-import MouseScroll2 from "../../Components/MouseScrollUp/MouseScroll2";
-import MouseComponent from "../../Components/MouseComponent/MouseComponent";
+import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
+import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import uuid from "react-native-uuid";
 import { FC, useContext, useRef, useState } from "react";
+import { SCROLL } from "../../setup";
 
 const PRIMARY_TECHNOLOGIES = [
   { name: "HTML", rating: 3.5 },
@@ -37,7 +36,7 @@ const OTHER_TECHNOLOGIES = [
 
 interface Props {
   unmounting: boolean;
-  sidewaysScroll: (scroll: Scroll) => undefined;
+  sidewaysScroll: (scroll: SCROLL) => undefined;
   setCurrentPage: (value: React.SetStateAction<number>) => void;
 }
 
@@ -62,12 +61,12 @@ const Dovednosti: FC<Props> = ({
 
   const handleLeft = () => {
     setCurrentPage(1);
-    sidewaysScroll(Scroll.left);
+    sidewaysScroll(SCROLL.left);
   };
 
   const handleRight = () => {
     setCurrentPage((page) => 5);
-    sidewaysScroll(Scroll.right);
+    sidewaysScroll(SCROLL.right);
   };
   return (
     <>
@@ -197,8 +196,8 @@ const Dovednosti: FC<Props> = ({
         >
           <Arrow />
         </button>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
     </>
   );

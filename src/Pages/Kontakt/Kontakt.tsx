@@ -1,13 +1,11 @@
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import BackgroundText from "../../Components/BackgroundText";
-import CTAButton from "../../Components/CTAButton";
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
+import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import emailjs from "@emailjs/browser";
-import MouseScroll2 from "../../Components/MouseScrollUp/MouseScroll2";
 import "./Kontakt.scss";
-import MouseScroll from "../../Components/MouseScrollDown/MouseScroll";
+import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import { contextTypes, UserContext } from "../../App";
-import MouseComponent from "../../Components/MouseComponent/MouseComponent";
 import { TextareaAutosize } from "@mui/material";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
@@ -235,8 +233,8 @@ const Kontakt: FC<Props> = ({ unmounting }) => {
             </div>
           </div>
         </div>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
     </>
   );

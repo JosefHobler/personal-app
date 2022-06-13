@@ -1,20 +1,19 @@
 import { Rating } from "@mui/material";
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { contextTypes, Scroll, UserContext } from "../../App";
-import BackgroundText from "../../Components/BackgroundText";
-import CustomizedRating from "../../Components/CustomizedRating";
-import CTAButton from "../../Components/CTAButton";
-import Arrow from "../../Components/Arrow/Arrow";
-import MouseScroll from "../../Components/MouseScrollDown/MouseScroll";
+import { contextTypes, UserContext } from "../../App";
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
+import CustomizedRating from "../../Components/Dovednosti/CustomizedRating";
+import CTAButton from "../../Components/Global/CallToAction/CTAButton";
+import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
+import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import "./Omně.scss";
 import Konzultant from "../../Assets/Images/Konzultant.png";
-import MouseScroll2 from "../../Components/MouseScrollUp/MouseScroll2";
-import MouseComponent from "../../Components/MouseComponent/MouseComponent";
+import { SCROLL } from "../../setup";
 
 interface Props {
   unmounting: boolean;
-  sidewaysScroll: (scroll: Scroll) => undefined;
+  sidewaysScroll: (scroll: SCROLL) => undefined;
   setCurrentPage: (value: React.SetStateAction<number>) => void;
 }
 
@@ -25,7 +24,7 @@ const Omně: FC<Props> = ({ unmounting, setCurrentPage, sidewaysScroll }) => {
   }
 
   const handleClick = () => {
-    sidewaysScroll(Scroll.right);
+    sidewaysScroll(SCROLL.right);
     setCurrentPage(4);
   };
 
@@ -136,8 +135,8 @@ const Omně: FC<Props> = ({ unmounting, setCurrentPage, sidewaysScroll }) => {
         >
           <Arrow />
         </button>
-        <MouseComponent top={true} />
-        <MouseComponent top={false} />
+        <MouseScroll top={true} />
+        <MouseScroll top={false} />
       </div>
     </>
   );
