@@ -5,15 +5,13 @@ import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import emailjs from "@emailjs/browser";
 import "./Kontakt.scss";
 import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
-import { contextTypes, UserContext } from "../../App";
+import { contextTypes } from "../../setup";
+import { UserContext } from "../../App";
 import { TextareaAutosize } from "@mui/material";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
+import { PagesProps } from "../../setup";
 
-interface Props {
-  unmounting: boolean;
-}
-
-const Kontakt: FC<Props> = ({ unmounting }) => {
+const Kontakt: FC<PagesProps> = ({ unmounting }) => {
   const form = useRef(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -233,8 +231,6 @@ const Kontakt: FC<Props> = ({ unmounting }) => {
             </div>
           </div>
         </div>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
     </>
   );

@@ -1,30 +1,52 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "../../../setup";
 import "./MouseScroll.scss";
 
-interface Props {
+interface PropsExtended extends Props {
   top: boolean;
 }
 
-const MouseScroll: FC<Props> = ({ top }) => {
+interface Props {
+  onClick: (e: SCROLL_VERTICAL) => void;
+}
+
+const MouseScrollElement: FC<PropsExtended> = ({ top, onClick }) => {
+  const rotateStyle = top
+    ? { transform: "rotate(180deg)" }
+    : { transform: "rotate(0deg)" };
+
   const positionStyle = () => {
-    if (top) return { top: "-130px" };
+    if (top) return { top: "0px" };
     return { bottom: "0px" };
   };
-
-  const rotateStyle = top ? { transform: "rotate(180deg)" } : {};
+  const handleClick = () => {
+    onClick(top ? SCROLL_VERTICAL.down : SCROLL_VERTICAL.up);
+  };
 
   return (
-    <div
-      className="position-absolute align-self-center text-center fadeIn-animation"
-      style={positionStyle()}
+    <button
+      onClick={() => handleClick()}
+      style={{
+        border: "none",
+        background: "transparent",
+        ...positionStyle(),
+        cursor: "pointer",
+        width: "24px",
+        height: "200px",
+        zIndex: 100000,
+        right: "50%",
+        transform: "translateX(-50%)",
+      }}
+      className={`position-absolute `}
     >
-      <div className="mouse_scroll fadeIn-animation">
+      <div
+        className={`mouse_scroll fadeIn-animation ${top ? "custom-top" : ""}`}
+      >
         {!top && (
           <div className="mouse d-none d-md-block">
             <div className="wheel"></div>
           </div>
         )}
-
         <div style={rotateStyle}>
           <span className={`m_scroll_arrows unu`}></span>
           <span className={`m_scroll_arrows doi`}></span>
@@ -36,6 +58,16 @@ const MouseScroll: FC<Props> = ({ top }) => {
           </div>
         )}
       </div>
+    </button>
+  );
+};
+
+const MouseScroll: FC<Props> = ({ onClick }) => {
+  return (
+    <div>
+      <MouseScrollElement top={true} onClick={onClick} />
+
+      <MouseScrollElement top={false} onClick={onClick} />
     </div>
   );
 };

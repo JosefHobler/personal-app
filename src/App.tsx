@@ -1,12 +1,13 @@
-import React, {
-  createContext,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router";
+
 import "./App.scss";
+
+import { useRefresh } from "./Hooks/useRefresh";
+import { useSwipeable } from "react-swipeable";
+import { useAppSelector } from "./Hooks/useAppSelector";
+import { useAppDispatch } from "./Hooks/useAppDispatch";
 import About from "./Pages/About/About";
 import Domů from "./Pages/Domů/Domů";
 import Dovednosti from "./Pages/Dovednosti/Dovednosti";
@@ -14,122 +15,107 @@ import Kontakt from "./Pages/Kontakt/Kontakt";
 import Koníčky from "./Pages/Koníčky/Koníčky";
 import Omně from "./Pages/Omně/Omně";
 import Projekty from "./Pages/Projekty/Projekty";
-import { useNavigate } from "react-router";
-import { useRefresh } from "./Hooks/useRefresh";
-import Logo from "./Assets/SVGs/logo.svg";
-import { useSwipeable } from "react-swipeable";
 import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
-import { MAIN_PAGES, NAMES, SCROLL } from "./setup";
-
-export type contextTypes = { previousPage: number; firstLoad: boolean };
+import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
+import { pageSliceAction } from "./Store/pagesSlice";
+import { MAIN_PAGES, NAMES, SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "./setup";
+import { contextTypes } from "./setup";
+import Logo from "./Components/Logo/Logo";
 
 export const UserContext = createContext<contextTypes>({
   previousPage: 1,
   firstLoad: true,
 });
-//import Logo from "./Images/logo.svg";
 
 type Wait = {
   current: {
     wait: boolean;
-    scroll: SCROLL;
+    scroll: SCROLL_HORIZONTAL | SCROLL_VERTICAL;
   };
 };
 
 function App() {
-  const refresh = useRefresh();
-  const [currentPage, setCurrentPage] = useState(0);
-  const waitScroll: Wait = useRef({ wait: false, scroll: SCROLL.null });
-  const history = useNavigate();
-  const previousPage = useRef(1);
   const [firstLoad, setFirstLoad] = useState(true);
+  const waitScroll: Wait = useRef({
+    wait: false,
+    scroll: SCROLL_VERTICAL.null,
+  });
+  const { curPage, prevPage } = useAppSelector((state) => state.pages);
+  const dispatch = useAppDispatch();
+  const refresh = useRefresh();
+  const history = useNavigate();
 
   // Handle mobile swipe
-  const handlersUp = useSwipeable({
-    onSwipedUp: (eventData) => handleScroll("Up"),
-    onSwipedDown: (eventData) => handleScroll("Down"),
+  const handlersVertical = useSwipeable({
+    onSwipedUp: () => handleScroll(SCROLL_VERTICAL.up),
+    onSwipedDown: () => handleScroll(SCROLL_VERTICAL.down),
   });
 
-  const sidewaysScroll = (scroll: SCROLL) => {
+  // Handling sideways scroll
+  function sidewaysScroll(scroll: SCROLL_HORIZONTAL) {
     if (waitScroll.current.wait) return;
-
-    previousPage.current = currentPage;
+    dispatch(pageSliceAction.changePrevPage(curPage));
     waitScroll.current.scroll = scroll;
     waitScroll.current.wait = true;
     return undefined;
+  }
+
+  // Handling mouse horizontal scroll
+  const handleScrollType = (e: React.WheelEvent<HTMLDivElement>): void => {
+    const { deltaY } = e as React.WheelEvent<HTMLDivElement>;
+    handleScroll(deltaY > 0 ? SCROLL_VERTICAL.up : SCROLL_VERTICAL.down);
   };
 
-  function handleScroll(e: string): void;
-  function handleScroll(e: React.WheelEvent<HTMLDivElement>): void;
-  function handleScroll(e: unknown): void {
+  // Handling horizontal scroll
+  function handleScroll(e: SCROLL_VERTICAL): void {
     if (waitScroll.current.wait) return;
     setFirstLoad(false);
-    previousPage.current = currentPage;
+    dispatch(pageSliceAction.changePrevPage(curPage));
 
-    if (typeof e === "string") {
-      switch (e) {
-        case "Up":
-          setCurrentPage((currentPage) =>
-            currentPage === 4 || currentPage === 5
-              ? 2
-              : currentPage + 1 > 3
-              ? 0
-              : currentPage + 1
-          );
-          waitScroll.current.scroll = SCROLL.down;
-
-          break;
-        case "Down":
-          setCurrentPage((currentPage) =>
-            currentPage === 4 || currentPage === 5
-              ? 0
-              : currentPage - 1 < 0
-              ? 3
-              : currentPage - 1
-          );
-          waitScroll.current.scroll = SCROLL.up;
-
-          break;
-      }
-    }
-    if (typeof e === "object") {
-      const { deltaY } = e as React.WheelEvent<HTMLDivElement>;
-      if (deltaY > 0) {
-        setCurrentPage((currentPage) =>
-          currentPage === 4 || currentPage === 5
-            ? 2
-            : currentPage + 1 > 3
-            ? 0
-            : currentPage + 1
-        );
-        waitScroll.current.scroll = SCROLL.down;
-      } else {
-        setCurrentPage((currentPage) =>
-          currentPage === 4 || currentPage === 5
-            ? 0
-            : currentPage - 1 < 0
-            ? 3
-            : currentPage - 1
-        );
-        waitScroll.current.scroll = SCROLL.up;
-      }
+    switch (e) {
+      case SCROLL_VERTICAL.up:
+        waitScroll.current.scroll = SCROLL_VERTICAL.down;
+        handlePageChange(SCROLL_VERTICAL.up);
+        break;
+      case SCROLL_VERTICAL.down:
+        waitScroll.current.scroll = SCROLL_VERTICAL.up;
+        handlePageChange(SCROLL_VERTICAL.down);
+        break;
     }
     waitScroll.current.wait = true;
+
+    if (waitScroll.current.wait === true) {
+      setTimeout(() => {
+        waitScroll.current.wait = false;
+        refresh();
+      }, 1800);
+    }
   }
 
-  if (waitScroll.current.wait === true) {
-    setTimeout(() => {
-      waitScroll.current.wait = false;
-      refresh();
-    }, 1800);
-  }
+  // Handling page flow
+  const handlePageChange = (direction: SCROLL_VERTICAL) => {
+    if (direction === SCROLL_VERTICAL.down) {
+      dispatch(
+        pageSliceAction.changeCurPage(
+          curPage === 4 || curPage === 5 ? 0 : curPage - 1 < 0 ? 3 : curPage - 1
+        )
+      );
+    } else {
+      dispatch(
+        pageSliceAction.changeCurPage(
+          curPage === 4 || curPage === 5 ? 2 : curPage + 1 > 3 ? 0 : curPage + 1
+        )
+      );
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {
-      history(MAIN_PAGES[currentPage]);
+      history(MAIN_PAGES[curPage]);
     }, 1800);
-  }, [currentPage]);
+  }, [curPage]);
 
+  // Making page same as device screen
   useEffect(() => {
     document.body.style.overflow = "hidden";
   }, []);
@@ -137,36 +123,24 @@ function App() {
   return (
     <>
       <UserContext.Provider
-        value={{ previousPage: previousPage.current, firstLoad: firstLoad }}
+        value={{ previousPage: prevPage, firstLoad: firstLoad }}
       >
         {waitScroll.current.wait && (
           <TransitionPage
             direction={waitScroll.current.scroll}
-            text={NAMES[currentPage]}
+            text={NAMES[curPage]}
           />
         )}
+        <Logo />
         <div
-          {...handlersUp}
-          onWheel={handleScroll}
-          className="bg-dark custom-resolution text-light"
+          {...handlersVertical}
+          onWheel={handleScrollType}
+          className="bg-dark custom-resolution text-light position-relative"
         >
-          <Link
-            to="/"
-            onClick={() => setCurrentPage(0)}
-            style={{ zIndex: 10000000 }}
-            className="position-fixed m-2"
-          >
-            <img src={Logo} alt="logo-josef-hobler" />
-          </Link>
           <div className="h-100">
             <Routes>
               <Route
-                element={
-                  <Domů
-                    unmounting={MAIN_PAGES[previousPage.current] === "/"}
-                    setCurrentPage={setCurrentPage}
-                  />
-                }
+                element={<Domů unmounting={MAIN_PAGES[prevPage] === "/"} />}
                 path="/"
               />
               <Route element={<About />} path="/Omne">
@@ -174,8 +148,7 @@ function App() {
                   element={
                     <Omně
                       sidewaysScroll={sidewaysScroll}
-                      setCurrentPage={setCurrentPage}
-                      unmounting={MAIN_PAGES[previousPage.current] === "/Omne"}
+                      unmounting={MAIN_PAGES[prevPage] === "/Omne"}
                     />
                   }
                   path="/Omne"
@@ -183,10 +156,7 @@ function App() {
                 <Route
                   element={
                     <Dovednosti
-                      unmounting={
-                        MAIN_PAGES[previousPage.current] === "/Omne/Dovednosti"
-                      }
-                      setCurrentPage={setCurrentPage}
+                      unmounting={MAIN_PAGES[prevPage] === "/Omne/Dovednosti"}
                       sidewaysScroll={sidewaysScroll}
                     />
                   }
@@ -195,10 +165,7 @@ function App() {
                 <Route
                   element={
                     <Koníčky
-                      setCurrentPage={setCurrentPage}
-                      unmounting={
-                        MAIN_PAGES[previousPage.current] === "/Omne/Konicky"
-                      }
+                      unmounting={MAIN_PAGES[prevPage] === "/Omne/Konicky"}
                       sidewaysScroll={sidewaysScroll}
                     />
                   }
@@ -207,24 +174,20 @@ function App() {
               </Route>
               <Route
                 element={
-                  <Projekty
-                    unmounting={
-                      MAIN_PAGES[previousPage.current] === "/Projekty"
-                    }
-                  />
+                  <Projekty unmounting={MAIN_PAGES[prevPage] === "/Projekty"} />
                 }
                 path="/Projekty"
               />
               <Route
                 element={
-                  <Kontakt
-                    unmounting={MAIN_PAGES[previousPage.current] === "/Kontakt"}
-                  />
+                  <Kontakt unmounting={MAIN_PAGES[prevPage] === "/Kontakt"} />
                 }
                 path="/Kontakt"
               />
             </Routes>
           </div>
+          <MouseScroll onClick={handleScroll} />
+          <MouseScroll onClick={handleScroll} />
         </div>
       </UserContext.Provider>
     </>

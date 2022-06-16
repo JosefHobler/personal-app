@@ -8,24 +8,26 @@ import SimpleAccordion from "../../Components/Koníčky/Accordion/Accordion";
 import CardVerticalLarge from "../../Components/Koníčky/Cards/CardVerticalLarge";
 import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
 import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
-import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
-import { SCROLL } from "../../setup";
+import { PagesProps, PagesPropsExtended, SCROLL_HORIZONTAL } from "../../setup";
+import { useSwipeable } from "react-swipeable";
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
+import { pageSliceAction } from "../../Store/pagesSlice";
 
-interface Props {
-  unmounting: boolean;
-  sidewaysScroll: (scroll: SCROLL) => undefined;
-  setCurrentPage: (value: React.SetStateAction<number>) => void;
-}
-
-const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) => {
+const Koníčky: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
   let animations = "";
   if (unmounting) {
     animations = "animation-fade";
   }
 
+  const dispatch = useAppDispatch();
+
+  const handlersSideways = useSwipeable({
+    onSwipedRight: () => handleClick(),
+  });
+
   const handleClick = () => {
-    setCurrentPage(4);
-    sidewaysScroll(SCROLL.left);
+    dispatch(pageSliceAction.changeCurPage(4));
+    sidewaysScroll(SCROLL_HORIZONTAL.left);
   };
 
   const [cards, setCards] = useState([
@@ -82,6 +84,7 @@ const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) =>
 
       <div
         className={`${animations} grid-fadeIn  h-100 w-100 d-flex flex-column justify-content-center position-relative`}
+        {...handlersSideways}
       >
         <div className="container px-5 d-flex flex-column align-items-center justify-content-center">
           {/*Flex template, XS*/}
@@ -148,8 +151,6 @@ const Koníčky: FC<Props> = ({ unmounting, sidewaysScroll, setCurrentPage }) =>
         >
           <Arrow />
         </button>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
     </>
   );

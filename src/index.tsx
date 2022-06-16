@@ -7,6 +7,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { gsap } from "gsap";
 import "animate.css";
+import { Provider } from "react-redux";
+import store from "./Store/store";
 
 const ORANGE_COLOR = "#FF3300";
 const DARK_COLOR = "#2A2727";
@@ -31,9 +33,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <ThemeProvider theme={theme}>
-    <Router>
-      <App />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </ThemeProvider>
 );
 

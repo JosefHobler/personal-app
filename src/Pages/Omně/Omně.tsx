@@ -1,31 +1,32 @@
-import { Rating } from "@mui/material";
 import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { contextTypes, UserContext } from "../../App";
+import { contextTypes } from "../../setup";
+import { UserContext } from "../../App";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import CustomizedRating from "../../Components/Dovednosti/CustomizedRating";
 import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
-import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import "./Omně.scss";
 import Konzultant from "../../Assets/Images/Konzultant.png";
-import { SCROLL } from "../../setup";
+import { PagesPropsExtended, SCROLL_HORIZONTAL } from "../../setup";
+import { useSwipeable } from "react-swipeable";
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
+import { pageSliceAction } from "../../Store/pagesSlice";
 
-interface Props {
-  unmounting: boolean;
-  sidewaysScroll: (scroll: SCROLL) => undefined;
-  setCurrentPage: (value: React.SetStateAction<number>) => void;
-}
-
-const Omně: FC<Props> = ({ unmounting, setCurrentPage, sidewaysScroll }) => {
+const Omně: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
   let animations = "";
   if (unmounting) {
     animations = "animation-fade";
   }
 
+  const dispatch = useAppDispatch();
+
+  const handlersSideways = useSwipeable({
+    onSwipedLeft: (eventData) => handleClick(),
+  });
+
   const handleClick = () => {
-    sidewaysScroll(SCROLL.right);
-    setCurrentPage(4);
+    sidewaysScroll(SCROLL_HORIZONTAL.right);
+    dispatch(pageSliceAction.changeCurPage(4));
   };
 
   let fadeTopOrBottom = "animation-up";
@@ -45,7 +46,8 @@ const Omně: FC<Props> = ({ unmounting, setCurrentPage, sidewaysScroll }) => {
         <BackgroundText text="O mně" />
       </div>
       <div
-        className={`${animations}  h-100 d-flex flex-column justify-content-center position-relative`}
+        {...handlersSideways}
+        className={`${animations}  h-100 d-flex flex-column justify-content-center`}
       >
         <div className="container px-5">
           <div className="row">
@@ -135,8 +137,6 @@ const Omně: FC<Props> = ({ unmounting, setCurrentPage, sidewaysScroll }) => {
         >
           <Arrow />
         </button>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
     </>
   );

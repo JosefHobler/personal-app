@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { contextTypes, SCROLL_HORIZONTAL } from "../../setup";
 import { Rating } from "@mui/material";
-import { contextTypes, UserContext } from "../../App";
+import { UserContext } from "../../App";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import "./Dovednosti.scss";
 import {
@@ -15,7 +16,10 @@ import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import uuid from "react-native-uuid";
 import { FC, useContext, useRef, useState } from "react";
-import { SCROLL } from "../../setup";
+import { PagesPropsExtended } from "../../setup";
+import { useSwipeable } from "react-swipeable";
+import { useDispatch } from "react-redux";
+import { pageSliceAction } from "../../Store/pagesSlice";
 
 const PRIMARY_TECHNOLOGIES = [
   { name: "HTML", rating: 3.5 },
@@ -34,22 +38,13 @@ const OTHER_TECHNOLOGIES = [
   "NPM",
 ];
 
-interface Props {
-  unmounting: boolean;
-  sidewaysScroll: (scroll: SCROLL) => undefined;
-  setCurrentPage: (value: React.SetStateAction<number>) => void;
-}
-
-const Dovednosti: FC<Props> = ({
-  unmounting,
-  sidewaysScroll,
-  setCurrentPage,
-}) => {
+const Dovednosti: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
   let animations = "";
   if (unmounting) {
     animations = "animation-fade";
   }
 
+  const dispatch = useDispatch();
   let fadeTopOrBottom = "animation-left";
 
   const data = useContext(UserContext) as contextTypes;
@@ -59,14 +54,19 @@ const Dovednosti: FC<Props> = ({
     fadeTopOrBottom = "animation-right";
   }
 
+  const handlersSideways = useSwipeable({
+    onSwipedLeft: (eventData) => handleRight(),
+    onSwipedRight: (eventData) => handleLeft(),
+  });
+
   const handleLeft = () => {
-    setCurrentPage(1);
-    sidewaysScroll(SCROLL.left);
+    dispatch(pageSliceAction.changeCurPage(1));
+    sidewaysScroll(SCROLL_HORIZONTAL.left);
   };
 
   const handleRight = () => {
-    setCurrentPage((page) => 5);
-    sidewaysScroll(SCROLL.right);
+    dispatch(pageSliceAction.changeCurPage(5));
+    sidewaysScroll(SCROLL_HORIZONTAL.right);
   };
   return (
     <>
@@ -75,6 +75,7 @@ const Dovednosti: FC<Props> = ({
       </div>
       <div
         className={`${animations} h-100 d-flex flex-column justify-content-center position-relative`}
+        {...handlersSideways}
       >
         <div className="container px-5">
           <div className="row">
@@ -196,8 +197,6 @@ const Dovednosti: FC<Props> = ({
         >
           <Arrow />
         </button>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
     </>
   );

@@ -1,20 +1,20 @@
 import React, { FC } from "react";
-import { SCROLL } from "../../../setup";
+import { SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "../../../setup";
 import "./TransitionPage.scss";
 interface Props {
   text: string;
-  direction: SCROLL;
+  direction: SCROLL_VERTICAL | SCROLL_HORIZONTAL;
 }
 
 const TransitionPage: FC<Props> = ({ text, direction }) => {
   let animationClass = "";
-  if (direction === SCROLL.down) {
+  if (direction === SCROLL_VERTICAL.down) {
     animationClass = "down";
-  } else if (direction === SCROLL.up) {
+  } else if (direction === SCROLL_VERTICAL.up) {
     animationClass = "up";
-  } else if (direction === SCROLL.left) {
+  } else if (direction === SCROLL_HORIZONTAL.left) {
     animationClass = "left";
-  } else if (direction === SCROLL.right) {
+  } else if (direction === SCROLL_HORIZONTAL.right) {
     animationClass = "right";
   }
   return (

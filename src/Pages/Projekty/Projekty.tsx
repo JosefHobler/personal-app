@@ -4,7 +4,8 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import { EffectCoverflow, Pagination } from "swiper";
-import { contextTypes, UserContext } from "../../App";
+import { contextTypes } from "../../setup";
+import { UserContext } from "../../App";
 import "./Projekty.scss";
 import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
@@ -80,8 +81,6 @@ const Projekty: FC<Props> = ({ unmounting }) => {
             </div>
           </SwiperSlide>
         </Swiper>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
       <div
         className={`${animations} ${fadeTopOrBottom} d-md-flex d-xl-none d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
@@ -132,8 +131,6 @@ const Projekty: FC<Props> = ({ unmounting }) => {
             </div>
           </SwiperSlide>
         </Swiper>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
       <div
         className={`${animations} ${fadeTopOrBottom} d-xl-flex d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
@@ -184,8 +181,6 @@ const Projekty: FC<Props> = ({ unmounting }) => {
             </div>
           </SwiperSlide>
         </Swiper>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
     </>
   );

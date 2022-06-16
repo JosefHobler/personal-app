@@ -3,20 +3,20 @@ import BackgroundText from "../../Components/Global/BackgroundText/BackgroundTex
 import Konzultant from "../../Assets/Images/Konzultant.png";
 import { Link } from "react-router-dom";
 import CTAButton from "../../Components/Global/CallToAction/CTAButton";
-import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
 import "./Domů.scss";
-import { contextTypes, UserContext } from "../../App";
+import { UserContext } from "../../App";
+import { contextTypes } from "../../setup";
+import { PagesProps } from "../../setup";
+import { useDispatch } from "react-redux";
+import { pageSliceAction } from "../../Store/pagesSlice";
 
-interface Props {
-  unmounting: boolean;
-  setCurrentPage: (value: React.SetStateAction<number>) => void;
-}
-
-const Domů: FC<Props> = ({ unmounting, setCurrentPage }) => {
+const Domů: FC<PagesProps> = ({ unmounting }) => {
   let animations = "";
   if (unmounting) {
     animations = "animation-fade";
   }
+
+  const dispatch = useDispatch();
 
   let fadeTopOrBottom = "animation-up";
   const data = useContext(UserContext) as contextTypes;
@@ -58,7 +58,7 @@ const Domů: FC<Props> = ({ unmounting, setCurrentPage }) => {
               }`}
             >
               <Link
-                onClick={() => setCurrentPage(3)}
+                onClick={() => dispatch(pageSliceAction.changeCurPage(3))}
                 style={{ all: "unset" }}
                 to="/Kontakt"
               >
@@ -77,8 +77,6 @@ const Domů: FC<Props> = ({ unmounting, setCurrentPage }) => {
             />
           </div>
         </div>
-        <MouseScroll top={true} />
-        <MouseScroll top={false} />
       </div>
     </>
   );
