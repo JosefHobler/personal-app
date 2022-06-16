@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 interface Initial {
   curPage: number;
   prevPage: number;

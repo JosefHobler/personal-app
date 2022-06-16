@@ -1,26 +1,26 @@
-import React, { FC, useContext, useEffect, useRef, useState } from "react";
-import { contextTypes } from "../../setup";
-import { UserContext } from "../../App";
+import { FC } from "react";
+import { useSwipeable } from "react-swipeable";
+
+import "./Omně.scss";
+import Konzultant from "../../Assets/Images/Konzultant.png";
+
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
+import { useAppSelector } from "../../Hooks/useAppSelector";
+import { PagesProps } from "../../setup";
+import { SCROLL_HORIZONTAL } from "../../setup";
+import { pageSliceAction } from "../../Store/pagesSlice";
+
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import CustomizedRating from "../../Components/Dovednosti/CustomizedRating";
 import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
-import "./Omně.scss";
-import Konzultant from "../../Assets/Images/Konzultant.png";
-import { PagesPropsExtended, SCROLL_HORIZONTAL } from "../../setup";
-import { useSwipeable } from "react-swipeable";
-import { useAppDispatch } from "../../Hooks/useAppDispatch";
-import { pageSliceAction } from "../../Store/pagesSlice";
+import Container from "../../Components/Global/Container/Container";
 
-const Omně: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
-  let animations = "";
-  if (unmounting) {
-    animations = "animation-fade";
-  }
-
+const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
   const dispatch = useAppDispatch();
-
-  const handlersSideways = useSwipeable({
+  const prevPage = useAppSelector((state) => state.pages.prevPage);
+  let animations = prevPage === 1 ? "animation-fade" : "";
+  const handlersHorizontal = useSwipeable({
     onSwipedLeft: (eventData) => handleClick(),
   });
 
@@ -31,12 +31,10 @@ const Omně: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
 
   let fadeTopOrBottom = "animation-up";
 
-  const data = useContext(UserContext) as contextTypes;
-  console.log(data.previousPage);
-  if (data.firstLoad) {
-  } else if (data.previousPage === 2) {
+  if (prevPage === 2) {
     fadeTopOrBottom = "animation-down";
-  } else if (data.previousPage === 4) {
+  }
+  if (prevPage === 4) {
     fadeTopOrBottom = "animation-left";
   }
 
@@ -45,9 +43,9 @@ const Omně: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
       <div className={animations}>
         <BackgroundText text="O mně" />
       </div>
-      <div
-        {...handlersSideways}
-        className={`${animations}  h-100 d-flex flex-column justify-content-center`}
+      <Container
+        animations={animations}
+        handlersHorizontal={handlersHorizontal}
       >
         <div className="container px-5">
           <div className="row">
@@ -130,14 +128,8 @@ const Omně: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
             </div>
           </div>
         </div>
-        <button
-          onClick={handleClick}
-          style={{ all: "unset", right: "5vw", cursor: "pointer" }}
-          className="position-absolute align-self-center text-center"
-        >
-          <Arrow />
-        </button>
-      </div>
+        <Arrow onClick={handleClick} left={false} />
+      </Container>
     </>
   );
 };

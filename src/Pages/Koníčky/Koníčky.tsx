@@ -1,35 +1,24 @@
-import React, { FC, useState } from "react";
-import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
-import "./Koníčky.scss";
-import data from "../../Data/Koníčky/data";
-import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
+import { FC, useState } from "react";
 import { Card } from "@mui/material";
+
+import "./Koníčky.scss";
+
+import { useSwipeable } from "react-swipeable";
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
+import { useAppSelector } from "../../Hooks/useAppSelector";
+import { pageSliceAction } from "../../Store/pagesSlice";
+import { PagesProps, SCROLL_HORIZONTAL } from "../../setup";
+import data from "../../Data/Koníčky/data";
+
+import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import SimpleAccordion from "../../Components/Koníčky/Accordion/Accordion";
 import CardVerticalLarge from "../../Components/Koníčky/Cards/CardVerticalLarge";
 import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
 import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
-import { PagesProps, PagesPropsExtended, SCROLL_HORIZONTAL } from "../../setup";
-import { useSwipeable } from "react-swipeable";
-import { useAppDispatch } from "../../Hooks/useAppDispatch";
-import { pageSliceAction } from "../../Store/pagesSlice";
+import Container from "../../Components/Global/Container/Container";
 
-const Koníčky: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
-  let animations = "";
-  if (unmounting) {
-    animations = "animation-fade";
-  }
-
-  const dispatch = useAppDispatch();
-
-  const handlersSideways = useSwipeable({
-    onSwipedRight: () => handleClick(),
-  });
-
-  const handleClick = () => {
-    dispatch(pageSliceAction.changeCurPage(4));
-    sidewaysScroll(SCROLL_HORIZONTAL.left);
-  };
-
+const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const [cards, setCards] = useState([
     false,
     false,
@@ -39,8 +28,19 @@ const Koníčky: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
     false,
     false,
   ]);
-
   const [prevClickIndex, setPrevClickIndex] = useState<number | null>(null);
+  const dispatch = useAppDispatch();
+  const prevPage = useAppSelector((state) => state.pages.prevPage);
+  const handlersHorizontal = useSwipeable({
+    onSwipedRight: () => handleClick(),
+  });
+
+  let animations = prevPage === 5 ? "animation-fade" : "";
+
+  const handleClick = () => {
+    dispatch(pageSliceAction.changeCurPage(4));
+    sidewaysScroll(SCROLL_HORIZONTAL.left);
+  };
 
   const handleCardClick = (index: number) => {
     const arr = [...cards];
@@ -81,10 +81,9 @@ const Koníčky: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
       <div className={animations}>
         <BackgroundText text="Koníčky" />
       </div>
-
-      <div
-        className={`${animations} grid-fadeIn  h-100 w-100 d-flex flex-column justify-content-center position-relative`}
-        {...handlersSideways}
+      <Container
+        animations={animations}
+        handlersHorizontal={handlersHorizontal}
       >
         <div className="container px-5 d-flex flex-column align-items-center justify-content-center">
           {/*Flex template, XS*/}
@@ -139,19 +138,8 @@ const Koníčky: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
             </div>
           </div>
         </div>
-        <button
-          onClick={handleClick}
-          style={{
-            all: "unset",
-            left: "5vw",
-            cursor: "pointer",
-            transform: "rotate(180deg",
-          }}
-          className="position-absolute align-self-center text-center"
-        >
-          <Arrow />
-        </button>
-      </div>
+        <Arrow left={true} onClick={handleClick} />
+      </Container>
     </>
   );
 };

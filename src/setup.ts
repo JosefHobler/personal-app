@@ -25,12 +25,27 @@ export enum SCROLL_HORIZONTAL {
   left = "left",
   null = "null",
 }
-export interface PagesProps {
-  unmounting: boolean;
-}
 
-export interface PagesPropsExtended extends PagesProps {
+export interface PagesProps {
   sidewaysScroll: (scroll: SCROLL_HORIZONTAL) => undefined;
 }
 
 export type contextTypes = { previousPage: number; firstLoad: boolean };
+
+// Dovednosti
+export const PRIMARY_TECHNOLOGIES = [
+  { name: "HTML", rating: 3.5 },
+  { name: "CSS", rating: 3 },
+  { name: "Javascript", rating: 3.5 },
+  { name: "React", rating: 3.5 },
+  { name: "Git", rating: 3 },
+  { name: "Sass", rating: 2.5 },
+];
+
+export const OTHER_TECHNOLOGIES = [
+  "Typescript",
+  "Bootstrap",
+  "Redux Toolkit",
+  "MUI",
+  "NPM",
+];

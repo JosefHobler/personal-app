@@ -1,9 +1,5 @@
+import { FC } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { contextTypes, SCROLL_HORIZONTAL } from "../../setup";
-import { Rating } from "@mui/material";
-import { UserContext } from "../../App";
-import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
-import "./Dovednosti.scss";
 import {
   faSass,
   faGitAlt,
@@ -12,52 +8,37 @@ import {
   faJsSquare,
   faReact,
 } from "@fortawesome/free-brands-svg-icons";
-import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
-import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
+import { Rating } from "@mui/material";
 import uuid from "react-native-uuid";
-import { FC, useContext, useRef, useState } from "react";
-import { PagesPropsExtended } from "../../setup";
+
+import "./Dovednosti.scss";
+
 import { useSwipeable } from "react-swipeable";
-import { useDispatch } from "react-redux";
 import { pageSliceAction } from "../../Store/pagesSlice";
+import { useAppSelector } from "../../Hooks/useAppSelector";
+import { useAppDispatch } from "../../Hooks/useAppDispatch";
+import { PagesProps, SCROLL_HORIZONTAL } from "../../setup";
+import { PRIMARY_TECHNOLOGIES } from "../../setup";
+import { OTHER_TECHNOLOGIES } from "../../setup";
 
-const PRIMARY_TECHNOLOGIES = [
-  { name: "HTML", rating: 3.5 },
-  { name: "CSS", rating: 3 },
-  { name: "Javascript", rating: 3.5 },
-  { name: "React", rating: 3.5 },
-  { name: "Git", rating: 3 },
-  { name: "Sass", rating: 2.5 },
-];
+import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
+import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
+import Container from "../../Components/Global/Container/Container";
 
-const OTHER_TECHNOLOGIES = [
-  "Typescript",
-  "Bootstrap",
-  "Redux Toolkit",
-  "MUI",
-  "NPM",
-];
+const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
+  const dispatch = useAppDispatch();
+  const prevPage = useAppSelector((state) => state.pages.prevPage);
+  const handlersHorizontal = useSwipeable({
+    onSwipedLeft: () => handleRight(),
+    onSwipedRight: () => handleLeft(),
+  });
 
-const Dovednosti: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
-  let animations = "";
-  if (unmounting) {
-    animations = "animation-fade";
-  }
+  let animations = prevPage === 4 ? "animation-fade" : "";
 
-  const dispatch = useDispatch();
   let fadeTopOrBottom = "animation-left";
-
-  const data = useContext(UserContext) as contextTypes;
-  console.log(data);
-  if (data.firstLoad) {
-  } else if (data.previousPage === 1) {
+  if (prevPage === 1) {
     fadeTopOrBottom = "animation-right";
   }
-
-  const handlersSideways = useSwipeable({
-    onSwipedLeft: (eventData) => handleRight(),
-    onSwipedRight: (eventData) => handleLeft(),
-  });
 
   const handleLeft = () => {
     dispatch(pageSliceAction.changeCurPage(1));
@@ -68,14 +49,54 @@ const Dovednosti: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
     dispatch(pageSliceAction.changeCurPage(5));
     sidewaysScroll(SCROLL_HORIZONTAL.right);
   };
+
+  const mappingPrimary = (): JSX.Element[] => {
+    return PRIMARY_TECHNOLOGIES.map(({ name, rating }) => {
+      return (
+        <li
+          key={uuid.v4() as string}
+          className={`text-color text-font d-flex mx-auto mx-md-0 ps-sm-3 ps-4 ps-md-0 justify-content-between ${
+            window.innerWidth < 342
+              ? "w-100"
+              : window.innerWidth < 480
+              ? "w-75"
+              : "w-50"
+          } custom-text`}
+        >
+          <p className="mb-1">{name}</p>
+          <Rating
+            name="half-rating-read"
+            defaultValue={rating}
+            precision={0.5}
+            readOnly
+          />
+        </li>
+      );
+    });
+  };
+
+  const mappingOther = (): JSX.Element[] => {
+    return OTHER_TECHNOLOGIES.map((tech) => {
+      return (
+        <li
+          key={uuid.v4() as string}
+          className="text-font text-color custom-text"
+        >
+          {tech}
+        </li>
+      );
+    });
+  };
+
   return (
     <>
       <div className={animations}>
         <BackgroundText text="Dovednosti" />
       </div>
-      <div
-        className={`${animations} h-100 d-flex flex-column justify-content-center position-relative`}
-        {...handlersSideways}
+
+      <Container
+        animations={animations}
+        handlersHorizontal={handlersHorizontal}
       >
         <div className="container px-5">
           <div className="row">
@@ -88,28 +109,7 @@ const Dovednosti: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
                 className="p-0 animation-fadeIn"
                 style={{ listStyle: "none" }}
               >
-                {PRIMARY_TECHNOLOGIES.map(({ name, rating }) => {
-                  return (
-                    <li
-                      key={uuid.v4() as string}
-                      className={`text-color text-font d-flex mx-auto mx-md-0 ps-sm-3 ps-4 ps-md-0 justify-content-between ${
-                        window.innerWidth < 342
-                          ? "w-100"
-                          : window.innerWidth < 480
-                          ? "w-75"
-                          : "w-50"
-                      } custom-text`}
-                    >
-                      <p className="mb-1">{name}</p>
-                      <Rating
-                        name="half-rating-read"
-                        defaultValue={rating}
-                        precision={0.5}
-                        readOnly
-                      />
-                    </li>
-                  );
-                })}
+                {mappingPrimary()}
               </ul>
               <div className="mt-5">
                 <h3
@@ -122,16 +122,7 @@ const Dovednosti: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
                   style={{ listStyle: "none" }}
                   className="p-0 animation-fadeIn _1"
                 >
-                  {OTHER_TECHNOLOGIES.map((tech) => {
-                    return (
-                      <li
-                        key={uuid.v4() as string}
-                        className="text-font text-color custom-text"
-                      >
-                        {tech}
-                      </li>
-                    );
-                  })}
+                  {mappingOther()}
                 </ul>
               </div>
             </div>
@@ -174,30 +165,9 @@ const Dovednosti: FC<PagesPropsExtended> = ({ unmounting, sidewaysScroll }) => {
             </div>
           </div>
         </div>
-        <button
-          onClick={handleLeft}
-          style={{
-            all: "unset",
-            left: "5vw",
-            cursor: "pointer",
-            transform: "rotate(180deg)",
-          }}
-          className="position-absolute align-self-center text-center"
-        >
-          <Arrow />
-        </button>
-        <button
-          onClick={handleRight}
-          style={{
-            all: "unset",
-            right: "5vw",
-            cursor: "pointer",
-          }}
-          className="position-absolute align-self-center text-center"
-        >
-          <Arrow />
-        </button>
-      </div>
+        <Arrow onClick={handleLeft} left={true} />
+        <Arrow onClick={handleRight} left={false} />
+      </Container>
     </>
   );
 };

@@ -1,13 +1,18 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { MAIN_PAGES } from "./setup";
 
 import "./App.scss";
+import Logo from "./Components/Logo/Logo";
 
 import { useRefresh } from "./Hooks/useRefresh";
 import { useSwipeable } from "react-swipeable";
 import { useAppSelector } from "./Hooks/useAppSelector";
 import { useAppDispatch } from "./Hooks/useAppDispatch";
+import { pageSliceAction } from "./Store/pagesSlice";
+import { NAMES, SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "./setup";
+
 import About from "./Pages/About/About";
 import Domů from "./Pages/Domů/Domů";
 import Dovednosti from "./Pages/Dovednosti/Dovednosti";
@@ -15,32 +20,16 @@ import Kontakt from "./Pages/Kontakt/Kontakt";
 import Koníčky from "./Pages/Koníčky/Koníčky";
 import Omně from "./Pages/Omně/Omně";
 import Projekty from "./Pages/Projekty/Projekty";
+
 import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
-import { pageSliceAction } from "./Store/pagesSlice";
-import { MAIN_PAGES, NAMES, SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "./setup";
-import { contextTypes } from "./setup";
-import Logo from "./Components/Logo/Logo";
-
-export const UserContext = createContext<contextTypes>({
-  previousPage: 1,
-  firstLoad: true,
-});
-
-type Wait = {
-  current: {
-    wait: boolean;
-    scroll: SCROLL_HORIZONTAL | SCROLL_VERTICAL;
-  };
-};
 
 function App() {
-  const [firstLoad, setFirstLoad] = useState(true);
-  const waitScroll: Wait = useRef({
-    wait: false,
-    scroll: SCROLL_VERTICAL.null,
-  });
-  const { curPage, prevPage } = useAppSelector((state) => state.pages);
+  const wait = useRef(false);
+  const scroll = useRef<SCROLL_HORIZONTAL | SCROLL_VERTICAL>(
+    SCROLL_HORIZONTAL.null
+  );
+  const curPage = useAppSelector((state) => state.pages.curPage);
   const dispatch = useAppDispatch();
   const refresh = useRefresh();
   const history = useNavigate();
@@ -52,11 +41,11 @@ function App() {
   });
 
   // Handling sideways scroll
-  function sidewaysScroll(scroll: SCROLL_HORIZONTAL) {
-    if (waitScroll.current.wait) return;
+  function sidewaysScroll(e: SCROLL_HORIZONTAL) {
+    if (wait.current) return;
     dispatch(pageSliceAction.changePrevPage(curPage));
-    waitScroll.current.scroll = scroll;
-    waitScroll.current.wait = true;
+    scroll.current = e;
+    wait.current = true;
     return undefined;
   }
 
@@ -68,28 +57,19 @@ function App() {
 
   // Handling horizontal scroll
   function handleScroll(e: SCROLL_VERTICAL): void {
-    if (waitScroll.current.wait) return;
-    setFirstLoad(false);
+    if (wait.current) return;
     dispatch(pageSliceAction.changePrevPage(curPage));
-
     switch (e) {
       case SCROLL_VERTICAL.up:
-        waitScroll.current.scroll = SCROLL_VERTICAL.down;
+        scroll.current = SCROLL_VERTICAL.down;
         handlePageChange(SCROLL_VERTICAL.up);
         break;
       case SCROLL_VERTICAL.down:
-        waitScroll.current.scroll = SCROLL_VERTICAL.up;
+        scroll.current = SCROLL_VERTICAL.up;
         handlePageChange(SCROLL_VERTICAL.down);
         break;
     }
-    waitScroll.current.wait = true;
-
-    if (waitScroll.current.wait === true) {
-      setTimeout(() => {
-        waitScroll.current.wait = false;
-        refresh();
-      }, 1800);
-    }
+    wait.current = true;
   }
 
   // Handling page flow
@@ -109,6 +89,16 @@ function App() {
     }
   };
 
+  // Allowing next scroll
+  useEffect(() => {
+    if (!wait.current) return;
+    setTimeout(() => {
+      wait.current = false;
+      refresh();
+    }, 2000);
+  }, [wait.current]);
+
+  // Setting next page to the screen
   useEffect(() => {
     setTimeout(() => {
       history(MAIN_PAGES[curPage]);
@@ -122,74 +112,39 @@ function App() {
 
   return (
     <>
-      <UserContext.Provider
-        value={{ previousPage: prevPage, firstLoad: firstLoad }}
+      {wait.current && (
+        <TransitionPage direction={scroll.current} text={NAMES[curPage]} />
+      )}
+      <Logo />
+      <div
+        {...handlersVertical}
+        onWheel={handleScrollType}
+        className="bg-dark custom-resolution text-light position-relative"
       >
-        {waitScroll.current.wait && (
-          <TransitionPage
-            direction={waitScroll.current.scroll}
-            text={NAMES[curPage]}
-          />
-        )}
-        <Logo />
-        <div
-          {...handlersVertical}
-          onWheel={handleScrollType}
-          className="bg-dark custom-resolution text-light position-relative"
-        >
-          <div className="h-100">
-            <Routes>
+        <div className="h-100">
+          <Routes>
+            <Route path="/" element={<Domů />} />
+            <Route element={<About />} path="/Omne">
               <Route
-                element={<Domů unmounting={MAIN_PAGES[prevPage] === "/"} />}
-                path="/"
-              />
-              <Route element={<About />} path="/Omne">
-                <Route
-                  element={
-                    <Omně
-                      sidewaysScroll={sidewaysScroll}
-                      unmounting={MAIN_PAGES[prevPage] === "/Omne"}
-                    />
-                  }
-                  path="/Omne"
-                />
-                <Route
-                  element={
-                    <Dovednosti
-                      unmounting={MAIN_PAGES[prevPage] === "/Omne/Dovednosti"}
-                      sidewaysScroll={sidewaysScroll}
-                    />
-                  }
-                  path="/Omne/Dovednosti"
-                />
-                <Route
-                  element={
-                    <Koníčky
-                      unmounting={MAIN_PAGES[prevPage] === "/Omne/Konicky"}
-                      sidewaysScroll={sidewaysScroll}
-                    />
-                  }
-                  path="/Omne/Konicky"
-                />
-              </Route>
-              <Route
-                element={
-                  <Projekty unmounting={MAIN_PAGES[prevPage] === "/Projekty"} />
-                }
-                path="/Projekty"
+                element={<Omně sidewaysScroll={sidewaysScroll} />}
+                path="/Omne"
               />
               <Route
-                element={
-                  <Kontakt unmounting={MAIN_PAGES[prevPage] === "/Kontakt"} />
-                }
-                path="/Kontakt"
+                element={<Dovednosti sidewaysScroll={sidewaysScroll} />}
+                path="/Omne/Dovednosti"
               />
-            </Routes>
-          </div>
-          <MouseScroll onClick={handleScroll} />
-          <MouseScroll onClick={handleScroll} />
+              <Route
+                element={<Koníčky sidewaysScroll={sidewaysScroll} />}
+                path="/Omne/Konicky"
+              />
+            </Route>
+            <Route element={<Projekty />} path="/Projekty" />
+            <Route element={<Kontakt />} path="/Kontakt" />
+          </Routes>
         </div>
-      </UserContext.Provider>
+        <MouseScroll onClick={handleScroll} />
+        <MouseScroll onClick={handleScroll} />
+      </div>
     </>
   );
 }

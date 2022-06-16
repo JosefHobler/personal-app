@@ -1,33 +1,25 @@
-import React, { FC, useContext, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+
+import "./Kontakt.scss";
+
+import { useAppSelector } from "../../Hooks/useAppSelector";
+
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import CTAButton from "../../Components/Global/CallToAction/CTAButton";
-import emailjs from "@emailjs/browser";
-import "./Kontakt.scss";
-import MouseScroll from "../../Components/Global/VerticalPointer/MouseScroll";
-import { contextTypes } from "../../setup";
-import { UserContext } from "../../App";
-import { TextareaAutosize } from "@mui/material";
-import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { PagesProps } from "../../setup";
+import Container from "../../Components/Global/Container/Container";
 
-const Kontakt: FC<PagesProps> = ({ unmounting }) => {
+const Kontakt = () => {
   const form = useRef(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-
-  let animations = "";
-
-  if (unmounting) {
-    animations = "animation-fade";
-  }
-
+  const prevPage = useAppSelector((state) => state.pages.prevPage);
+  let animations = prevPage === 3 ? "animation-fade" : "";
   let fadeTopOrBottom = "animation-down";
-  const data = useContext(UserContext) as contextTypes;
-  if (data.firstLoad) {
-  } else if (data.previousPage !== 0) {
+  if (prevPage !== 0) {
     fadeTopOrBottom = "animation-up";
   }
 
@@ -69,9 +61,7 @@ const Kontakt: FC<PagesProps> = ({ unmounting }) => {
       <div className={animations}>
         <BackgroundText text="Kontakt" />
       </div>
-      <div
-        className={`${animations} h-100 d-flex flex-column align-items-center justify-content-center position-relative`}
-      >
+      <Container animations={animations}>
         <div
           className="container px-5 text-font text-color"
           style={{ height: "65vh" }}
@@ -231,7 +221,7 @@ const Kontakt: FC<PagesProps> = ({ unmounting }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 };
