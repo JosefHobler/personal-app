@@ -5,7 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material";
-import { gsap } from "gsap";
 import "animate.css";
 import { Provider } from "react-redux";
 import store from "./Store/store";
