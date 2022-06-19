@@ -1,6 +1,8 @@
-import React, { FC } from "react";
-import { SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "../../../setup";
+import { FC } from "react";
+
 import "./TransitionPage.scss";
+
+import { SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "../../../setup";
 interface Props {
   text: string;
   direction: SCROLL_VERTICAL | SCROLL_HORIZONTAL;
@@ -8,15 +10,21 @@ interface Props {
 
 const TransitionPage: FC<Props> = ({ text, direction }) => {
   let animationClass = "";
-  if (direction === SCROLL_VERTICAL.down) {
-    animationClass = "down";
-  } else if (direction === SCROLL_VERTICAL.up) {
-    animationClass = "up";
-  } else if (direction === SCROLL_HORIZONTAL.left) {
-    animationClass = "left";
-  } else if (direction === SCROLL_HORIZONTAL.right) {
-    animationClass = "right";
+  switch (direction) {
+    case SCROLL_VERTICAL.down:
+      animationClass = "down";
+      break;
+    case SCROLL_VERTICAL.up:
+      animationClass = "up";
+      break;
+    case SCROLL_HORIZONTAL.left:
+      animationClass = "left";
+      break;
+    case SCROLL_HORIZONTAL.right:
+      animationClass = "right";
+      break;
   }
+
   return (
     <div
       className={`${animationClass} position-absolute w-100 h-100 bg-dark text-light bg-font d-flex align-items-center justify-content-center`}

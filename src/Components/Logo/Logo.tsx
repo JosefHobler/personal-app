@@ -1,11 +1,12 @@
-import React from "react";
 import { Link } from "react-router-dom";
+
 import { useAppDispatch } from "../../Hooks/useAppDispatch";
 import { pageSliceAction } from "../../Store/pagesSlice";
 import logoImage from "../../Assets/SVGs/logo.svg";
 
 function Logo() {
   const dispatch = useAppDispatch();
+
   return (
     <Link
       to="/"

@@ -1,7 +1,8 @@
+import { FC } from "react";
+
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fab } from "@mui/material";
-import React, { FC } from "react";
 
 interface Props {
   text: string;

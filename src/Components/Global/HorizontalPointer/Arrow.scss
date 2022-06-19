@@ -64,48 +64,48 @@ $xxl: 1400px;
 @keyframes slide {
   0% {
     opacity: 0;
-    transform: translateX(5vw);
+    transform: translateX(30px);
   }
   20% {
     opacity: 1;
-    transform: translateX(3vw);
+    transform: translateX(18px);
   }
   80% {
     opacity: 1;
-    transform: translateX(-3vw);
+    transform: translateX(-18px);
   }
   100% {
     opacity: 0;
-    transform: translateX(-5vw);
+    transform: translateX(-30px);
   }
 }
 
 @media (min-width: $sm) and (max-width: $md) {
   .arrow {
-    border-width: 1vw;
+    border-width: 0.8vw;
   }
 }
 
 @media (min-width: $md) and (max-width: $lg) {
   .arrow {
-    border-width: 0.8vw;
+    border-width: 0.6vw;
   }
 }
 
 @media (min-width: $lg) and (max-width: $xl) {
   .arrow {
-    border-width: 0.7vw;
+    border-width: 0.5vw;
   }
 }
 
 @media (min-width: $xl) and (max-width: $xxl) {
   .arrow {
-    border-width: 0.6vw;
+    border-width: 0.4vw;
   }
 }
 
 @media (min-width: $xxl) {
   .arrow {
-    border-width: 0.55vw;
+    border-width: 0.35vw;
   }
 }

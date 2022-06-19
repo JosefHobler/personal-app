@@ -23,9 +23,11 @@ import Projekty from "./Pages/Projekty/Projekty";
 
 import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
+import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 function App() {
   const wait = useRef(false);
+  const mouseScrollRef = useRef<HTMLDivElement>(null);
   const scroll = useRef<SCROLL_HORIZONTAL | SCROLL_VERTICAL>(
     SCROLL_HORIZONTAL.null
   );
@@ -92,7 +94,15 @@ function App() {
   // Allowing next scroll
   useEffect(() => {
     if (!wait.current) return;
+    const wrapper = mouseScrollRef.current;
+    if (mouseScrollRef) {
+      wrapper!.classList.add("animation-fadeOut");
+    }
     setTimeout(() => {
+      if (mouseScrollRef) {
+        wrapper!.classList.remove("animation-fadeOut");
+        wrapper!.classList.add("animation-fadeIn");
+      }
       wait.current = false;
       refresh();
     }, 2000);
@@ -119,7 +129,8 @@ function App() {
       <div
         {...handlersVertical}
         onWheel={handleScrollType}
-        className="bg-dark custom-resolution text-light position-relative"
+        className="bg-dark text-light position-relative"
+        style={{ height: "100vh", width: "100vw" }}
       >
         <div className="h-100">
           <Routes>
@@ -142,8 +153,10 @@ function App() {
             <Route element={<Kontakt />} path="/Kontakt" />
           </Routes>
         </div>
-        <MouseScroll onClick={handleScroll} />
-        <MouseScroll onClick={handleScroll} />
+        <div ref={mouseScrollRef}>
+          <MouseScroll onClick={handleScroll} />
+          <MouseScroll onClick={handleScroll} />
+        </div>
       </div>
     </>
   );

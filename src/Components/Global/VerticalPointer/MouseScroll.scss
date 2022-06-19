@@ -8,11 +8,7 @@
 
 .mouse_scroll {
   display: block;
-  margin: 0 auto;
-  width: 24px;
-  height: 75px;
-  margin-top: 125px;
-  transform: scale(0.5);
+  transform: scale(0.6);
 }
 
 .m_scroll_arrows {
@@ -25,7 +21,7 @@
 
   border-right: 2px solid white;
   border-bottom: 2px solid white;
-  margin: 0 0 3px 4px;
+  margin: 0 0px 3px 4px;
 
   width: 16px;
   height: 16px;
@@ -75,9 +71,9 @@
 
 .mouse {
   height: 42px;
-  width: 24px;
+  min-width: 25px;
   border-radius: 14px;
-  transform: none;
+  transform: scale(0.8);
   border: 2px solid white;
   top: 170px;
 }
@@ -103,11 +99,6 @@
   animation: mouse-wheel 0.6s linear infinite;
 }
 
-.custom-top {
-  position: absolute;
-  top: -130px;
-}
-
 .fadeIn-animation {
   animation: fadeIn 500ms 1.4s both;
 }
@@ -126,10 +117,6 @@
     -ms-transform: translateY(6px);
     transform: translateY(6px);
   }
-}
-
-.fadeIn-animation {
-  animation: fadeIn 500ms 1.4s both;
 }
 
 @-moz-keyframes mouse-wheel {

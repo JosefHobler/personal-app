@@ -1,6 +1,6 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { FC } from "react";
-import "./CardAnimations.scss";
+
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 interface Props {
   image: string;
@@ -10,19 +10,24 @@ interface Props {
   };
 }
 
-const CardHorizontalLarge: FC<Props> = ({ image, text }) => {
-  const { heading, body } = text;
+const CardHorizontalLarge: FC<Props> = ({ image, text: { heading, body } }) => {
   return (
     <Card className="w-100 h-100 d-flex">
       <CardMedia
-        className="image-fadeIn"
+        className="animation-fadeIn delay-5 duration-5"
         component="img"
-        style={{ height: "25vh", width: "calc(75vw / 4)" }}
-        alt="Live from space album cover"
-        image={image}
+        style={{
+          height: "25vh",
+          width: "calc(75vw / 4)",
+        }}
+        image={require(`../../../Assets/Konicky/${image}`)}
+        alt={heading}
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <CardContent sx={{ flex: "1 0 auto" }} className="text-fadeIn">
+        <CardContent
+          sx={{ flex: "1 0 auto" }}
+          className="animation-fadeIn delay-7 duration-3"
+        >
           <Typography
             gutterBottom
             variant="h5"

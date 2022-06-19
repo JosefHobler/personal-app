@@ -24,6 +24,7 @@ import { OTHER_TECHNOLOGIES } from "../../setup";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
+import useWindowSize from "../../Hooks/useWindowSize";
 
 const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
   const dispatch = useAppDispatch();
@@ -32,12 +33,13 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
     onSwipedLeft: () => handleRight(),
     onSwipedRight: () => handleLeft(),
   });
+  const { width: windowWidth } = useWindowSize();
 
-  let animations = prevPage === 4 ? "animation-fade" : "";
+  let animations = prevPage === 4 ? "animation-fadeOut" : "";
 
-  let fadeTopOrBottom = "animation-left";
+  let fadeTopOrBottom = "animation-leftEntry";
   if (prevPage === 1) {
-    fadeTopOrBottom = "animation-right";
+    fadeTopOrBottom = "animation-rightEntry";
   }
 
   const handleLeft = () => {
@@ -52,15 +54,12 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
 
   const mappingPrimary = (): JSX.Element[] => {
     return PRIMARY_TECHNOLOGIES.map(({ name, rating }) => {
+      console.log(windowWidth);
       return (
         <li
           key={uuid.v4() as string}
           className={`text-color text-font d-flex mx-auto mx-md-0 ps-sm-3 ps-4 ps-md-0 justify-content-between ${
-            window.innerWidth < 342
-              ? "w-100"
-              : window.innerWidth < 480
-              ? "w-75"
-              : "w-50"
+            windowWidth! < 390 ? "w-100" : windowWidth! < 480 ? "w-75" : "w-50"
           } custom-text`}
         >
           <p className="mb-1">{name}</p>
@@ -98,35 +97,35 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
         animations={animations}
         handlersHorizontal={handlersHorizontal}
       >
-        <div className="container px-5">
-          <div className="row">
+        <div className="container px-5" style={{ zIndex: 10 }}>
+          <div className="row align-items-center">
             <div className="col-lg-1"></div>
             <div className="col-xl-5 col-lg-6 col-md-8 text-center text-md-start">
               <h2 className={`heading-color heading-font ${fadeTopOrBottom}`}>
                 Primární technologie
               </h2>
               <ul
-                className="p-0 animation-fadeIn"
+                className="p-0 animation-fadeIn delay-4"
                 style={{ listStyle: "none" }}
               >
                 {mappingPrimary()}
               </ul>
               <div className="mt-5">
                 <h3
-                  className={`heading-color heading-font delay-100 ${fadeTopOrBottom}
+                  className={`heading-color heading-font delay-1 ${fadeTopOrBottom}
                 `}
                 >
                   Další...
                 </h3>
                 <ul
                   style={{ listStyle: "none" }}
-                  className="p-0 animation-fadeIn _1"
+                  className="p-0 animation-fadeIn delay-5"
                 >
                   {mappingOther()}
                 </ul>
               </div>
             </div>
-            <div className="col-xl-6 my-auto col-lg-5 col-md-4 d-none d-md-block d-flex align-items-center justify-content-center animation-fadeIn">
+            <div className="col-xl-6 col-lg-5 col-md-4 d-none d-md-block d-flex align-items-center justify-content-center delay-12 animation-fadeIn">
               {/*Cube styles in dovednosti.scss */}
               <div className="scene">
                 <div className="cube">

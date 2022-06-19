@@ -1,5 +1,6 @@
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { FC } from "react";
+
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 interface Props {
   image: string;
@@ -9,18 +10,18 @@ interface Props {
   };
 }
 
-const CardVerticalLarge: FC<Props> = ({ image, text }) => {
-  const { heading, body } = text;
+const CardVerticalLarge: FC<Props> = ({ image, text: { heading, body } }) => {
   return (
     <Card className="w-100 h-100">
-      <CardMedia
-        className="image-fadeIn"
-        component="img"
-        alt="green iguana"
-        image={image}
-        style={{ height: "25vh" }}
-      />
-      <CardContent className="text-fadeIn">
+      <div style={{ height: "25vh", overflow: "hidden" }}>
+        <CardMedia
+          className="animation-fadeIn delay-5 duration-5"
+          component="img"
+          alt={heading}
+          image={require(`../../../Assets/Konicky/${image}`)}
+        />
+      </div>
+      <CardContent className="animation-fadeIn delay-7 duration-7">
         <Typography
           gutterBottom
           variant="h5"

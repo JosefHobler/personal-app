@@ -1,14 +1,18 @@
-.animation-fadeIn {
-  animation: fadeIn 500ms both;
-  animation-delay: 900ms;
-}
-._1 {
-  animation-delay: 1000ms;
-}
-._2 {
-  animation-delay: 1100ms;
+.image-wrapper {
+  padding-bottom: max(275px, 100%);
+  width: max(275px, 100%);
+  position: relative;
+  border-radius: 2rem;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.025);
+  outline: 8px solid rgba(0, 0, 0, 0.06);
 }
 
-.delay-2000 {
-  animation-delay: 1800ms;
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 2rem;
+  left: 0;
+  top: 0;
 }

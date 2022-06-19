@@ -1,4 +1,5 @@
-import React, { FC } from "react";
+import { FC } from "react";
+
 import "./Arrow.scss";
 
 interface Props {
@@ -11,9 +12,11 @@ const Arrow: FC<Props> = ({ onClick, left }) => {
     <button
       onClick={onClick}
       style={{
+        minWidth: "50px",
         all: "unset",
-        left: `${left ? "5vw" : ""}`,
-        right: `${left ? "" : "5vw"}`,
+        zIndex: 100000,
+        left: `${left ? "15px" : ""}`,
+        right: `${left ? "" : "15px"}`,
         cursor: "pointer",
         transform: `${left ? "rotate(180deg)" : ""}`,
       }}

@@ -26,6 +26,15 @@ export enum SCROLL_HORIZONTAL {
   null = "null",
 }
 
+export interface JSONValues {
+  data: {
+    image: string;
+    text: {
+      heading: string;
+      body: string;
+    };
+  }[];
+}
 export interface PagesProps {
   sidewaysScroll: (scroll: SCROLL_HORIZONTAL) => undefined;
 }

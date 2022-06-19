@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState } from "react";
-import { SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "../../../setup";
+import { FC } from "react";
+import { SCROLL_VERTICAL } from "../../../setup";
 import "./MouseScroll.scss";
 
 interface PropsExtended extends Props {
@@ -19,6 +19,7 @@ const MouseScrollElement: FC<PropsExtended> = ({ top, onClick }) => {
     if (top) return { top: "0px" };
     return { bottom: "0px" };
   };
+
   const handleClick = () => {
     onClick(top ? SCROLL_VERTICAL.down : SCROLL_VERTICAL.up);
   };
@@ -32,16 +33,17 @@ const MouseScrollElement: FC<PropsExtended> = ({ top, onClick }) => {
         ...positionStyle(),
         cursor: "pointer",
         width: "24px",
-        height: "200px",
+        height: "75px",
         zIndex: 100000,
-        right: "50%",
-        transform: "translateX(-50%)",
+        right: "50vw",
+        transform: "translateX(50%)",
       }}
-      className={`position-absolute `}
+      className={`position-absolute d-flex flex-column ${
+        top ? "justify-content-end" : "justify-content-start"
+      }
+       `}
     >
-      <div
-        className={`mouse_scroll fadeIn-animation ${top ? "custom-top" : ""}`}
-      >
+      <div className={`mouse_scroll fadeIn-animation ${top ? "" : ""}`}>
         {!top && (
           <div className="mouse d-none d-md-block">
             <div className="wheel"></div>
@@ -64,11 +66,11 @@ const MouseScrollElement: FC<PropsExtended> = ({ top, onClick }) => {
 
 const MouseScroll: FC<Props> = ({ onClick }) => {
   return (
-    <div>
+    <>
       <MouseScrollElement top={true} onClick={onClick} />
 
       <MouseScrollElement top={false} onClick={onClick} />
-    </div>
+    </>
   );
 };
 

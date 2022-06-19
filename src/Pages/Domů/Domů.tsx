@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-import "./Domů.scss";
-import Konzultant from "../../Assets/Images/Konzultant.png";
+import Image2 from "../../Assets/MainImages/Image2.png";
 
 import { useAppDispatch } from "../../Hooks/useAppDispatch";
 import { useAppSelector } from "../../Hooks/useAppSelector";
@@ -15,59 +14,66 @@ const Domů = () => {
   const dispatch = useAppDispatch();
   const prevPage = useAppSelector((state) => state.pages.prevPage);
 
-  let animations = prevPage === 0 ? "animation-fade" : "";
+  let animations = prevPage === 0 ? "animation-fadeOut" : "";
 
-  let fadeTopOrBottom = "animation-up";
+  let fadeTopOrBottom = "animation-upEntry";
   if (prevPage !== 3) {
-    fadeTopOrBottom = "animation-down";
+    fadeTopOrBottom = "animation-downEntry";
   }
 
   return (
     <>
-      <div
-        className="col-md-6 text-center text-md-start px-5 d-flex flex-column justify-content-center"
-        style={{ zIndex: 100 }}
-      >
-        <h1
-          className={`heading-font heading-color ${fadeTopOrBottom} ${
-            fadeTopOrBottom === "animation-down" ? "delay-200" : ""
-          }`}
-        >
-          Josef Hobler
-        </h1>
-        <p
-          className={`mb-3 custom-text text-color text-font ${fadeTopOrBottom} delay-100`}
-        >
-          Jsem mladý ambiciózní junior front-end developer, který v týmu podpoří
-          pozitivní a přátelskou atmosféru a bude plnit úkoly s nejvyšším
-          nasazením.
-        </p>
-        <div
-          className={`${fadeTopOrBottom} ${
-            fadeTopOrBottom === "animation-down" ? "" : "delay-200"
-          }`}
-        >
-          <Link
-            onClick={() => dispatch(pageSliceAction.changeCurPage(3))}
-            style={{ all: "unset" }}
-            to="/Kontakt"
-          >
-            <CTAButton padding={3} text="Kontakt" />
-          </Link>
-        </div>
-      </div>
       <div className={animations}>
         <BackgroundText text="Domů" />
       </div>
       <Container animations={animations}>
-        <div className="row">
+        <div className="row" style={{ zIndex: 10 }}>
           <div
-            className="col-md-6 d-none d-md-block d-flex align-items-center justify-content-center"
+            className="col-md-5 text-center text-md-start px-5 d-flex flex-column justify-content-center"
             style={{ zIndex: 100 }}
           >
+            <h1
+              className={`heading-font heading-color ${fadeTopOrBottom} ${
+                fadeTopOrBottom === "animation-downEntry" ? "delay-2" : ""
+              }`}
+            >
+              Josef Hobler
+            </h1>
+            <p
+              className={`mb-3 custom-text text-color text-font ${fadeTopOrBottom} delay-1`}
+            >
+              Jsem mladý ambiciózní junior front-end developer, který v týmu
+              podpoří pozitivní a přátelskou atmosféru a bude plnit úkoly s
+              nejvyšším nasazením.
+            </p>
+            <div
+              className={`${fadeTopOrBottom} ${
+                fadeTopOrBottom === "animation-downEntry" ? "" : "delay-2"
+              }`}
+            >
+              <Link
+                onClick={() => dispatch(pageSliceAction.changeCurPage(3))}
+                style={{ all: "unset" }}
+                to="/Kontakt"
+              >
+                <CTAButton padding={3} text="Kontakt" />
+              </Link>
+            </div>
+          </div>
+          <div className="col-md-3"></div>
+          <div
+            className="col-md-4 d-none d-md-block d-flex align-items-center justify-content-end"
+            style={{ zIndex: 100 }}
+          >
+            {/*Image here*/}
             <img
-              className="animation-fadeIn img-fluid h-75"
-              src={Konzultant}
+              className="animation-fadeIn img-fluid h-100"
+              style={{
+                transform: "scale(1.5)",
+                borderRadius: "7rem",
+                filter: "drop-shadow(0px 0px 39px #000)",
+              }}
+              src={Image2}
               alt="Já"
             />
           </div>

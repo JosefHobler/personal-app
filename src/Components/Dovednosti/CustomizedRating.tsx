@@ -1,9 +1,8 @@
-import * as React from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Rating from "@mui/material/Rating";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLanguage } from "@fortawesome/free-solid-svg-icons";
+import Box from "@mui/material/Box";
+import Rating from "@mui/material/Rating";
 
 const StyledRating = styled(Rating)({
   "& .MuiRating-iconFilled": {

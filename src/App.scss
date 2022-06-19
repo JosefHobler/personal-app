@@ -7,7 +7,7 @@
   --background-text-color: black;
   --headings-font: "Bebas Neue", cursive;
   --bg-font: "Roboto Mono", monospace;
-  --text-font: "Roboto", serif;
+  --body-font: "Roboto", serif;
 }
 
 * {
@@ -15,60 +15,14 @@
   padding: 0;
   margin: 0;
 }
-.animation-left {
-  animation: fadeInLeftBig 1000ms both;
+
+// Responsive text
+.custom-text {
+  max-width: 60ch;
+  font-size: calc(13px + (20 - 13) * (100vw - 320px) / (2560 - 320));
 }
 
-.animation-right {
-  animation: fadeInRightBig 1000ms both;
-}
-
-.animation-up {
-  animation: fadeInUpBig 1000ms both;
-}
-
-.animation-down {
-  animation: fadeInDownBig 1000ms both;
-}
-
-.delay-100 {
-  animation-delay: 100ms;
-}
-
-.delay-200 {
-  animation-delay: 200ms;
-}
-
-.delay-300 {
-  animation-delay: 300ms;
-}
-
-.animation-fade {
-  animation: fadeOut 0.5s linear both !important;
-}
-
-.custom-resolution {
-  width: 100vw;
-  height: 100vh;
-}
-
-.heading-font {
-  font-family: var(--headings-font) !important;
-}
-
-.bg-font {
-  font-family: var(--bg-font) !important;
-}
-
-.text-font {
-  font-family: var(--text-font) !important;
-}
-
-.active {
-  color: var(--secondary-color) !important;
-  opacity: 0.8;
-}
-
+// Shadows
 .white-shadow {
   -webkit-box-shadow: 8px -8px 11px 5px rgba(255, 255, 255, 0.9);
   box-shadow: 8px -8px 11px 5px rgba(255, 255, 255, 0.9);
@@ -81,6 +35,24 @@
     0px 17px 8px -3px rgba(255, 51, 0, 0.07) !important;
 }
 
+// Fonts
+@mixin font-mixin($name) {
+  font-family: var($name) !important;
+}
+
+.heading-font {
+  @include font-mixin(--headings-font);
+}
+
+.bg-font {
+  @include font-mixin(--bg-font);
+}
+
+.text-font {
+  @include font-mixin(--body-font);
+}
+
+// Text colors
 .heading-color {
   color: #dddddd !important;
 }
@@ -89,19 +61,85 @@
   color: #cccccc !important;
 }
 
-.fadeIn-animation {
-  animation: fadeIn 500ms 1.4s both;
+// Animations
+@mixin animation-mixin(
+  $animation-name: none,
+  $animation-duration: 0s,
+  $animation-timing-function: ease,
+  $animation-delay: 0s,
+  $animation-iteration-count: 1,
+  $animation-direction: normal,
+  $animation-fill-mode: none,
+  $animation-play-state: running
+) {
+  animation: #{$animation-name} #{$animation-duration} #{$animation-timing-function}
+    #{$animation-delay} #{$animation-iteration-count} #{$animation-fill-mode} #{$animation-direction};
 }
 
+@for $i from 1 through 100 {
+  .delay-#{$i} {
+    animation-delay: $i * 100ms !important;
+  }
+}
+
+@for $i from 1 through 100 {
+  .duration-#{$i} {
+    animation-duration: $i * 100ms !important;
+  }
+}
+
+.animation-leftEntry {
+  @include animation-mixin(
+    $animation-name: fadeInLeftBig,
+    $animation-duration: 1s,
+    $animation-fill-mode: both
+  );
+}
+.animation-rightEntry {
+  @include animation-mixin(
+    $animation-name: fadeInRightBig,
+    $animation-duration: 1s,
+    $animation-fill-mode: both
+  );
+}
+.animation-upEntry {
+  @include animation-mixin(
+    $animation-name: fadeInUpBig,
+    $animation-duration: 1s,
+    $animation-fill-mode: both
+  );
+}
+.animation-downEntry {
+  @include animation-mixin(
+    $animation-name: fadeInDownBig,
+    $animation-duration: 1s,
+    $animation-fill-mode: both
+  );
+}
 .animation-fadeIn {
-  animation: fadeIn 2s 700ms both;
+  @include animation-mixin(
+    $animation-name: fadeIn,
+    $animation-duration: 2s,
+    $animation-fill-mode: both
+  );
+}
+.animation-fadeOut {
+  @include animation-mixin(
+    $animation-name: fadeOut,
+    $animation-duration: 500ms,
+    $animation-fill-mode: both,
+    $animation-timing-function: linear
+  );
+}
+.animation-darken {
+  animation: 1s darken both !important;
 }
 
-.animation-bg {
-  animation: fadeIn 500ms both;
-}
-
-.custom-text {
-  max-width: 60ch;
-  font-size: calc(13px + (20 - 13) * (100vw - 320px) / (2560 - 320));
+@keyframes darken {
+  0% {
+    background-color: white;
+  }
+  100% {
+    background-color: #212529;
+  }
 }

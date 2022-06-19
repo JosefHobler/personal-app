@@ -1,6 +1,6 @@
 .scene {
-  width: 20vw;
-  height: 20vw;
+  width: min(20vw, 500px);
+  height: min(20vw, 500px);
   perspective: 600px;
 }
 
@@ -71,8 +71,4 @@
   83% {
     transform: rotateX(90deg);
   }
-}
-
-._1 {
-  animation-delay: 1s;
 }

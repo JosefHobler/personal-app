@@ -1,0 +1,20 @@
+
+{"data":[
+
+    {
+      "image": "screenshot1.png",
+      "text": {
+        "heading": "Osobní stránka",
+        "body": "Moje osobní webová stránka sloužící jako ukázka mé práce."
+      }
+    },
+    {
+      "image": "ComingSoon.jpg",
+      "text": {
+        "heading": "Coming soon...",
+        "body": " "
+      }
+    }
+  ]
+  }
+  
