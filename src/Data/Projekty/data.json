@@ -3,6 +3,7 @@
 
     {
       "image": "screenshot1.png",
+      "link": "https://josefhobler.netlify.app",  
       "text": {
         "heading": "Osobní stránka",
         "body": "Moje osobní webová stránka sloužící jako ukázka mé práce."
@@ -10,6 +11,7 @@
     },
     {
       "image": "ComingSoon.jpg",
+      "link": "#",  
       "text": {
         "heading": "Coming soon...",
         "body": " "

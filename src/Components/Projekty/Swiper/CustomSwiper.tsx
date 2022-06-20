@@ -8,15 +8,15 @@ import dataJSON from "../../../Data/Projekty/data.json";
 import uuid from "react-native-uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper";
-import { JSONValues } from "../../../setup";
+import { JSONValuesProjekty } from "../../../setup";
 interface Props {
   pagination: number;
 }
 const CustomSwiper: FC<Props> = ({ pagination }) => {
-  const { data }: JSONValues = dataJSON;
+  const { data }: JSONValuesProjekty = dataJSON;
   console.log(typeof data, data);
   const mapProjects = () => {
-    return data.map(({ image, text: { body, heading } }) => {
+    return data.map(({ image, text: { body, heading }, link }) => {
       return (
         <SwiperSlide key={uuid.v4() as string} className="animation-darken">
           <img
@@ -32,8 +32,8 @@ const CustomSwiper: FC<Props> = ({ pagination }) => {
               className="position-absolute"
               style={{ right: "5px", bottom: "5px" }}
             >
-              <a className="text-font text-color custom-text" href="#">
-                www.ffwwffwef.com
+              <a className="text-font text-color custom-text" href={link}>
+                {link}
               </a>
             </div>
           </div>

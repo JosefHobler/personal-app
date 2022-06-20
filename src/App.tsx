@@ -130,7 +130,13 @@ function App() {
         {...handlersVertical}
         onWheel={handleScrollType}
         className="bg-dark text-light position-relative"
-        style={{ height: "100vh", width: "100vw" }}
+        style={{
+          height: "100vh",
+          width: "100vw",
+          overflow: "hidden",
+          maxHeight: "100vh",
+          maxWidth: "100vw",
+        }}
       >
         <div className="h-100">
           <Routes>

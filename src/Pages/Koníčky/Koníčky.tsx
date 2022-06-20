@@ -7,7 +7,7 @@ import { useSwipeable } from "react-swipeable";
 import { useAppDispatch } from "../../Hooks/useAppDispatch";
 import { useAppSelector } from "../../Hooks/useAppSelector";
 import { pageSliceAction } from "../../Store/pagesSlice";
-import { JSONValues, PagesProps, SCROLL_HORIZONTAL } from "../../setup";
+import { JSONValuesKonicky, PagesProps, SCROLL_HORIZONTAL } from "../../setup";
 import dataJSON from "../../Data/Koníčky/data.json";
 
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
@@ -19,7 +19,7 @@ import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontal
 import Container from "../../Components/Global/Container/Container";
 
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
-  const { data }: JSONValues = dataJSON;
+  const { data }: JSONValuesKonicky = dataJSON;
 
   const [cards, setCards] = useState([
     false,

@@ -26,7 +26,18 @@ export enum SCROLL_HORIZONTAL {
   null = "null",
 }
 
-export interface JSONValues {
+export interface JSONValuesProjekty {
+  data: {
+    image: string;
+    text: {
+      heading: string;
+      body: string;
+    };
+    link: string;
+  }[];
+}
+
+export interface JSONValuesKonicky {
   data: {
     image: string;
     text: {
