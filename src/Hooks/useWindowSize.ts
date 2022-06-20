@@ -1,25 +1,37 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
-function useWindowSize() {
-  const [windowSize, setWindowSize] = useState<{
+// Hook
+const useWindowSize = () => {
+  const isClient = typeof window === "object"; //Object represents browser window
+  const lastWidth = useRef<null | {
     width: number | undefined;
-    height: number | undefined;
-  }>({
-    width: undefined,
-    height: undefined,
-  });
+  }>(null);
+
+  function getSize() {
+    return {
+      width: isClient ? window.innerWidth : undefined,
+    };
+  }
+
+  const [windowSize, setWindowSize] = useState(getSize);
+
   useEffect(() => {
+    if (!isClient) {
+      return;
+    } //Exit if not user/browser
+
     function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+      if (window?.innerWidth !== lastWidth.current?.width) {
+        const width = getSize();
+        lastWidth.current = width;
+        setWindowSize(width);
+      }
     }
-    window.addEventListener("resize", handleResize);
-    handleResize();
+    window.addEventListener("resize", handleResize); // <-- I am only interested in window.innerWidth !
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, []); // Empty array ensures that effect is only run on mount and unmount
+
   return windowSize;
-}
+};
 
 export default useWindowSize;

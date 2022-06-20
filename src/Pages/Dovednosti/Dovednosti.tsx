@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSass,
@@ -53,8 +53,9 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
   };
 
   const mappingPrimary = (): JSX.Element[] => {
+    console.log(window.innerWidth);
+    console.log(windowWidth);
     return PRIMARY_TECHNOLOGIES.map(({ name, rating }) => {
-      console.log(windowWidth);
       return (
         <li
           key={uuid.v4() as string}
