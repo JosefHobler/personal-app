@@ -38,13 +38,9 @@
 
 @keyframes right {
   from {
-    top: 0vh;
-    bottom: 0vh;
     right: -100vw;
   }
   to {
-    top: 0vh;
-    bottom: 0vh;
     right: 100vw;
   }
 }
@@ -57,13 +53,9 @@
 
 @keyframes left {
   from {
-    top: 0vh;
-    bottom: 0vh;
     right: 100vw;
   }
   to {
-    top: 0vh;
-    bottom: 0vh;
     right: -100vw;
   }
 }
