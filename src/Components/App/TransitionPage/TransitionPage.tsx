@@ -35,7 +35,6 @@ const TransitionPage: FC<Props> = ({ text, direction }) => {
         maxHeight: "100vh",
         zIndex: 100000,
         fontSize: "16vw",
-        top: "100vh",
       }}
     >
       {text}

@@ -2,6 +2,7 @@
   animation-duration: 2s;
   animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: down;
+  animation-fill-mode: both;
 }
 
 @keyframes down {
@@ -17,6 +18,7 @@
   animation-duration: 2s;
   animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: up;
+  animation-fill-mode: both;
 }
 
 @keyframes up {
@@ -34,6 +36,7 @@
   animation-duration: 1.75s;
   animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: right;
+  animation-fill-mode: both;
 }
 
 @keyframes right {
@@ -46,9 +49,12 @@
 }
 
 .left {
+  top: 0;
+  bottom: 0;
   animation-duration: 1.75s;
   animation-timing-function: cubic-bezier(0.39, 0.83, 0.61, 0.17);
   animation-name: left;
+  animation-fill-mode: both;
 }
 
 @keyframes left {
