@@ -1,7 +1,5 @@
 import * as React from "react";
 
-import "./Accordion.scss";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -14,6 +12,7 @@ import {
   faPersonSnowboarding,
   faUserGraduate,
 } from "@fortawesome/free-solid-svg-icons";
+import uuid from "react-native-uuid";
 import { faBitcoin, faChrome } from "@fortawesome/free-brands-svg-icons";
 
 interface Props {
@@ -43,7 +42,7 @@ const SimpleAccordion: React.FC<Props> = ({ data }) => {
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
-
+  console.log("hi");
   return (
     <div
       className="w-100 h-100 d-flex flex-column align-items-center justify-content-center"
@@ -54,7 +53,8 @@ const SimpleAccordion: React.FC<Props> = ({ data }) => {
 
         return (
           <Accordion
-            className={`animation-accordion _${index}dl`}
+            key={uuid.v4() as string}
+            className={`animation-rightEntry delay-${index}`}
             expanded={expanded === `panel${index}`}
             onChange={handleChange(`panel${index}`)}
           >

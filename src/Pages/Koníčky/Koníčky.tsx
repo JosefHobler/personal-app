@@ -88,6 +88,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
     }
     return content;
   };
+  console.log("hi");
 
   return (
     <>
@@ -105,7 +106,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           {/*Flex template, XS*/}
           <div
             style={{ height: "80vh", width: "70vw" }}
-            className=" d-block d-md-none"
+            className="d-block d-md-none"
           >
             <SimpleAccordion data={data} />
           </div>
@@ -128,7 +129,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           </div>
           {/* Grid template, XL */}
           <div
-            className="d-flex align-items-center"
+            className="d-xl-grid d-none custom-grid align-items-center"
             style={{
               height: "100vh",
               width: "100vw",
@@ -139,7 +140,6 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
                 height: "75vh",
                 width: "75vw",
               }}
-              className="d-xl-grid d-none custom-grid"
             >
               <div className="grid-1">
                 <CardVerticalLarge image={data[0].image} text={data[0].text} />
