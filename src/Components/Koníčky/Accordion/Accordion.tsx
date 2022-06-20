@@ -42,7 +42,16 @@ const SimpleAccordion: React.FC<Props> = ({ data }) => {
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
-  console.log("hi");
+  let animation = "";
+
+  React.useLayoutEffect(() => {
+    animation = "animation-rightEntry";
+  }, []);
+
+  React.useEffect(() => {
+    animation = "";
+  }, [animation]);
+
   return (
     <div
       className="w-100 h-100 d-flex flex-column align-items-center justify-content-center"
@@ -54,12 +63,12 @@ const SimpleAccordion: React.FC<Props> = ({ data }) => {
         return (
           <Accordion
             key={uuid.v4() as string}
-            className={`animation-rightEntry delay-${index}`}
+            className={`delay-${index} `}
             expanded={expanded === `panel${index}`}
             onChange={handleChange(`panel${index}`)}
           >
             <AccordionSummary
-              className="access-child-margin"
+              className={`access-child-margin`}
               expandIcon={<FontAwesomeIcon icon={faAngleDown} />}
               aria-controls="panel1bh-content"
               id="panel1bh-header"

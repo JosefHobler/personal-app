@@ -101,7 +101,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
       >
         <div
           className="container px-5 d-flex flex-column align-items-center justify-content-center animation-rightEntry"
-          style={{ zIndex: 10 }}
+          style={{ zIndex: 10, overflow: "hidden" }}
         >
           {/*Flex template, XS*/}
           <div
