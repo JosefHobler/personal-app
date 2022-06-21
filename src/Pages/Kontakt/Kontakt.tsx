@@ -62,11 +62,11 @@ const Kontakt = () => {
         <BackgroundText text="Kontakt" />
       </div>
       <Container animations={animations}>
-        <div
-          className="container px-5 text-font text-color"
-          style={{ zIndex: 10, height: "60vh" }}
-        >
-          <div className="accessible-page d-flex justify-content-center align-items-center">
+        <div className="accessible-page d-flex justify-content-center align-items-center">
+          <div
+            className="container px-5 text-font text-color"
+            style={{ zIndex: 10, height: "60vh" }}
+          >
             <div ref={form} className="row h-100">
               <div className="col-md-5 col-sm-6 col-lg-5 h-100">
                 <form onSubmit={sendEmail} className="h-100">
