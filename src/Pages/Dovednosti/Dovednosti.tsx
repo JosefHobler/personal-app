@@ -96,10 +96,12 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
         animations={animations}
         handlersHorizontal={handlersHorizontal}
       >
-        <div className="container px-5 accessible-page" style={{ zIndex: 10 }}>
-          <div className="row align-items-center accessible-page">
-            <div className="col-lg-1"></div>
-            <div className="col-xl-5 col-lg-6 col-md-8 text-center text-md-start">
+        <div
+          className="container px-5 accessible-page d-flex align-items-center"
+          style={{ zIndex: 10 }}
+        >
+          <div className="d-flex align-items-center w-100 justify-content-around">
+            <div className=" text-center text-md-start">
               <h2 className={`heading-color heading-font ${fadeTopOrBottom}`}>
                 Primární technologie
               </h2>
@@ -124,7 +126,7 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
                 </ul>
               </div>
             </div>
-            <div className="col-xl-6 col-lg-5 col-md-4 d-none d-md-block d-flex align-items-center justify-content-center delay-12 animation-fadeIn">
+            <div className=" d-none d-md-block d-flex align-items-center justify-content-center delay-12 animation-fadeIn">
               {/*Cube styles in dovednosti.scss */}
               <div className="scene">
                 <div className="cube">

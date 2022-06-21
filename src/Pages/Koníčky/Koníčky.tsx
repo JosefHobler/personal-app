@@ -57,8 +57,8 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
         <Card
           onClick={() => handleCardClick(i)}
           style={{
-            height: "15vw",
-            width: "15vw",
+            height: "15vh",
+            width: "15vh",
             minWidth: "170px",
             minHeight: "170px",
             cursor: "pointer",
@@ -128,8 +128,9 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
             </div>
           </div>
           {/* Grid template, XL */}
-          <div className="d-xl-grid d-none custom-grid align-items-center accessible-page">
+          <div className="d-xl-flex d-none align-items-center justify-content-center h-100 w-100">
             <div
+              className="d-grid custom-grid"
               style={{
                 height: "75vh",
                 width: "75vw",

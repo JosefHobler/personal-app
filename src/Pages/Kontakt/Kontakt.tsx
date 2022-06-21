@@ -62,10 +62,10 @@ const Kontakt = () => {
           className="container px-5 text-font text-color"
           style={{ height: "65vh", zIndex: 10 }}
         >
-          <div ref={form} className="row accessible-page">
-            <div className="col-md-5 col-sm-6 col-lg-5">
-              <form onSubmit={sendEmail} className="accessible-page">
-                <div className="d-flex flex-column gap-1 accessible-page">
+          <div ref={form} className="row h-100">
+            <div className="col-md-5 col-sm-6 col-lg-5 h-100">
+              <form onSubmit={sendEmail} className="h-100">
+                <div className="d-flex flex-column gap-1 h-100">
                   <div className="d-flex gap-1">
                     <input
                       name="from_name"
@@ -99,7 +99,7 @@ const Kontakt = () => {
                       placeholder="Subject"
                     />
                   </div>
-                  <div className="accessible-page mb-2">
+                  <div className="h-100 mb-2">
                     <textarea
                       style={{ lineHeight: "20px", height: "100%" }}
                       className={`form-control w-100 p-2 rounded  ${fadeTopOrBottom} ${
@@ -117,9 +117,9 @@ const Kontakt = () => {
               </form>
             </div>
             <div className="d-none d-md-block col-md-2 col-lg-2"></div>
-            <div className="d-none d-sm-block col-md-5 col-sm-6 mb-2 accessible-page">
+            <div className="d-none d-sm-block col-md-5 col-sm-6 mb-2 h-100">
               <MapContainer
-                className={`accessible-page w-100 ${fadeTopOrBottom} ${
+                className={`h-100 w-100 ${fadeTopOrBottom} ${
                   fadeTopOrBottom === "animation-upEntry"
                     ? "delay-2"
                     : "delay-1"
@@ -134,7 +134,7 @@ const Kontakt = () => {
                   </Popup>
                 </Marker>
                 <div
-                  className="position-absolute text-font text-dark p-2 fs-8 rounded text-center white-shadow adress-animation"
+                  className="position-absolute text-font text-dark p-2 fs-8 rounded text-center white-shadow"
                   style={{
                     backgroundColor: "white",
                     bottom: 0,

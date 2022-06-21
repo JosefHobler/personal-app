@@ -1,6 +1,6 @@
 .scene {
-  width: min(20vw, 500px);
-  height: min(20vw, 500px);
+  width: min(20vw, 200px);
+  height: min(20vw, 200px);
   perspective: 600px;
 }
 
@@ -9,14 +9,14 @@
   height: 100%;
   transform-style: preserve-3d;
   position: relative;
-  transform-origin: 10vw 10vw 0;
+  transform-origin: min(10vw, 100px) min(10vw, 100px) 0;
   animation: rotatingCube 12s infinite ease-in-out;
 }
 
 .cube-face {
   position: absolute;
-  width: 20vw; //20vw
-  height: 20vw;
+  width: min(20vw, 200px); //20vw
+  height: min(20vw, 200px);
   border: 1px solid #ccc;
   background: rgba(255, 255, 255, 0.4);
   text-align: center;
@@ -28,27 +28,27 @@
 }
 
 .cube-face-front {
-  transform: rotateY(0deg) translateZ(10vw);
+  transform: rotateY(0deg) translateZ(min(10vw, 100px));
 }
 
 .cube-face-right {
-  transform: rotateY(90deg) translateZ(10vw);
+  transform: rotateY(90deg) translateZ(min(10vw, 100px));
 }
 
 .cube-face-back {
-  transform: rotateY(180deg) translateZ(10vw);
+  transform: rotateY(180deg) translateZ(min(10vw, 100px));
 }
 
 .cube-face-left {
-  transform: rotateY(-90deg) translateZ(10vw);
+  transform: rotateY(-90deg) translateZ(min(10vw, 100px));
 }
 
 .cube-face-top {
-  transform: rotateX(90deg) translateZ(10vw);
+  transform: rotateX(90deg) translateZ(min(10vw, 100px));
 }
 
 .cube-face-bottom {
-  transform: rotateX(-90deg) translateZ(10vw);
+  transform: rotateX(-90deg) translateZ(min(10vw, 100px));
 }
 
 @keyframes rotatingCube {

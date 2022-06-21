@@ -27,9 +27,12 @@ const Domů = () => {
         <BackgroundText text="Domů" />
       </div>
       <Container animations={animations}>
-        <div className="row" style={{ zIndex: 10 }}>
+        <div
+          className="d-flex justify-content-around align-items-center accessible-page "
+          style={{ zIndex: 10 }}
+        >
           <div
-            className="col-md-5 text-center accessible-page text-md-start px-5 d-flex flex-column justify-content-center"
+            className="text-center text-md-start px-5 d-flex flex-column justify-content-center"
             style={{ zIndex: 100 }}
           >
             <h1
@@ -62,12 +65,12 @@ const Domů = () => {
           </div>
           <div className="col-md-3"></div>
           <div
-            className="col-md-4 d-none d-md-block d-flex align-items-center justify-content-end"
+            className="d-none d-md-flex align-items-center justify-content-end"
             style={{ zIndex: 100 }}
           >
             {/*Image here*/}
             <img
-              className="animation-fadeIn img-fluid h-100"
+              className="animation-fadeIn img-fluid"
               style={{
                 transform: "scale(1.5)",
                 borderRadius: "7rem",
