@@ -138,13 +138,13 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
               }`}
             >
               <div className="row h-100 g-5">
-                <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
                   {cardCreatorMD(0, 2)}
                 </div>
                 <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
                   {cardCreatorMD(2, 5)}
                 </div>
-                <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
                   {cardCreatorMD(5, 7)}
                 </div>
               </div>
