@@ -73,6 +73,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
     for (let i = lowerLimit; i < upperLimit; i++) {
       content.push(
         <Card
+          className="mb-4"
           onClick={() => handleCardClick(i)}
           style={{
             height: "15vh",
@@ -137,14 +138,14 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
                 handleResponsiveness() === 1 ? "d-block" : "d-none"
               }`}
             >
-              <div className="row h-100 g-5">
-                <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+              <div className="row h-100">
+                <div className="col-4 d-flex flex-column m justify-content-center align-items-center">
                   {cardCreatorMD(0, 2)}
                 </div>
-                <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                <div className="h-100 col-4 d-flex flex-column justify-content-center align-items-center">
                   {cardCreatorMD(2, 5)}
                 </div>
-                <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                <div className="col-4 d-flex flex-column justify-content-center align-items-center">
                   {cardCreatorMD(5, 7)}
                 </div>
               </div>
