@@ -27,12 +27,8 @@ const TransitionPage: FC<Props> = ({ text, direction }) => {
 
   return (
     <div
-      className={`${animationClass} position-absolute w-100 h-100 bg-dark text-light bg-font d-flex align-items-center justify-content-center`}
+      className={`${animationClass} position-absolute bg-dark text-light bg-font d-flex align-items-center justify-content-center accessible-page`}
       style={{
-        width: "100vw",
-        height: "100vh",
-        maxWidth: "100vw",
-        maxHeight: "100vh",
         zIndex: 100000,
         fontSize: "16vw",
       }}

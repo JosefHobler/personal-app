@@ -2,3 +2,8 @@ $primary: #212529;
 $secondary: #ff3300;
 
 @import "~bootstrap/scss/bootstrap";
+
+#root {
+  height: 100vh;
+  height: -webkit-fill-available;
+}

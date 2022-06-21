@@ -130,7 +130,7 @@ function App() {
         {...handlersVertical}
         onWheel={handleScrollType}
         className="bg-dark text-light position-relative accessible-page"
-        style={{}}
+        style={{ overflow: "hidden" }}
       >
         <div className="h-100">
           <Routes>
