@@ -20,11 +20,11 @@ import { useAppDispatch } from "../../Hooks/useAppDispatch";
 import { PagesProps, SCROLL_HORIZONTAL } from "../../setup";
 import { PRIMARY_TECHNOLOGIES } from "../../setup";
 import { OTHER_TECHNOLOGIES } from "../../setup";
+import useWindowSize from "../../Hooks/useWindowSize";
 
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
-import useWindowSize from "../../Hooks/useWindowSize";
 
 const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
   const dispatch = useAppDispatch();

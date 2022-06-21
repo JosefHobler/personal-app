@@ -117,77 +117,92 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
         animations={animations}
         handlersHorizontal={handlersHorizontal}
       >
-        <div
-          className="container px-5 d-flex flex-column align-items-center justify-content-center animation-rightEntry"
-          style={{ zIndex: 10, overflow: "hidden" }}
-        >
-          {/*Flex template, XS*/}
+        <div className="accessible-page d-flex justify-content-center align-items-center">
           <div
-            style={{ height: "80vh", width: "70vw" }}
-            className={`${handleResponsiveness() === 0 ? "d-block" : "d-none"}`}
+            className="container px-5 d-flex flex-column align-items-center justify-content-center animation-rightEntry"
+            style={{ zIndex: 10, overflow: "hidden" }}
           >
-            <SimpleAccordion data={data} />
-          </div>
-          {/*Grid template, MD*/}
-          <div
-            className={`${handleResponsiveness() === 1 ? "d-block" : "d-none"}`}
-          >
-            <div className="row h-100 g-5">
-              <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
-                {cardCreatorMD(0, 2)}
-              </div>
-              <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
-                {cardCreatorMD(2, 5)}
-              </div>
-              <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
-                {cardCreatorMD(5, 7)}
-              </div>
-            </div>
-          </div>
-          {/* Grid template, XL */}
-          <div
-            className={`${
-              handleResponsiveness() === 2 ? "d-flex" : "d-none"
-            } align-items-center justify-content-center h-100 w-100`}
-          >
+            {/*Flex template, XS*/}
             <div
-              className="d-grid custom-grid"
-              style={{
-                height: "75vh",
-                width: "75vw",
-              }}
+              style={{ height: "80vh", width: "70vw" }}
+              className={`${
+                handleResponsiveness() === 0 ? "d-flex" : "d-none"
+              } justify-content-center align-items-center`}
             >
-              <div className="grid-1">
-                <CardVerticalLarge image={data[0].image} text={data[0].text} />
+              <SimpleAccordion data={data} />
+            </div>
+            {/*Grid template, MD*/}
+            <div
+              className={`${
+                handleResponsiveness() === 1 ? "d-block" : "d-none"
+              }`}
+            >
+              <div className="row h-100 g-5">
+                <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                  {cardCreatorMD(0, 2)}
+                </div>
+                <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                  {cardCreatorMD(2, 5)}
+                </div>
+                <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+                  {cardCreatorMD(5, 7)}
+                </div>
               </div>
-              <div className="grid-2">
-                <CardHorizontalLarge
-                  image={data[1].image}
-                  text={data[1].text}
-                />
-              </div>
-              <div className="grid-3">
-                <CardVerticalLarge image={data[2].image} text={data[2].text} />
-              </div>
-              <div className="grid-4">
-                <CardSmall text={data[3].text} />
-              </div>
-              <div className="grid-5">
-                <CardVerticalLarge image={data[4].image} text={data[4].text} />
-              </div>
-              <div className="grid-6">
-                <CardHorizontalLarge
-                  image={data[5].image}
-                  text={data[5].text}
-                />
-              </div>
-              <div className="grid-7">
-                <CardSmall text={data[6].text} />
+            </div>
+            {/* Grid template, XL */}
+            <div
+              className={`${
+                handleResponsiveness() === 2 ? "d-flex" : "d-none"
+              } align-items-center justify-content-center h-100 w-100`}
+            >
+              <div
+                className="d-grid custom-grid"
+                style={{
+                  height: "75vh",
+                  width: "75vw",
+                }}
+              >
+                <div className="grid-1">
+                  <CardVerticalLarge
+                    image={data[0].image}
+                    text={data[0].text}
+                  />
+                </div>
+                <div className="grid-2">
+                  <CardHorizontalLarge
+                    image={data[1].image}
+                    text={data[1].text}
+                  />
+                </div>
+                <div className="grid-3">
+                  <CardVerticalLarge
+                    image={data[2].image}
+                    text={data[2].text}
+                  />
+                </div>
+                <div className="grid-4">
+                  <CardSmall text={data[3].text} />
+                </div>
+                <div className="grid-5">
+                  <CardVerticalLarge
+                    image={data[4].image}
+                    text={data[4].text}
+                  />
+                </div>
+                <div className="grid-6">
+                  <CardHorizontalLarge
+                    image={data[5].image}
+                    text={data[5].text}
+                  />
+                </div>
+                <div className="grid-7">
+                  <CardSmall text={data[6].text} />
+                </div>
               </div>
             </div>
           </div>
+          <Arrow left={true} onClick={handleClick} />
         </div>
-        <Arrow left={true} onClick={handleClick} />
       </Container>
     </>
   );

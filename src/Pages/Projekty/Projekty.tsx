@@ -1,5 +1,3 @@
-import "./Projekty.scss";
-
 import { useAppSelector } from "../../Hooks/useAppSelector";
 
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
@@ -33,7 +31,7 @@ const Projekty = () => {
       </div>
       {/* Swiper template, MD */}
       <div
-        className={`${fadeTopOrBottom}  d-md-flex d-xl-none d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
+        className={`${fadeTopOrBottom} accessible-page   d-md-flex d-xl-none d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
       >
         <Container animations={animations}>
           <CustomSwiper pagination={2} />
@@ -41,7 +39,7 @@ const Projekty = () => {
       </div>
       {/* Swiper template, XL */}
       <div
-        className={`${fadeTopOrBottom} d-xl-flex d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
+        className={`${fadeTopOrBottom} accessible-page  d-xl-flex d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
       >
         <Container animations={animations}>
           <CustomSwiper pagination={3} />
