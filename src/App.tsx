@@ -155,7 +155,6 @@ function App() {
         </div>
         <div ref={mouseScrollRef}>
           <MouseScroll onClick={handleScroll} />
-          <MouseScroll onClick={handleScroll} />
         </div>
       </div>
     </>
