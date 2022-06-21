@@ -132,7 +132,7 @@ function App() {
         className="bg-dark text-light position-relative accessible-page"
         style={{ overflow: "hidden" }}
       >
-        <div className="h-100">
+        <div className="accessible-page">
           <Routes>
             <Route path="/" element={<Domů />} />
             <Route element={<About />} path="/Omne">
