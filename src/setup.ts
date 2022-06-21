@@ -26,6 +26,12 @@ export enum SCROLL_HORIZONTAL {
   null = "null",
 }
 
+export enum displayResponsive {
+  smallLayout,
+  mediumLayout,
+  extraLargeLayout,
+}
+
 export interface JSONValuesProjekty {
   data: {
     image: string;

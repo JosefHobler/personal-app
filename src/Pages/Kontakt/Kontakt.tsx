@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 import { useAppSelector } from "../../Hooks/useAppSelector";
+import useWindowSize from "../../Hooks/useWindowSize";
 
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import CTAButton from "../../Components/Global/CallToAction/CTAButton";
@@ -15,6 +16,7 @@ const Kontakt = () => {
   const [message, setMessage] = useState("");
   const form = useRef(null);
   const prevPage = useAppSelector((state) => state.pages.prevPage);
+  const { width: windowWidth } = useWindowSize();
 
   let animations = prevPage === 3 ? "animation-fadeOut" : "";
   let fadeTopOrBottom = "animation-downEntry";
@@ -52,6 +54,8 @@ const Kontakt = () => {
       );
   };
 
+  console.log(windowWidth);
+
   return (
     <>
       <div className={animations}>
@@ -60,18 +64,19 @@ const Kontakt = () => {
       <Container animations={animations}>
         <div
           className="container px-5 text-font text-color"
-          style={{ height: "65vh", zIndex: 10 }}
+          style={{ zIndex: 10, height: "60vh" }}
         >
           <div ref={form} className="row h-100">
             <div className="col-md-5 col-sm-6 col-lg-5 h-100">
               <form onSubmit={sendEmail} className="h-100">
                 <div className="d-flex flex-column gap-1 h-100">
-                  <div className="d-flex gap-1">
+                  <div className="d-flex gap-1" style={{ height: "7%" }}>
                     <input
                       name="from_name"
                       className={`w-100 p-2 rounded ${fadeTopOrBottom} ${
                         fadeTopOrBottom === "animation-upEntry" ? "" : "delay-3"
                       }`}
+                      style={{ height: "100%" }}
                       type="text"
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Name"
@@ -80,29 +85,37 @@ const Kontakt = () => {
                       className={`w-100 p-2 rounded  ${fadeTopOrBottom} ${
                         fadeTopOrBottom === "animation-upEntry" ? "" : "delay-3"
                       }`}
+                      style={{ height: "100%" }}
                       name="from_email"
                       type="email"
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Email"
                     />
                   </div>
-                  <div>
+                  <div style={{ height: "7%" }}>
                     <input
                       className={`w-100 p-2 rounded  ${fadeTopOrBottom} ${
                         fadeTopOrBottom === "animation-upEntry"
                           ? "delay-1"
                           : "delay-2"
                       }`}
+                      style={{ height: "100%" }}
                       name="subject"
                       type="text"
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="Subject"
                     />
                   </div>
-                  <div className="h-100 mb-2">
+                  <div
+                    className="mb-2"
+                    style={{ height: `${windowWidth! < 576 ? "71%" : "86%"}` }}
+                  >
                     <textarea
-                      style={{ lineHeight: "20px", height: "100%" }}
-                      className={`form-control w-100 p-2 rounded  ${fadeTopOrBottom} ${
+                      style={{
+                        lineHeight: "20px",
+                        height: "100%",
+                      }}
+                      className={`form-control w-100 h-100 p-2 rounded m-0 p-0  ${fadeTopOrBottom} ${
                         fadeTopOrBottom === "animation-upEntry"
                           ? "delay-2"
                           : "delay-1"
@@ -112,6 +125,49 @@ const Kontakt = () => {
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Message"
                     ></textarea>
+                  </div>
+                  <div
+                    className="d-flex d-sm-none justify-content-between justify-content-md-start"
+                    style={{ height: "15%" }}
+                  >
+                    <div
+                      style={{ height: "100%" }}
+                      className={` ${fadeTopOrBottom} ${
+                        fadeTopOrBottom === "animation-upEntry" ? "delay-3" : ""
+                      }`}
+                    >
+                      <CTAButton
+                        onClick={sendEmail}
+                        rounded={true}
+                        text="Odeslat"
+                      />
+                    </div>
+                    <div
+                      className="d-block d-sm-none text-end"
+                      style={{ color: "white", fontSize: "0.7rem" }}
+                    >
+                      <span className="lead delay-5 animation-fadeIn">
+                        Josef Hobler
+                      </span>
+                      <br />
+                      <span className="delay-6 animation-fadeIn">
+                        Czech Republic,
+                      </span>
+                      <br />
+
+                      <span className="delay-7 animation-fadeIn">
+                        Lomená 193
+                      </span>
+                      <br />
+                      <span className="delay-8 animation-fadeIn">
+                        Olomoucký kraj, Leština
+                      </span>
+                      <br />
+                      <br />
+                      <span className="delay-9  animation-fadeIn">
+                        pepous.hoblik@gmail.com
+                      </span>
+                    </div>
                   </div>
                 </div>
               </form>
@@ -182,38 +238,14 @@ const Kontakt = () => {
                 </div>
               </MapContainer>
             </div>
-            <div className="d-flex justify-content-between">
-              <div
-                className={` ${fadeTopOrBottom} ${
-                  fadeTopOrBottom === "animation-upEntry" ? "delay-3" : ""
-                }`}
-              >
-                <CTAButton onClick={sendEmail} rounded={true} text="Odeslat" />
-              </div>
-              <div
-                className="d-block d-sm-none text-end"
-                style={{ color: "white", fontSize: "0.7rem" }}
-              >
-                <span className="lead delay-5 animation-fadeIn">
-                  Josef Hobler
-                </span>
-                <br />
-                <span className="delay-6 animation-fadeIn">
-                  Czech Republic,
-                </span>
-                <br />
-
-                <span className="delay-7 animation-fadeIn">Lomená 193</span>
-                <br />
-                <span className="delay-8 animation-fadeIn">
-                  Olomoucký kraj, Leština
-                </span>
-                <br />
-                <br />
-                <span className="delay-9  animation-fadeIn">
-                  pepous.hoblik@gmail.com
-                </span>
-              </div>
+          </div>
+          <div className="d-none d-sm-block justify-content-between justify-content-md-start">
+            <div
+              className={` ${fadeTopOrBottom} ${
+                fadeTopOrBottom === "animation-upEntry" ? "delay-3" : ""
+              }`}
+            >
+              <CTAButton onClick={sendEmail} rounded={true} text="Odeslat" />
             </div>
           </div>
         </div>

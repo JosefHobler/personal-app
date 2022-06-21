@@ -7,8 +7,14 @@ import { useSwipeable } from "react-swipeable";
 import { useAppDispatch } from "../../Hooks/useAppDispatch";
 import { useAppSelector } from "../../Hooks/useAppSelector";
 import { pageSliceAction } from "../../Store/pagesSlice";
-import { JSONValuesKonicky, PagesProps, SCROLL_HORIZONTAL } from "../../setup";
+import {
+  displayResponsive,
+  JSONValuesKonicky,
+  PagesProps,
+  SCROLL_HORIZONTAL,
+} from "../../setup";
 import dataJSON from "../../Data/Koníčky/data.json";
+import useWindowSize from "../../Hooks/useWindowSize";
 
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
@@ -35,6 +41,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const handlersHorizontal = useSwipeable({
     onSwipedRight: () => handleClick(),
   });
+  const { width: windowWidth, height: windowHeight } = useWindowSize();
 
   let animations = prevPage === 5 ? "animation-fadeOut" : "";
 
@@ -44,10 +51,21 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   };
   // Udelat zitra
   const handleCardClick = (index: number) => {
-    console.log(cards.indexOf(true) >= 0 ? cards.indexOf(true) : null);
     const cardsArray = [false, false, false, false, false, false, false];
     cardsArray[index!] = true;
     setCards(cardsArray);
+  };
+
+  const handleResponsiveness = () => {
+    if (windowWidth! >= 768 && windowHeight! >= 730 && windowWidth! < 1200) {
+      return displayResponsive.mediumLayout;
+    } else if (
+      windowWidth! < 768 ||
+      (windowHeight! < 730 && windowWidth! < 1200)
+    ) {
+      return displayResponsive.smallLayout;
+    }
+    return displayResponsive.extraLargeLayout;
   };
 
   const cardCreatorMD = (lowerLimit: number, upperLimit: number) => {
@@ -59,8 +77,8 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           style={{
             height: "15vh",
             width: "15vh",
-            minWidth: "170px",
-            minHeight: "170px",
+            minWidth: "175px",
+            minHeight: "175px",
             cursor: "pointer",
           }}
         >
@@ -88,8 +106,8 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
     }
     return content;
   };
-  console.log("hi");
-
+  console.log(windowWidth, windowHeight);
+  console.log(handleResponsiveness());
   return (
     <>
       <div className={animations}>
@@ -106,29 +124,32 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           {/*Flex template, XS*/}
           <div
             style={{ height: "80vh", width: "70vw" }}
-            className="d-block d-md-none"
+            className={`${handleResponsiveness() === 0 ? "d-block" : "d-none"}`}
           >
             <SimpleAccordion data={data} />
           </div>
           {/*Grid template, MD*/}
           <div
-            style={{ height: "80vh", width: "70vw" }}
-            className="d-md-block d-none d-xl-none"
+            className={`${handleResponsiveness() === 1 ? "d-block" : "d-none"}`}
           >
             <div className="row h-100 g-5">
-              <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+              <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
                 {cardCreatorMD(0, 2)}
               </div>
-              <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+              <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
                 {cardCreatorMD(2, 5)}
               </div>
-              <div className="col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
+              <div className="h-100 col-4 d-flex flex-column justify-content-center gap-4 align-items-center">
                 {cardCreatorMD(5, 7)}
               </div>
             </div>
           </div>
           {/* Grid template, XL */}
-          <div className="d-xl-flex d-none align-items-center justify-content-center h-100 w-100">
+          <div
+            className={`${
+              handleResponsiveness() === 2 ? "d-flex" : "d-none"
+            } align-items-center justify-content-center h-100 w-100`}
+          >
             <div
               className="d-grid custom-grid"
               style={{
