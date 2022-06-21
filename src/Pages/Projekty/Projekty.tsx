@@ -24,7 +24,7 @@ const Projekty = () => {
       {/* Swiper template, XS */}
       <div
         className={`${fadeTopOrBottom} 
-        d-flex d-md-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
+        d-flex d-md-none accessible-page d-flex flex-column justify-content-center position-relative align-items-center`}
         style={{ zIndex: 10 }}
       >
         <Container animations={animations}>

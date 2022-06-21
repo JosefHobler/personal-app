@@ -29,7 +29,7 @@ const Domů = () => {
       <Container animations={animations}>
         <div className="row" style={{ zIndex: 10 }}>
           <div
-            className="col-md-5 text-center text-md-start px-5 d-flex flex-column justify-content-center"
+            className="col-md-5 text-center accessible-page text-md-start px-5 d-flex flex-column justify-content-center"
             style={{ zIndex: 100 }}
           >
             <h1

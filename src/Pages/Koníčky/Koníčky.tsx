@@ -128,13 +128,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
             </div>
           </div>
           {/* Grid template, XL */}
-          <div
-            className="d-xl-grid d-none custom-grid align-items-center"
-            style={{
-              height: "100vh",
-              width: "100vw",
-            }}
-          >
+          <div className="d-xl-grid d-none custom-grid align-items-center accessible-page">
             <div
               style={{
                 height: "75vh",

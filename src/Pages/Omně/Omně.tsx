@@ -66,8 +66,8 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
         animations={animations}
         handlersHorizontal={handlersHorizontal}
       >
-        <div className="container px-5" style={{ zIndex: 10 }}>
-          <div className="row align-items-center">
+        <div className="container px-5 accessible-page" style={{ zIndex: 10 }}>
+          <div className="accessible-page row align-items-center">
             <div className="col-md-6">
               <div>
                 <h2

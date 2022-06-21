@@ -96,8 +96,8 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
         animations={animations}
         handlersHorizontal={handlersHorizontal}
       >
-        <div className="container px-5" style={{ zIndex: 10 }}>
-          <div className="row align-items-center">
+        <div className="container px-5 accessible-page" style={{ zIndex: 10 }}>
+          <div className="row align-items-center accessible-page">
             <div className="col-lg-1"></div>
             <div className="col-xl-5 col-lg-6 col-md-8 text-center text-md-start">
               <h2 className={`heading-color heading-font ${fadeTopOrBottom}`}>
