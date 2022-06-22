@@ -38,8 +38,14 @@ body {
 }
 
 // Responsive text
+
+@for $i from 1 to 10 {
+  .text-width-#{$i} {
+    max-width: $i * 10ch;
+  }
+}
+
 .custom-text {
-  max-width: 60ch;
   font-size: calc(13px + (20 - 13) * (100vw - 320px) / (2560 - 320));
 }
 
@@ -152,8 +158,9 @@ body {
     $animation-timing-function: linear
   );
 }
+
 .animation-darken {
-  animation: 1s darken both !important;
+  animation: 900ms darken both !important;
 }
 
 @keyframes darken {
@@ -162,5 +169,38 @@ body {
   }
   100% {
     background-color: #212529;
+  }
+}
+
+// Custom for arrows
+.animation-fadeIn-arrows {
+  @include animation-mixin(
+    $animation-name: fadeIn,
+    $animation-duration: 2s,
+    $animation-delay: 5s,
+    $animation-fill-mode: both
+  );
+}
+
+// Used in Omně.tsx in images more specificaly
+.multiple-animations {
+  animation: images-animation 7500ms linear both infinite;
+}
+
+@keyframes images-animation {
+  0% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }

@@ -20,10 +20,10 @@ const CustomSwiper: FC<Props> = ({ pagination }) => {
       return (
         <SwiperSlide key={uuid.v4() as string} className="animation-darken">
           <img
-            className="animation-fadeIn delay-10 duration-5 img-fluid"
+            className="animation-fadeIn delay-9  img-fluid"
             src={require(`../../../Assets/Projects/${image}`)}
           />
-          <div className="animation-fadeIn delay-12 duration-5">
+          <div className="animation-fadeIn delay-11 ">
             <h5 className="text-center pt-2 heading-font heading-color">
               {heading}
             </h5>

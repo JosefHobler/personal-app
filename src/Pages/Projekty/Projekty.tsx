@@ -31,7 +31,7 @@ const Projekty = () => {
       </div>
       {/* Swiper template, MD */}
       <div
-        className={`${fadeTopOrBottom} accessible-page   d-md-flex d-xl-none d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
+        className={`${fadeTopOrBottom} accessible-page d-md-flex d-xl-none d-none h-100 d-flex flex-column justify-content-center position-relative align-items-center`}
       >
         <Container animations={animations}>
           <CustomSwiper pagination={2} />

@@ -20,7 +20,6 @@ import { useAppDispatch } from "../../Hooks/useAppDispatch";
 import { PagesProps, SCROLL_HORIZONTAL } from "../../setup";
 import { PRIMARY_TECHNOLOGIES } from "../../setup";
 import { OTHER_TECHNOLOGIES } from "../../setup";
-import useWindowSize from "../../Hooks/useWindowSize";
 
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
@@ -33,8 +32,6 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
     onSwipedLeft: () => handleRight(),
     onSwipedRight: () => handleLeft(),
   });
-  const { width: windowWidth } = useWindowSize();
-
   let animations = prevPage === 4 ? "animation-fadeOut" : "";
 
   let fadeTopOrBottom = "animation-leftEntry";
@@ -57,9 +54,7 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
       return (
         <li
           key={uuid.v4() as string}
-          className={`text-color text-font d-flex mx-auto mx-md-0 ps-sm-3 ps-4 ps-md-0 justify-content-between ${
-            windowWidth! < 390 ? "w-100" : windowWidth! < 480 ? "w-75" : "w-50"
-          } custom-text`}
+          className={`text-color text-font d-flex mx-auto mx-md-0 ps-sm-3 ps-4 ps-md-0 justify-content-between ${"w-100"} custom-text`}
         >
           <p className="mb-1">{name}</p>
           <Rating
@@ -72,7 +67,6 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
       );
     });
   };
-
   const mappingOther = (): JSX.Element[] => {
     return OTHER_TECHNOLOGIES.map((tech) => {
       return (
@@ -106,7 +100,7 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
                 Primární technologie
               </h2>
               <ul
-                className="p-0 animation-fadeIn delay-4"
+                className="p-0 animation-fadeIn delay-8"
                 style={{ listStyle: "none" }}
               >
                 {mappingPrimary()}
@@ -120,13 +114,13 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
                 </h3>
                 <ul
                   style={{ listStyle: "none" }}
-                  className="p-0 animation-fadeIn delay-5"
+                  className="p-0 animation-fadeIn delay-9"
                 >
                   {mappingOther()}
                 </ul>
               </div>
             </div>
-            <div className=" d-none d-md-block d-flex align-items-center justify-content-center delay-12 animation-fadeIn">
+            <div className=" d-none d-md-block d-flex align-items-center justify-content-center delay-11 animation-fadeIn">
               {/*Cube styles in dovednosti.scss */}
               <div className="scene">
                 <div className="cube">

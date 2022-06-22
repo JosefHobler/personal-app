@@ -23,10 +23,10 @@ import CardVerticalLarge from "../../Components/Koníčky/Cards/CardVerticalLarg
 import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
 import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
 import Container from "../../Components/Global/Container/Container";
+import useIsFirstTwoRenders from "../../Hooks/useIsFirstTwoRenders";
 
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const { data }: JSONValuesKonicky = dataJSON;
-
   const [cards, setCards] = useState([
     false,
     false,
@@ -41,6 +41,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const handlersHorizontal = useSwipeable({
     onSwipedRight: () => handleClick(),
   });
+  const firstRenders = useIsFirstTwoRenders();
   const { width: windowWidth, height: windowHeight } = useWindowSize();
 
   let animations = prevPage === 5 ? "animation-fadeOut" : "";
@@ -84,8 +85,8 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           }}
         >
           {cards[i] ? (
-            <div className="animation-fadeIn duration-3">
-              <h5 className="text-center custom-text  pt-2">
+            <div className="animation-fadeIn delay-1 duration-3">
+              <h5 className="text-center custom-text heading-font pt-2">
                 {data[i].text.heading}
               </h5>
               <p
@@ -98,7 +99,9 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           ) : (
             <img
               src={require(`../../Assets/Konicky/${data[i].image}`)}
-              className="img-fluid animation-fadeIn delay-3"
+              className={`img-fluid animation-fadeIn ${
+                firstRenders ? "delay-5 duration-5" : "delay-1 duration-3"
+              }`}
               alt=""
             />
           )}
@@ -107,8 +110,6 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
     }
     return content;
   };
-  console.log(windowWidth, windowHeight);
-  console.log(handleResponsiveness());
   return (
     <>
       <div className={animations}>
@@ -120,7 +121,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
       >
         <div className="accessible-page d-flex justify-content-center align-items-center">
           <div
-            className="container px-5 d-flex flex-column align-items-center justify-content-center animation-rightEntry"
+            className="container px-5 d-flex flex-column align-items-center justify-content-center"
             style={{ zIndex: 10, overflow: "hidden" }}
           >
             {/*Flex template, XS*/}
@@ -136,7 +137,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
             <div
               className={`${
                 handleResponsiveness() === 1 ? "d-block" : "d-none"
-              }`}
+              }  animation-rightEntry`}
             >
               <div className="row h-100">
                 <div className="col-4 d-flex flex-column m justify-content-center align-items-center">
@@ -154,7 +155,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
             <div
               className={`${
                 handleResponsiveness() === 2 ? "d-flex" : "d-none"
-              } align-items-center justify-content-center h-100 w-100`}
+              } align-items-center justify-content-center h-100 w-100  animation-rightEntry`}
             >
               <div
                 className="d-grid custom-grid"

@@ -38,12 +38,12 @@ const MouseScrollElement: FC<PropsExtended> = ({ top, onClick }) => {
         right: "50vw",
         transform: "translateX(50%)",
       }}
-      className={`position-absolute d-flex flex-column ${
+      className={`position-absolute d-flex flex-column animation-fadeIn-arrows  ${
         top ? "justify-content-end" : "justify-content-start"
       }
        `}
     >
-      <div className={`mouse_scroll fadeIn-animation ${top ? "" : ""}`}>
+      <div className={`mouse_scroll`}>
         {!top && (
           <div className="mouse d-none d-md-block">
             <div className="wheel"></div>

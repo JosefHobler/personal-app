@@ -15,7 +15,6 @@ import { pageSliceAction } from "../../Store/pagesSlice";
 
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import CustomizedRating from "../../Components/Dovednosti/CustomizedRating";
-import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
 
@@ -41,7 +40,6 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
   if (prevPage === 4) {
     fadeTopOrBottom = "animation-leftEntry";
   }
-  console.log(image);
   useLayoutEffect(() => {
     const interval = setInterval(() => {
       setImage((image) =>
@@ -66,23 +64,23 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
         animations={animations}
         handlersHorizontal={handlersHorizontal}
       >
-        <div className="container px-5 accessible-page" style={{ zIndex: 10 }}>
+        <div className="container px-5 accessible-page">
           <div className="accessible-page row align-items-center">
             <div className="col-md-6">
               <div>
                 <h2
                   className={`heading-font heading-color ${fadeTopOrBottom}
-                ${fadeTopOrBottom === "animation-downEntry" ? "delay-3" : ""}
+                ${fadeTopOrBottom === "animation-downEntry" ? "delay-2" : ""}
                 `}
                 >
                   Profil
                 </h2>
                 <p
-                  className={`custom-text text-font text-color animation-fadeIn
+                  className={`custom-text text-width-5 text-font text-color animation-fadeIn
                 ${
                   fadeTopOrBottom === "animation-downEntry"
-                    ? "delay-8"
-                    : "delay-6"
+                    ? "delay-10"
+                    : "delay-8"
                 }
                 `}
                 >
@@ -94,18 +92,14 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
               </div>
               <div>
                 <h2
-                  className={`heading-font heading-color ${fadeTopOrBottom}  ${
-                    fadeTopOrBottom === "animation-downEntry"
-                      ? "delay-2"
-                      : "delay-1"
-                  }
+                  className={`heading-font heading-color ${fadeTopOrBottom} delay-1
                 `}
                 >
                   Vzdělání
                 </h2>
                 <p
                   className={`custom-text text-font text-color  animation-fadeIn 
-                delay-7
+                delay-9
                 `}
                 >
                   Studuji třetím rokem na{" "}
@@ -122,11 +116,7 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
               <div>
                 <h2
                   className={`heading-font heading-color ${fadeTopOrBottom}
-                  ${
-                    fadeTopOrBottom === "animation-downEntry"
-                      ? "delay-1"
-                      : "delay-2"
-                  }
+                  ${fadeTopOrBottom === "animation-downEntry" ? "" : "delay-2"}
                 `}
                 >
                   Jazyky
@@ -135,8 +125,8 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                   className={`
                   ${
                     fadeTopOrBottom === "animation-downEntry"
-                      ? "delay-6"
-                      : "delay-8"
+                      ? "delay-8"
+                      : "delay-10"
                   }
                 animation-fadeIn`}
                 >
@@ -154,48 +144,27 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                   </div>
                 </div>
               </div>
-              <div
+              {/*<div
                 className={`mt-4 ${fadeTopOrBottom}
                 ${fadeTopOrBottom === "animation-downEntry" ? "" : "delay-3"}
                 `}
               >
                 <CTAButton padding={3} text="Životopis" rounded={true} />
-              </div>
+                </div> */}
             </div>
             {/*Custom image*/}
+            {/*animation-fadeIn delay-12 */}
             <div
-              className="col-md-6 d-none d-md-block animation-fadeIn d-flex justify-content-center align-items-center"
+              className="col-md-6 d-none d-md-block d-flex justify-content-center align-items-center"
               style={{ padding: "5vw" }}
             >
               <div className="image-wrapper">
-                {image === Image1 && (
-                  <img
-                    src={Image1}
-                    className="animation-fadeOut duration-5 delay-69"
-                    alt="já"
-                  />
-                )}
-                {image === Image3 && (
-                  <img
-                    src={Image3}
-                    className="animation-fadeOut duration-5 delay-69"
-                    alt="já"
-                  />
-                )}
-                {image === Image4 && (
-                  <img
-                    src={Image4}
-                    className="animation-fadeOut duration-5 delay-69"
-                    alt="já"
-                  />
-                )}
-                {image === Image5 && (
-                  <img
-                    src={Image5}
-                    className="animation-fadeOut duration-5 delay-69"
-                    alt="já"
-                  />
-                )}
+                <div className="multiple-animations">
+                  {image === Image1 && <img src={Image1} alt="já" />}
+                  {image === Image3 && <img src={Image3} alt="já" />}
+                  {image === Image4 && <img src={Image4} alt="já" />}
+                  {image === Image5 && <img src={Image5} alt="já" />}
+                </div>
               </div>
             </div>
           </div>

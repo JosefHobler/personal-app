@@ -190,7 +190,7 @@ const Kontakt = () => {
                       : "delay-1"
                   }`}
                   center={[49.8697625, 16.928348]}
-                  zoom={13}
+                  zoom={9}
                 >
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                   <Marker position={[49.8697625, 16.928348]}>
@@ -209,7 +209,7 @@ const Kontakt = () => {
                     }}
                   >
                     <span
-                      className="lead delay-5  animation-fadeIn"
+                      className="lead delay-5  animation-fadeIn heading-font"
                       style={{ color: "rgba(0, 0, 0, 0.87)" }}
                     >
                       Josef Hobler
@@ -227,20 +227,26 @@ const Kontakt = () => {
                       className="delay-7  animation-fadeIn"
                       style={{ color: "rgba(0, 0, 0, 0.6)" }}
                     >
-                      Lomená 193
+                      Leština
                     </span>
                     <br />
                     <span
                       className="delay-8  animation-fadeIn"
                       style={{ color: "rgba(0, 0, 0, 0.6)" }}
                     >
-                      Olomoucký kraj, Leština
+                      okres Šumperk
                     </span>
-                    <br />
                     <br />
                     <span
                       className="delay-9  animation-fadeIn"
                       style={{ color: "rgba(0, 0, 0, 0.6)" }}
+                    >
+                      Olomoucký kraj
+                    </span>
+                    <br />
+                    <span
+                      className="delay-10  animation-fadeIn"
+                      style={{ color: "rgba(0, 0, 0, 0.8)" }}
                     >
                       pepous.hoblik@gmail.com
                     </span>
@@ -248,14 +254,12 @@ const Kontakt = () => {
                 </MapContainer>
               </div>
             </div>
-            <div className="d-none d-sm-block justify-content-between justify-content-md-start">
-              <div
-                className={` ${fadeTopOrBottom} ${
-                  fadeTopOrBottom === "animation-upEntry" ? "delay-3" : ""
-                }`}
-              >
-                <CTAButton onClick={sendEmail} rounded={true} text="Odeslat" />
-              </div>
+            <div
+              className={` ${fadeTopOrBottom} ${
+                fadeTopOrBottom === "animation-upEntry" ? "delay-3" : ""
+              } d-none d-sm-block justify-content-between justify-content-md-start`}
+            >
+              <CTAButton onClick={sendEmail} rounded={true} text="Odeslat" />
             </div>
           </div>
         </div>

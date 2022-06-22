@@ -21,7 +21,7 @@ const CardVerticalLarge: FC<Props> = ({ image, text: { heading, body } }) => {
           image={require(`../../../Assets/Konicky/${image}`)}
         />
       </div>
-      <CardContent className="animation-fadeIn delay-7 duration-7">
+      <CardContent className="animation-fadeIn delay-7 duration-5">
         <Typography
           gutterBottom
           variant="h5"

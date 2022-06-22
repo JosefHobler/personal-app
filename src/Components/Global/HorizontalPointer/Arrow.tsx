@@ -12,17 +12,17 @@ const Arrow: FC<Props> = ({ onClick, left }) => {
     <button
       onClick={onClick}
       style={{
+        background: "transparent",
+        border: "none",
         minWidth: "50px",
-        all: "unset",
         zIndex: 100000,
         left: `${left ? "15px" : ""}`,
         right: `${left ? "" : "15px"}`,
-        cursor: "pointer",
         transform: `${left ? "rotate(180deg)" : ""}`,
       }}
-      className="position-absolute align-self-center text-center"
+      className="position-absolute align-self-center text-center animation-fadeIn-arrows"
     >
-      <div id="arrowAnim" className="  fadeIn-animation">
+      <div id="arrowAnim">
         <div className="arrowSliding">
           <div className="arrow"></div>
         </div>

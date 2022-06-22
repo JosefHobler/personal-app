@@ -12,7 +12,7 @@ interface Props {
 const CardSmall: FC<Props> = ({ text: { heading, body } }) => {
   return (
     <Card className="w-100 h-100">
-      <CardContent className="animation-fadeIn delay-7 duration-7">
+      <CardContent className="animation-fadeIn delay-7 duration-5">
         <Typography
           gutterBottom
           variant="h5"

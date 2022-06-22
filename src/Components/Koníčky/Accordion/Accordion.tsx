@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import uuid from "react-native-uuid";
 import { faBitcoin, faChrome } from "@fortawesome/free-brands-svg-icons";
+import useIsFirstTwoRenders from "../../../Hooks/useIsFirstTwoRenders";
 
 interface Props {
   data: {
@@ -37,20 +38,11 @@ const ICONS = [
 
 const SimpleAccordion: React.FC<Props> = ({ data }) => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
-
+  const firstRender = useIsFirstTwoRenders();
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
-  let animation = "";
-
-  React.useLayoutEffect(() => {
-    animation = "animation-rightEntry";
-  }, []);
-
-  React.useEffect(() => {
-    animation = "";
-  }, [animation]);
 
   return (
     <div
@@ -63,7 +55,9 @@ const SimpleAccordion: React.FC<Props> = ({ data }) => {
         return (
           <Accordion
             key={uuid.v4() as string}
-            className={`delay-${index} `}
+            className={`delay-${index} ${
+              firstRender ? "animation-rightEntry" : ""
+            }`}
             expanded={expanded === `panel${index}`}
             onChange={handleChange(`panel${index}`)}
           >

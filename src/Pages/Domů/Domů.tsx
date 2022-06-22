@@ -27,10 +27,7 @@ const Domů = () => {
         <BackgroundText text="Domů" />
       </div>
       <Container animations={animations}>
-        <div
-          className="d-flex justify-content-around align-items-center accessible-page "
-          style={{ zIndex: 10 }}
-        >
+        <div className="d-flex justify-content-around align-items-center accessible-page ">
           <div
             className="text-center text-md-start px-5 d-flex flex-column justify-content-center"
             style={{ zIndex: 100 }}
@@ -43,7 +40,7 @@ const Domů = () => {
               Josef Hobler
             </h1>
             <p
-              className={`mb-3 custom-text text-color text-font ${fadeTopOrBottom} delay-1`}
+              className={`mb-3 custom-text text-width-5 text-color text-font ${fadeTopOrBottom} delay-1`}
             >
               Jsem mladý ambiciózní junior front-end developer, který v týmu
               podpoří pozitivní a přátelskou atmosféru a bude plnit úkoly s
@@ -63,16 +60,14 @@ const Domů = () => {
               </Link>
             </div>
           </div>
-          <div className="col-md-3"></div>
           <div
             className="d-none d-md-flex align-items-center justify-content-end"
-            style={{ zIndex: 100 }}
+            style={{ zIndex: 100, transform: "scale(1.25)" }}
           >
             {/*Image here*/}
             <img
-              className="animation-fadeIn img-fluid"
+              className="animation-fadeIn delay-10 img-fluid"
               style={{
-                transform: "scale(1.5)",
                 borderRadius: "7rem",
                 filter: "drop-shadow(0px 0px 39px #000)",
               }}

@@ -26,7 +26,7 @@ const CardHorizontalLarge: FC<Props> = ({ image, text: { heading, body } }) => {
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <CardContent
           sx={{ flex: "1 0 auto" }}
-          className="animation-fadeIn delay-7 duration-3"
+          className="animation-fadeIn delay-7  duration-5"
         >
           <Typography
             gutterBottom

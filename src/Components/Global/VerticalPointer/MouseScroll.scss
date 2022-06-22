@@ -11,6 +11,10 @@
   transform: scale(0.6);
 }
 
+button:hover {
+  background-color: red;
+}
+
 .m_scroll_arrows {
   display: block;
   width: 5px;

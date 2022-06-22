@@ -23,7 +23,6 @@ import Projekty from "./Pages/Projekty/Projekty";
 
 import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
-import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 function App() {
   const wait = useRef(false);
@@ -91,17 +90,18 @@ function App() {
     }
   };
 
-  // Allowing next scroll
+  // Allowing next scroll + handling vertical arrow animations
   useEffect(() => {
     if (!wait.current) return;
     const wrapper = mouseScrollRef.current;
     if (mouseScrollRef) {
+      wrapper!.classList.remove("animation-fadeIn-arrows");
       wrapper!.classList.add("animation-fadeOut");
     }
     setTimeout(() => {
       if (mouseScrollRef) {
         wrapper!.classList.remove("animation-fadeOut");
-        wrapper!.classList.add("animation-fadeIn");
+        wrapper!.classList.add("animation-fadeIn-arrows");
       }
       wait.current = false;
       refresh();
