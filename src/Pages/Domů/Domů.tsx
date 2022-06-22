@@ -62,14 +62,14 @@ const Domů = () => {
           </div>
           <div
             className="d-none d-md-flex align-items-center justify-content-end"
-            style={{ zIndex: 100, transform: "scale(1.25)" }}
+            style={{ zIndex: 100, transform: "scale(1.5)" }}
           >
             {/*Image here*/}
             <img
               className="animation-fadeIn delay-10 img-fluid"
               style={{
                 borderRadius: "7rem",
-                filter: "drop-shadow(0px 0px 39px #000)",
+                filter: "drop-shadow(0px 0px 8px #000)",
               }}
               src={Image2}
               alt="Já"
