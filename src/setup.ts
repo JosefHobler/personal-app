@@ -72,6 +72,5 @@ export const OTHER_TECHNOLOGIES = [
   "Typescript",
   "Bootstrap",
   "Redux Toolkit",
-  "MUI",
-  "NPM",
+  "C++",
 ];
