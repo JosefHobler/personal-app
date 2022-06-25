@@ -26,14 +26,20 @@ function HorizontalStepper() {
             style={{
               width: `${i !== 2 ? "25%" : "100%"}`,
             }}
-            className="d-flex justify-content-center align-items-center"
+            className={`d-flex ${
+              i === 0
+                ? "justify-content-end"
+                : i === 1
+                ? "justify-content-center"
+                : "justify-content-start"
+            } align-items-center`}
           >
             <p
               style={{
                 transition: "color 1.5s",
                 color: `${i === index ? "white" : "rgba(256,256,256,0.5)"}`,
               }}
-              className="my-auto"
+              className="my-auto custom-text-pagination"
             >
               {SECONDARY_NAMES[i]}
             </p>
@@ -42,7 +48,7 @@ function HorizontalStepper() {
             <div
               className="d-flex justify-content-center align-items-center"
               style={{
-                width: `${i === 1 ? "75%" : "75%"}`,
+                width: `75%`,
               }}
             >
               <div
@@ -51,6 +57,7 @@ function HorizontalStepper() {
                   zIndex: 1,
                   border: "1px solid rgba(256,256,256,0.3)",
                 }}
+                className="mx-1"
               ></div>
             </div>
           )}
@@ -62,7 +69,7 @@ function HorizontalStepper() {
 
   return (
     <ul
-      className="w-75 d-flex justify-content-center align-items-center"
+      className="w-50 d-flex justify-content-center align-items-center"
       style={{
         listStyle: "none",
         padding: 0,

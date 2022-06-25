@@ -32,7 +32,7 @@ function VerticalStepper() {
                 transition: "color 1.5s",
                 color: `${i === index ? "white" : "rgba(256,256,256,0.5)"}`,
               }}
-              className="my-auto"
+              className="my-auto custom-text-pagination"
             >
               {PRIMARY_NAMES[i]}
             </p>
@@ -59,7 +59,7 @@ function VerticalStepper() {
 
   return (
     <ul
-      className="h-100 d-flex flex-column justify-content-center align-items-center"
+      className="h-75 d-flex flex-column justify-content-center align-items-center"
       style={{
         listStyle: "none",
         padding: 0,
