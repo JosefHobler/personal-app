@@ -14,7 +14,6 @@ interface Props {
 }
 const CustomSwiper: FC<Props> = ({ pagination }) => {
   const { data }: JSONValuesProjekty = dataJSON;
-  console.log(typeof data, data);
   const mapProjects = () => {
     return data.map(({ image, text: { body, heading }, link }) => {
       return (

@@ -23,9 +23,13 @@ import Projekty from "./Pages/Projekty/Projekty";
 
 import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
+import VerticalStepper from "./Components/App/VerticalStepper/VerticalStepper";
+import HorizontalStepper from "./Components/App/HorizontalStepper.tsx/HorizontalStepper";
 
 function App() {
   const wait = useRef(false);
+  const paginationVerticalRef = useRef<HTMLDivElement>(null);
+  const paginationHorizontalRef = useRef<HTMLDivElement>(null);
   const mouseScrollRef = useRef<HTMLDivElement>(null);
   const scroll = useRef<SCROLL_HORIZONTAL | SCROLL_VERTICAL>(
     SCROLL_HORIZONTAL.null
@@ -44,9 +48,13 @@ function App() {
   // Handling sideways scroll
   function sidewaysScroll(e: SCROLL_HORIZONTAL) {
     if (wait.current) return;
+    wait.current = true;
     dispatch(pageSliceAction.changePrevPage(curPage));
     scroll.current = e;
-    wait.current = true;
+    setTimeout(() => {
+      wait.current = false;
+      refresh();
+    }, 1850);
     return undefined;
   }
 
@@ -59,6 +67,7 @@ function App() {
   // Handling horizontal scroll
   function handleScroll(e: SCROLL_VERTICAL): void {
     if (wait.current) return;
+    wait.current = true;
     dispatch(pageSliceAction.changePrevPage(curPage));
     switch (e) {
       case SCROLL_VERTICAL.up:
@@ -70,7 +79,10 @@ function App() {
         handlePageChange(SCROLL_VERTICAL.down);
         break;
     }
-    wait.current = true;
+    setTimeout(() => {
+      wait.current = false;
+      refresh();
+    }, 1850);
   }
 
   // Handling page flow
@@ -90,29 +102,53 @@ function App() {
     }
   };
 
-  // Allowing next scroll + handling vertical arrow animations
   useEffect(() => {
-    if (!wait.current) return;
-    const wrapper = mouseScrollRef.current;
-    if (mouseScrollRef) {
-      wrapper!.classList.remove("animation-fadeIn-arrows");
-      wrapper!.classList.add("animation-fadeOut");
-    }
-    setTimeout(() => {
-      if (mouseScrollRef) {
+    // Handling pagination animations
+    if (wait.current) {
+      const wrapper = paginationHorizontalRef.current;
+      const wrapper2 = paginationVerticalRef.current;
+      if (wrapper) {
         wrapper!.classList.remove("animation-fadeOut");
-        wrapper!.classList.add("animation-fadeIn-arrows");
+        wrapper!.classList.add("animation-fadeIn-pagination");
       }
-      wait.current = false;
-      refresh();
-    }, 2000);
+      if (wrapper2) {
+        wrapper2!.classList.remove("animation-fadeOut");
+        wrapper2!.classList.add("animation-fadeIn-pagination");
+      }
+      setTimeout(() => {
+        if (wrapper) {
+          wrapper!.classList.add("animation-fadeOut");
+          wrapper!.classList.remove("animation-fadeIn-pagination");
+        }
+        if (wrapper2) {
+          wrapper2!.classList.add("animation-fadeOut");
+          wrapper2!.classList.remove("animation-fadeIn-pagination");
+        }
+      }, 1000);
+
+      // Allowing next scroll + handling vertical arrow animations
+      const wrapperMouse = mouseScrollRef.current;
+      if (wrapperMouse) {
+        wrapperMouse!.classList.remove("animation-fadeIn-arrows");
+        wrapperMouse!.classList.add("animation-fadeOut");
+      }
+    } else {
+      const wrapperMouse = mouseScrollRef.current;
+      setTimeout(() => {
+        if (wrapperMouse) {
+          wrapperMouse!.classList.add("animation-fadeIn-arrows");
+          wrapperMouse!.classList.remove("animation-fadeOut");
+        }
+      }, 500);
+    }
   }, [wait.current]);
 
   // Setting next page to the screen
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       history(MAIN_PAGES[curPage]);
-    }, 1800);
+    }, 1850);
+    return () => clearTimeout(timeout);
   }, [curPage]);
 
   // Making page same as device screen
@@ -157,6 +193,22 @@ function App() {
           <MouseScroll onClick={handleScroll} />
         </div>
       </div>
+      <div
+        ref={paginationVerticalRef}
+        className="d position-absolute heading-color d-flex align-items-center justify-content-center"
+        style={{ right: 15, top: 15, bottom: 15, zIndex: 1001 }}
+      >
+        <VerticalStepper />
+      </div>
+      {(curPage === 1 || curPage > 3) && (
+        <div
+          ref={paginationHorizontalRef}
+          className="w-100 position-absolute heading-color d-flex align-items-center justify-content-center"
+          style={{ bottom: 15, zIndex: 1001 }}
+        >
+          <HorizontalStepper />
+        </div>
+      )}
     </>
   );
 }

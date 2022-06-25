@@ -29,8 +29,8 @@ const TransitionPage: FC<Props> = ({ text, direction }) => {
     <div
       className={`${animationClass} position-absolute bg-dark text-light bg-font d-flex align-items-center justify-content-center accessible-page`}
       style={{
-        zIndex: 100000,
         fontSize: "16vw",
+        zIndex: 1000,
       }}
     >
       {text}

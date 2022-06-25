@@ -176,8 +176,17 @@ body {
 .animation-fadeIn-arrows {
   @include animation-mixin(
     $animation-name: fadeIn,
-    $animation-duration: 2s,
-    $animation-delay: 5s,
+    $animation-duration: 500ms,
+    $animation-delay: 2s,
+    $animation-fill-mode: both
+  );
+}
+
+.animation-fadeIn-pagination {
+  @include animation-mixin(
+    $animation-name: fadeIn,
+    $animation-duration: 1s,
+    $animation-delay: 0s,
     $animation-fill-mode: both
   );
 }

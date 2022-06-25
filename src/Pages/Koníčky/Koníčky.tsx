@@ -1,5 +1,6 @@
-import { FC, useState } from "react";
+import { FC, Key, useState } from "react";
 import { Card } from "@mui/material";
+import uuid from "react-native-uuid";
 
 import "./Koníčky.scss";
 
@@ -24,6 +25,7 @@ import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
 import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
 import Container from "../../Components/Global/Container/Container";
 import useIsFirstTwoRenders from "../../Hooks/useIsFirstTwoRenders";
+import HorizontalStepper from "../../Components/App/HorizontalStepper.tsx/HorizontalStepper";
 
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const { data }: JSONValuesKonicky = dataJSON;
@@ -74,6 +76,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
     for (let i = lowerLimit; i < upperLimit; i++) {
       content.push(
         <Card
+          key={uuid.v4() as Key}
           className="mb-4"
           onClick={() => handleCardClick(i)}
           style={{

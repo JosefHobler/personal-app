@@ -7,14 +7,12 @@ export const MAIN_PAGES = [
   "/Omne/Konicky",
 ];
 
-export const NAMES = [
-  "Domů",
-  "O mně",
-  "Projekty",
-  "Kontakt",
-  "Dovednosti",
-  "Koníčky",
-];
+export const PRIMARY_NAMES = ["Domů", "O mně", "Projekty", "Kontakt"];
+
+export const SECONDARY_NAMES = ["O mně", "Dovednosti", "Koníčky"];
+
+export const NAMES = [...PRIMARY_NAMES, ...SECONDARY_NAMES.slice(1, 3)];
+
 export enum SCROLL_VERTICAL {
   down = "down",
   up = "up",

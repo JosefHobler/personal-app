@@ -8,15 +8,17 @@ import useWindowSize from "../../Hooks/useWindowSize";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import Container from "../../Components/Global/Container/Container";
+import { useRefresh } from "../../Hooks/useRefresh";
 
 const Kontakt = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const form = useRef(null);
   const prevPage = useAppSelector((state) => state.pages.prevPage);
   const { width: windowWidth } = useWindowSize();
+  const contactRef = useRef<HTMLFormElement>(null);
+  const refresh = useRefresh();
 
   let animations = prevPage === 3 ? "animation-fadeOut" : "";
   let fadeTopOrBottom = "animation-downEntry";
@@ -25,36 +27,50 @@ const Kontakt = () => {
     fadeTopOrBottom = "animation-upEntry";
   }
 
-  const checkIfValid = () => {
-    if (!name) return false;
-    if (!email) return false;
-    if (!subject) return false;
-    if (!message) return false;
+  const validateInputs = () => {
+    if (
+      !email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+    ) {
+      alert("neplatná emailová adresa");
+      return false;
+    }
+    if (!name) {
+      alert("Neplatné jméno");
+      return false;
+    }
+    if (!message) {
+      alert("Neplatná zpráva");
+      return false;
+    }
     return true;
   };
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!checkIfValid()) return;
+    if (!validateInputs()) return;
     emailjs
       .sendForm(
         "service_lk8lvhj",
         "template_jnnrz6j",
-        form.current ? form.current : "",
+        contactRef.current ? contactRef.current : "",
         "I9yfNwOfp3HKRNBII"
       )
       .then(
         () => {
           alert("Message successfully sent!");
-          window.location.reload();
+          setName("");
+          setSubject("");
+          setEmail("");
+          setMessage("");
+          refresh();
         },
         () => {
-          alert("Failed to send the message, please try again");
+          alert("Error");
         }
       );
   };
-
-  console.log(windowWidth);
 
   return (
     <>
@@ -67,9 +83,9 @@ const Kontakt = () => {
             className="container px-5 text-font text-color"
             style={{ zIndex: 10, height: "60vh" }}
           >
-            <div ref={form} className="row h-100">
+            <div className="row h-100">
               <div className="col-md-5 col-sm-6 col-lg-5 h-100">
-                <form onSubmit={sendEmail} className="h-100">
+                <form onSubmit={sendEmail} className="h-100" ref={contactRef}>
                   <div className="d-flex flex-column gap-1 h-100">
                     <div className="d-flex gap-1" style={{ height: "7%" }}>
                       <input
@@ -80,9 +96,10 @@ const Kontakt = () => {
                             : "delay-3"
                         }`}
                         style={{ height: "100%" }}
+                        value={name}
                         type="text"
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Name"
+                        placeholder="Jméno"
                       />
                       <input
                         className={`w-100 p-2 rounded  ${fadeTopOrBottom} ${
@@ -93,6 +110,7 @@ const Kontakt = () => {
                         style={{ height: "100%" }}
                         name="from_email"
                         type="email"
+                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Email"
                       />
@@ -107,8 +125,9 @@ const Kontakt = () => {
                         style={{ height: "100%" }}
                         name="subject"
                         type="text"
+                        value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                        placeholder="Subject"
+                        placeholder="Předmět"
                       />
                     </div>
                     <div
@@ -127,10 +146,10 @@ const Kontakt = () => {
                             ? "delay-2"
                             : "delay-1"
                         }`}
+                        value={message}
                         name="message"
-                        id=""
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Message"
+                        placeholder="Zpráva"
                       ></textarea>
                     </div>
                     <div
@@ -193,11 +212,7 @@ const Kontakt = () => {
                   zoom={9}
                 >
                   <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-                  <Marker position={[49.8697625, 16.928348]}>
-                    <Popup className="text-color text-font">
-                      Přijdte na oběd :D
-                    </Popup>
-                  </Marker>
+                  <Marker position={[49.8697625, 16.928348]}></Marker>
                   <div
                     className="position-absolute text-font text-dark p-2 fs-8 rounded text-center white-shadow"
                     style={{
