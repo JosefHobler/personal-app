@@ -39,7 +39,7 @@ function HorizontalStepper() {
                 transition: "color 1.5s",
                 color: `${i === index ? "white" : "rgba(256,256,256,0.5)"}`,
               }}
-              className="my-auto custom-text-pagination"
+              className={` my-auto custom-text-pagination`}
             >
               {SECONDARY_NAMES[i]}
             </p>
@@ -57,7 +57,11 @@ function HorizontalStepper() {
                   zIndex: 1,
                   border: "1px solid rgba(256,256,256,0.3)",
                 }}
-                className="mx-1"
+                className={`${
+                  i === 1
+                    ? " ms-2 ms-xl-0 ms-md-1 me-1"
+                    : " me-2 me-xl-0 me-md-1 ms-1"
+                }`}
               ></div>
             </div>
           )}

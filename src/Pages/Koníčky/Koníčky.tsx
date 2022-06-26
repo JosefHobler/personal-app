@@ -24,8 +24,7 @@ import CardVerticalLarge from "../../Components/Koníčky/Cards/CardVerticalLarg
 import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
 import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
 import Container from "../../Components/Global/Container/Container";
-import useIsFirstTwoRenders from "../../Hooks/useIsFirstTwoRenders";
-import HorizontalStepper from "../../Components/App/HorizontalStepper.tsx/HorizontalStepper";
+import useIsFirstTwoRenders from "../../Hooks/useIsFirstRender";
 
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const { data }: JSONValuesKonicky = dataJSON;
@@ -38,6 +37,9 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
     false,
     false,
   ]);
+
+  const [prevCards, setPrevCards] = useState([...cards]);
+
   const dispatch = useAppDispatch();
   const prevPage = useAppSelector((state) => state.pages.prevPage);
   const handlersHorizontal = useSwipeable({
@@ -52,8 +54,9 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
     dispatch(pageSliceAction.changeCurPage(4));
     sidewaysScroll(SCROLL_HORIZONTAL.left);
   };
-  // Udelat zitra
+
   const handleCardClick = (index: number) => {
+    setPrevCards(cards);
     const cardsArray = [false, false, false, false, false, false, false];
     cardsArray[index!] = true;
     setCards(cardsArray);
@@ -74,6 +77,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const cardCreatorMD = (lowerLimit: number, upperLimit: number) => {
     let content = [];
     for (let i = lowerLimit; i < upperLimit; i++) {
+      console.log(cards[i]);
       content.push(
         <Card
           key={uuid.v4() as Key}
@@ -88,7 +92,11 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           }}
         >
           {cards[i] ? (
-            <div className="animation-fadeIn delay-1 duration-3">
+            <div
+              className={`
+                animation-fadeIn
+               delay-1 duration-3`}
+            >
               <h5 className="text-center custom-text heading-font pt-2">
                 {data[i].text.heading}
               </h5>
@@ -102,7 +110,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
           ) : (
             <img
               src={require(`../../Assets/Konicky/${data[i].image}`)}
-              className={`img-fluid animation-fadeIn ${
+              className={`img-fluid ${prevCards[i] ? "animation-fadeIn" : ""} ${
                 firstRenders ? "delay-5 duration-5" : "delay-1 duration-3"
               }`}
               alt=""

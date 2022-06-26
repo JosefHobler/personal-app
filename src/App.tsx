@@ -209,6 +209,13 @@ function App() {
           <HorizontalStepper />
         </div>
       )}
+      <div
+        ref={paginationHorizontalRef}
+        className="w-100 position-absolute heading-color d-flex align-items-center justify-content-center"
+        style={{ bottom: 15, zIndex: 1001 }}
+      >
+        <HorizontalStepper />
+      </div>
     </>
   );
 }

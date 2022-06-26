@@ -14,7 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import uuid from "react-native-uuid";
 import { faBitcoin, faChrome } from "@fortawesome/free-brands-svg-icons";
-import useIsFirstTwoRenders from "../../../Hooks/useIsFirstTwoRenders";
+import useIsFirstTwoRenders from "../../../Hooks/useIsFirstRender";
 
 interface Props {
   data: {
