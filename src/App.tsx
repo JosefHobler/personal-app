@@ -25,6 +25,7 @@ import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
 import VerticalStepper from "./Components/App/VerticalStepper/VerticalStepper";
 import HorizontalStepper from "./Components/App/HorizontalStepper.tsx/HorizontalStepper";
+import useIsFirstRender from "./Hooks/useIsFirstRender";
 
 function App() {
   const wait = useRef(false);
@@ -32,6 +33,7 @@ function App() {
   const paginationVerticalRef = useRef<HTMLDivElement>(null);
   const paginationHorizontalRef = useRef<HTMLDivElement>(null);
   const mouseScrollRef = useRef<HTMLDivElement>(null);
+  const lastRender = useRef(false);
   const scroll = useRef<SCROLL_HORIZONTAL | SCROLL_VERTICAL>(
     SCROLL_HORIZONTAL.null
   );
@@ -39,6 +41,7 @@ function App() {
   const dispatch = useAppDispatch();
   const refresh = useRefresh();
   const history = useNavigate();
+  const firstRender = useIsFirstRender();
 
   // Handle mobile swipe
   const handlersVertical = useSwipeable({
@@ -61,7 +64,6 @@ function App() {
 
   // Handling mouse horizontal scroll
   const handleScrollType = (e: React.WheelEvent<HTMLDivElement>): void => {
-    console.log(ctrlPressed.current);
     if (ctrlPressed.current) return;
     const { deltaY } = e as React.WheelEvent<HTMLDivElement>;
     handleScroll(deltaY > 0 ? SCROLL_VERTICAL.up : SCROLL_VERTICAL.down);
@@ -145,19 +147,30 @@ function App() {
     }
   }, [wait.current]);
 
+  // Check if page refreshes
+  window.onbeforeunload = function (event) {
+    lastRender.current = true;
+    refresh();
+  };
+
   // Setting next page to the screen
   useEffect(() => {
+    if (firstRender) return;
+    if (lastRender.current) return;
     const timeout = setTimeout(() => {
       history(MAIN_PAGES[curPage]);
     }, 1850);
     return () => clearTimeout(timeout);
   }, [curPage]);
 
-  // Making page same as device screen
   useEffect(() => {
+    // Making page same as device screen
     document.body.style.overflow = "hidden";
+
     document.addEventListener("keydown", handleKeyDown, true);
     document.addEventListener("keyup", handleKeyUp, true);
+
+    history(MAIN_PAGES[0]);
   }, []);
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -165,7 +178,6 @@ function App() {
   };
 
   const handleKeyUp = (e: KeyboardEvent) => {
-    console.log(e.altKey);
     return (ctrlPressed.current = false);
   };
 
