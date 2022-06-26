@@ -141,20 +141,11 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                   </div>
                   <div className="d-flex align-items-start gap-3 custom-text">
                     <p className="text-font text-color">Španělština</p>
-                    <CustomizedRating value={1.5} />
+                    <CustomizedRating value={1} />
                   </div>
                 </div>
               </div>
-              {/*<div
-                className={`mt-4 ${fadeTopOrBottom}
-                ${fadeTopOrBottom === "animation-downEntry" ? "" : "delay-3"}
-                `}
-              >
-                <CTAButton padding={3} text="Životopis" rounded={true} />
-                </div> */}
             </div>
-            {/*Custom image*/}
-            {/*animation-fadeIn delay-12 */}
             <div
               className="col-md-6 d-none d-md-block d-flex justify-content-center align-items-center"
               style={{ padding: "5vw" }}

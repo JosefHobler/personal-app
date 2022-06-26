@@ -64,7 +64,6 @@ const Domů = () => {
             className="d-none d-md-flex align-items-center justify-content-end"
             style={{ zIndex: 100, transform: "scale(1.5)" }}
           >
-            {/*Image here*/}
             <img
               className="animation-fadeIn delay-10 img-fluid"
               style={{

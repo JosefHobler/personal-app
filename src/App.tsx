@@ -25,6 +25,7 @@ import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
 import VerticalStepper from "./Components/App/VerticalStepper/VerticalStepper";
 import HorizontalStepper from "./Components/App/HorizontalStepper.tsx/HorizontalStepper";
+import useIsFirstRender from "./Hooks/useIsFirstRender";
 
 function App() {
   const wait = useRef(false);
@@ -38,6 +39,7 @@ function App() {
   const dispatch = useAppDispatch();
   const refresh = useRefresh();
   const history = useNavigate();
+  const firstRender = useIsFirstRender();
 
   // Handle mobile swipe
   const handlersVertical = useSwipeable({
@@ -193,13 +195,15 @@ function App() {
           <MouseScroll onClick={handleScroll} />
         </div>
       </div>
-      <div
-        ref={paginationVerticalRef}
-        className="d position-absolute heading-color d-flex align-items-center justify-content-center"
-        style={{ right: 15, top: 15, bottom: 15, zIndex: 1001 }}
-      >
-        <VerticalStepper />
-      </div>
+      {wait.current && (
+        <div
+          ref={paginationVerticalRef}
+          className="position-absolute heading-color d-flex align-items-center justify-content-center"
+          style={{ right: 15, top: 15, bottom: 15, zIndex: 1001 }}
+        >
+          <VerticalStepper />
+        </div>
+      )}
       {(curPage === 1 || curPage > 3) && (
         <div
           ref={paginationHorizontalRef}
@@ -209,13 +213,6 @@ function App() {
           <HorizontalStepper />
         </div>
       )}
-      <div
-        ref={paginationHorizontalRef}
-        className="w-100 position-absolute heading-color d-flex align-items-center justify-content-center"
-        style={{ bottom: 15, zIndex: 1001 }}
-      >
-        <HorizontalStepper />
-      </div>
     </>
   );
 }
