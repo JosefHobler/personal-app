@@ -127,10 +127,15 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
               <div className="scene">
                 <div className="cube">
                   <div className="cube-face cube-face-front">
-                    <FontAwesomeIcon icon={faHtml5} color="#F06529" />
+                    <FontAwesomeIcon
+                      icon={faHtml5}
+                      className="w-75 h-75"
+                      color="#F06529"
+                    />
                   </div>
                   <div className="cube-face cube-face-back">
                     <FontAwesomeIcon
+                      className="w-75 h-75"
                       style={{ transform: "rotateZ(90deg)" }}
                       icon={faCss3}
                       color="#28A4D9"
@@ -138,23 +143,33 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
                   </div>
                   <div className="cube-face cube-face-left">
                     <FontAwesomeIcon
+                      className="w-75 h-75"
                       style={{ transform: "rotateZ(90deg)" }}
                       icon={faJsSquare}
                       color="#EFD81D"
                     />
                   </div>
                   <div className="cube-face cube-face-right">
-                    <FontAwesomeIcon icon={faReact} color="#5ED4F4" />
+                    <FontAwesomeIcon
+                      icon={faReact}
+                      className="w-75 h-75"
+                      color="#5ED4F4"
+                    />
                   </div>
                   <div className="cube-face cube-face-top">
                     <FontAwesomeIcon
+                      className="w-75 h-75"
                       icon={faGitAlt}
                       style={{ transform: "rotateZ(-90deg)" }}
                       color="#EC4D28"
                     />
                   </div>
                   <div className="cube-face cube-face-bottom">
-                    <FontAwesomeIcon icon={faSass} color="#ce679a" />
+                    <FontAwesomeIcon
+                      icon={faSass}
+                      className="w-75 h-75"
+                      color="#ce679a"
+                    />
                   </div>
                 </div>
               </div>
