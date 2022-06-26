@@ -44,6 +44,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const prevPage = useAppSelector((state) => state.pages.prevPage);
   const handlersHorizontal = useSwipeable({
     onSwipedRight: () => handleClick(),
+    delta: 100,
   });
   const firstRenders = useIsFirstTwoRenders();
   const { width: windowWidth, height: windowHeight } = useWindowSize();

@@ -25,6 +25,7 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
   let animations = prevPage === 1 ? "animation-fadeOut" : "";
   const handlersHorizontal = useSwipeable({
     onSwipedLeft: () => handleClick(),
+    delta: 100,
   });
 
   const handleClick = () => {

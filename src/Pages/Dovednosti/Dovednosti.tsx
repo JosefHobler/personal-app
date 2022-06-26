@@ -24,7 +24,6 @@ import { OTHER_TECHNOLOGIES } from "../../setup";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
-import HorizontalStepper from "../../Components/App/HorizontalStepper.tsx/HorizontalStepper";
 
 const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
   const dispatch = useAppDispatch();
@@ -32,7 +31,9 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
   const handlersHorizontal = useSwipeable({
     onSwipedLeft: () => handleRight(),
     onSwipedRight: () => handleLeft(),
+    delta: 100,
   });
+
   let animations = prevPage === 4 ? "animation-fadeOut" : "";
 
   let fadeTopOrBottom = "animation-leftEntry";

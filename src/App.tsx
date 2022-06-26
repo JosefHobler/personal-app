@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { MAIN_PAGES } from "./setup";
@@ -12,6 +12,7 @@ import { useAppSelector } from "./Hooks/useAppSelector";
 import { useAppDispatch } from "./Hooks/useAppDispatch";
 import { pageSliceAction } from "./Store/pagesSlice";
 import { NAMES, SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "./setup";
+import useIsFirstRender from "./Hooks/useIsFirstRender";
 
 import About from "./Pages/About/About";
 import Domů from "./Pages/Domů/Domů";
@@ -25,7 +26,6 @@ import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
 import VerticalStepper from "./Components/App/VerticalStepper/VerticalStepper";
 import HorizontalStepper from "./Components/App/HorizontalStepper.tsx/HorizontalStepper";
-import useIsFirstRender from "./Hooks/useIsFirstRender";
 
 function App() {
   const wait = useRef(false);
@@ -47,6 +47,7 @@ function App() {
   const handlersVertical = useSwipeable({
     onSwipedUp: () => handleScroll(SCROLL_VERTICAL.up),
     onSwipedDown: () => handleScroll(SCROLL_VERTICAL.down),
+    delta: 100,
   });
 
   // Handling sideways scroll
