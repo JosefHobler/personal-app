@@ -77,7 +77,6 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const cardCreatorMD = (lowerLimit: number, upperLimit: number) => {
     let content = [];
     for (let i = lowerLimit; i < upperLimit; i++) {
-      console.log(cards[i]);
       content.push(
         <Card
           key={uuid.v4() as Key}

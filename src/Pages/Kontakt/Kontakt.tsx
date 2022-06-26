@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 import { useAppSelector } from "../../Hooks/useAppSelector";
 import useWindowSize from "../../Hooks/useWindowSize";
@@ -179,7 +179,7 @@ const Kontakt = () => {
                         </span>
                         <br />
                         <span className="delay-6 animation-fadeIn">
-                          Czech Republic,
+                          Česká republika,
                         </span>
                         <br />
 

@@ -56,6 +56,7 @@ function HorizontalStepper() {
                   width: "100%",
                   zIndex: 1,
                   border: "1px solid rgba(256,256,256,0.3)",
+                  backgroundColor: "rgba(256,256,256,0.3)",
                 }}
                 className={`${
                   i === 1

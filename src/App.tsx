@@ -25,7 +25,6 @@ import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
 import VerticalStepper from "./Components/App/VerticalStepper/VerticalStepper";
 import HorizontalStepper from "./Components/App/HorizontalStepper.tsx/HorizontalStepper";
-import useIsFirstRender from "./Hooks/useIsFirstRender";
 
 function App() {
   const wait = useRef(false);
@@ -39,7 +38,6 @@ function App() {
   const dispatch = useAppDispatch();
   const refresh = useRefresh();
   const history = useNavigate();
-  const firstRender = useIsFirstRender();
 
   // Handle mobile swipe
   const handlersVertical = useSwipeable({

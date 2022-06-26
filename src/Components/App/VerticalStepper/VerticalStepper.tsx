@@ -47,6 +47,7 @@ function VerticalStepper() {
                   height: "100%",
                   width: "1px",
                   border: "1px solid rgba(256,256,256,0.3)",
+                  backgroundColor: "rgba(256,256,256,0.3)",
                 }}
               ></div>
             </div>
