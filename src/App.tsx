@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { MAIN_PAGES } from "./setup";
@@ -63,7 +63,6 @@ function App() {
     const { deltaY } = e as React.WheelEvent<HTMLDivElement>;
     handleScroll(deltaY > 0 ? SCROLL_VERTICAL.up : SCROLL_VERTICAL.down);
   };
-
   // Handling horizontal scroll
   function handleScroll(e: SCROLL_VERTICAL): void {
     if (wait.current) return;
@@ -100,6 +99,12 @@ function App() {
         )
       );
     }
+  };
+
+  // Check if page refreshes
+  window.onbeforeunload = function (event) {
+    console.log("Page Refreshed");
+    history(MAIN_PAGES[0]);
   };
 
   useEffect(() => {

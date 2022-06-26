@@ -1,4 +1,4 @@
-import { FC, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FC, useLayoutEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
 import "./Omně.scss";
@@ -17,7 +17,6 @@ import BackgroundText from "../../Components/Global/BackgroundText/BackgroundTex
 import CustomizedRating from "../../Components/Dovednosti/CustomizedRating";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
-import HorizontalStepper from "../../Components/App/HorizontalStepper.tsx/HorizontalStepper";
 
 const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
   const [image, setImage] = useState(Image1);
