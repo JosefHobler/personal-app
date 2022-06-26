@@ -28,6 +28,7 @@ import HorizontalStepper from "./Components/App/HorizontalStepper.tsx/Horizontal
 
 function App() {
   const wait = useRef(false);
+  const ctrlPressed = useRef(false);
   const paginationVerticalRef = useRef<HTMLDivElement>(null);
   const paginationHorizontalRef = useRef<HTMLDivElement>(null);
   const mouseScrollRef = useRef<HTMLDivElement>(null);
@@ -60,6 +61,8 @@ function App() {
 
   // Handling mouse horizontal scroll
   const handleScrollType = (e: React.WheelEvent<HTMLDivElement>): void => {
+    console.log(ctrlPressed.current);
+    if (ctrlPressed.current) return;
     const { deltaY } = e as React.WheelEvent<HTMLDivElement>;
     handleScroll(deltaY > 0 ? SCROLL_VERTICAL.up : SCROLL_VERTICAL.down);
   };
@@ -99,12 +102,6 @@ function App() {
         )
       );
     }
-  };
-
-  // Check if page refreshes
-  window.onbeforeunload = function (event) {
-    dispatch(pageSliceAction.changeCurPage(0));
-    dispatch(pageSliceAction.changePrevPage(1));
   };
 
   useEffect(() => {
@@ -159,7 +156,18 @@ function App() {
   // Making page same as device screen
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown, true);
+    document.addEventListener("keyup", handleKeyUp, true);
   }, []);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    return e.ctrlKey ? (ctrlPressed.current = true) : undefined;
+  };
+
+  const handleKeyUp = (e: KeyboardEvent) => {
+    console.log(e.altKey);
+    return (ctrlPressed.current = false);
+  };
 
   return (
     <>
