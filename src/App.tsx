@@ -103,8 +103,8 @@ function App() {
 
   // Check if page refreshes
   window.onbeforeunload = function (event) {
-    console.log("Page Refreshed");
-    history(MAIN_PAGES[0]);
+    dispatch(pageSliceAction.changeCurPage(0));
+    dispatch(pageSliceAction.changePrevPage(1));
   };
 
   useEffect(() => {
