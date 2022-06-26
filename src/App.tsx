@@ -213,6 +213,7 @@ function App() {
             </Route>
             <Route element={<Projekty />} path="/Projekty" />
             <Route element={<Kontakt />} path="/Kontakt" />
+            <Route element={<Domů />} />
           </Routes>
         </div>
         <div ref={mouseScrollRef}>
