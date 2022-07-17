@@ -11,7 +11,7 @@ function Logo() {
     <Link
       to="/"
       onClick={() => dispatch(pageSliceAction.changeCurPage(0))}
-      style={{ zIndex: 10000000 }}
+      style={{ zIndex: 1001 }}
       className="position-fixed m-2"
     >
       <img src={logoImage} alt="logo-josef-hobler" />

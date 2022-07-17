@@ -15,7 +15,7 @@ const Arrow: FC<Props> = ({ onClick, left }) => {
         background: "transparent",
         border: "none",
         minWidth: "50px",
-        zIndex: 100000,
+        zIndex: 1001,
         left: `${left ? "15px" : ""}`,
         right: `${left ? "" : "15px"}`,
         transform: `${left ? "rotate(180deg)" : ""}`,

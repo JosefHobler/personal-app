@@ -20,7 +20,7 @@ import Dovednosti from "./Pages/Dovednosti/Dovednosti";
 import Kontakt from "./Pages/Kontakt/Kontakt";
 import Koníčky from "./Pages/Koníčky/Koníčky";
 import Omně from "./Pages/Omně/Omně";
-import Projekty from "./Pages/Projekty/Projekty";
+import Projekty from "./Pages/projekty/Projekty";
 
 import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";

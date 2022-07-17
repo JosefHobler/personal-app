@@ -34,7 +34,7 @@ const MouseScrollElement: FC<PropsExtended> = ({ top, onClick }) => {
         cursor: "pointer",
         width: "24px",
         height: "75px",
-        zIndex: 100000,
+        zIndex: 1001,
         right: "50vw",
         transform: "translateX(50%)",
       }}

@@ -219,7 +219,7 @@ const Kontakt = () => {
                       backgroundColor: "white",
                       bottom: 0,
                       left: 0,
-                      zIndex: 1000,
+                      zIndex: 1001,
                       color: "rgba(0, 0, 0, 0.6)",
                     }}
                   >
