@@ -1,7 +1,7 @@
 {
   "name": "personal-app",
   "version": "0.1.0",
-  "homepage": "pepasik.github.io",
+  "homepage": "https://pepasik.github.io/personal-app",
   "private": true,
   "dependencies": {
     "@emailjs/browser": "^3.6.2",
