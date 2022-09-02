@@ -25,8 +25,10 @@ import BackgroundText from "../../Components/Global/BackgroundText/BackgroundTex
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
 import { FormattedMessage, useIntl } from "react-intl";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
+  useDocumentTitle("Skills | Josef Hobler");
   const intl = useIntl();
   const dispatch = useAppDispatch();
   const prevPage = useAppSelector((state) => state.pages.prevPage);

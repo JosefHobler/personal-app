@@ -4,10 +4,12 @@ import BackgroundText from "../../Components/Global/BackgroundText/BackgroundTex
 import Container from "../../Components/Global/Container/Container";
 import CustomSwiper from "../../Components/Projekty/Swiper/CustomSwiper";
 import { useIntl } from "react-intl";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const Projekty = () => {
   const intl = useIntl();
   const prevPage = useAppSelector((state) => state.pages.prevPage);
+  useDocumentTitle("Projects | Josef Hobler");
 
   let animations = prevPage === 2 ? "animation-fadeOut" : "";
   let fadeTopOrBottom = "animation-downEntry";

@@ -18,8 +18,10 @@ import CustomizedRating from "../../Components/Dovednosti/CustomizedRating";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
 import { FormattedMessage, useIntl } from "react-intl";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
+  useDocumentTitle("About | Josef Hobler");
   const intl = useIntl();
   const [image, setImage] = useState(Image1);
   const dispatch = useAppDispatch();

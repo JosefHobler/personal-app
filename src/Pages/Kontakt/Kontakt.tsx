@@ -10,8 +10,10 @@ import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import Container from "../../Components/Global/Container/Container";
 import { useRefresh } from "../../Hooks/useRefresh";
 import { FormattedMessage, useIntl } from "react-intl";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const Kontakt = () => {
+  useDocumentTitle("Contact | Josef Hobler");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -77,7 +79,7 @@ const Kontakt = () => {
   return (
     <>
       <div className={animations}>
-        <BackgroundText text={intl.formatMessage({id: "MIXED.NAMES.5"})} />
+        <BackgroundText text={intl.formatMessage({ id: "MIXED.NAMES.5" })} />
       </div>
       <Container animations={animations}>
         <div className="accessible-page d-flex justify-content-center align-items-center">

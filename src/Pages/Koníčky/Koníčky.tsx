@@ -21,8 +21,10 @@ import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontal
 import Container from "../../Components/Global/Container/Container";
 import useIsFirstTwoRenders from "../../Hooks/useIsFirstRender";
 import { FormattedMessage, useIntl } from "react-intl";
+import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
+  useDocumentTitle("Habits | Josef Hobler");
   const intl = useIntl();
   const [cards, setCards] = useState([
     false,
