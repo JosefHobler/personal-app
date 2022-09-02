@@ -1,17 +1,11 @@
 export const MAIN_PAGES = [
   "/",
-  "/Omne",
-  "/Projekty",
-  "/Kontakt",
-  "/Omne/Dovednosti",
-  "/Omne/Konicky",
+  "/About",
+  "/Projects",
+  "/Contact",
+  "/About/Skills",
+  "/About/Habits",
 ];
-
-export const PRIMARY_NAMES = ["Domů", "O mně", "Projekty", "Kontakt"];
-
-export const SECONDARY_NAMES = ["O mně", "Dovednosti", "Koníčky"];
-
-export const NAMES = [...PRIMARY_NAMES, ...SECONDARY_NAMES.slice(1, 3)];
 
 export enum SCROLL_VERTICAL {
   down = "down",
@@ -30,26 +24,6 @@ export enum displayResponsive {
   extraLargeLayout,
 }
 
-export interface JSONValuesProjekty {
-  data: {
-    image: string;
-    text: {
-      heading: string;
-      body: string;
-    };
-    link: string;
-  }[];
-}
-
-export interface JSONValuesKonicky {
-  data: {
-    image: string;
-    text: {
-      heading: string;
-      body: string;
-    };
-  }[];
-}
 export interface PagesProps {
   sidewaysScroll: (scroll: SCROLL_HORIZONTAL) => undefined;
 }

@@ -4,13 +4,11 @@ import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 interface Props {
   image: string;
-  text: {
-    heading: string;
-    body: string;
-  };
+  heading: string;
+  body: string;
 }
 
-const CardHorizontalLarge: FC<Props> = ({ image, text: { heading, body } }) => {
+const CardHorizontalLarge: FC<Props> = ({ image, heading, body }) => {
   return (
     <Card className="w-100 h-100 d-flex">
       <CardMedia

@@ -217,3 +217,12 @@ body {
     opacity: 0;
   }
 }
+
+.flag-hover {
+  transition: 100ms;
+
+  &:hover {
+    opacity: 0.7 !important;
+    transform: scale(1.025);
+  }
+}

@@ -4,13 +4,11 @@ import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 interface Props {
   image: string;
-  text: {
-    heading: string;
-    body: string;
-  };
+  heading: string;
+  body: string;
 }
 
-const CardVerticalLarge: FC<Props> = ({ image, text: { heading, body } }) => {
+const CardVerticalLarge: FC<Props> = ({ image, heading, body }) => {
   return (
     <Card className="w-100 h-100">
       <div style={{ height: "25vh", overflow: "hidden" }}>

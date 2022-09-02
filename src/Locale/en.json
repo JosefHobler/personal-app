@@ -1,0 +1,66 @@
+{
+  "COMMON.BUTTON.CONTACT": "Contact",
+  "COMMON.BUTTON.SEND": "Send",
+
+  "DOMU.HEADING.NAME": "Josef Hobler",
+  "DOMU.PARAGRAPH.DESCRIPTION": "I am a young ambitious junior front-end developer who will promote a positive and friendly atmosphere in the team and will perform tasks with the highest commitment.",
+
+  "PROJECTS.CAROUSEL.ITEM.TEXT.HEADING.0": "Personal Website",
+  "PROJECTS.CAROUSEL.ITEM.TEXT.DESCRIPTION.0": "My personal website serving as a sample of my work.",
+  "PROJECTS.CAROUSEL.ITEM.TEXT.HEADING.1": "Currency exchange",
+  "PROJECTS.CAROUSEL.ITEM.TEXT.DESCRIPTION.1": "Project to verify knowledge of programming on a part-time job in <linkProClient>PRO CLIENT</linkProClient>.",
+
+  "ABOUT.HEADING.PROFILE": "Profile",
+  "ABOUT.PARAGRAPH.PROFILE": "Motivated and hardworking student looking for employment in practice. Self-confidence, diligence and determination to achieve the best results in the field of web development. Willing to learn new things and improve the habitual ones.",
+  "ABOUT.HEADING.STUDY": "Education",
+  "ABOUT.PARAGRAPH.STUDY": "I am studying for the last year at the <linkGyza>high school in Zábřeh na Moravě</linkGyza>",
+  "ABOUT.HEADING.LANGUAGES": "Languages",
+  "ABOUT.HEADING.CZECH": "Czech",
+  "ABOUT.HEADING.ENGLISH": "English",
+  "ABOUT.HEADING.SPANISH": "Spanish",
+
+  "SKILLS.HEADING.NAME": "Primary technologies",
+  "SKILLS.HEADING.NAME.NEXT": "More...",
+
+  "HABITS.HEADING.0": "Web Development",
+  "HABITS.PARAGRAPH.0": " I like web development because it allows me to create things and contribute to society that way. I'm getting better every day and I don't plan to stop.",
+  "HABITS.HEADING.1": "Snowboarding",
+  "HABITS.PARAGRAPH.1": "I've been snowboarding since I was a kid and despite countless injuries, I go snowboarding with a smile on my face.",
+  "HABITS.HEADING.2": "Fitness",
+  "HABITS.PARAGRAPH.2": "For the third year in a row I have been visiting the fitness center, where I improve my physical condition and clear my mind.",
+  "HABITS.HEADING.3": "Crypto & Blockchain",
+  "HABITS.PARAGRAPH.3": "I enjoy studying crypto, blockchain, individual ecosystems and exploring the concepts that evolve from these technologies.",
+  "HABITS.HEADING.4": "Personal Development",
+  "HABITS.PARAGRAPH.4": "I am improving in all areas of my life and actively looking for the best ways to achieve my goals as efficiently as possible.",
+  "HABITS.HEADING.5": "Programming",
+  "HABITS.PARAGRAPH.5": "I have always loved logical thinking my entire life, and since I learned to program, I can't stop myself doing it.",
+  "HABITS.HEADING.6": "Math",
+  "HABITS.PARAGRAPH.6": "I have always excelled in mathematics and won several school competitions, but it wasn't until high school that I was captivated by math.",
+
+  "CONTACTS.FORM.NAME": "Name",
+  "CONTACTS.FORM.EMAIL": "Email",
+  "CONTACTS.FORM.SUBJECT": "Subject",
+  "CONTACTS.FORM.MESSAGE": "Message",
+  "CONTACTS.MAP.NAME": "Josef Hobler",
+  "CONTACTS.MAP.COUNTRY": "Czech Republic",
+  "CONTACTS.MAP.CITY": "Leština",
+  "CONTACTS.MAP.COUNTY": "County Šumperk",
+  "CONTACTS.MAP.REGION": "Region Olomouc",
+  "CONTACTS.MAP.EMAIL": "pepous.hoblik@gmail.com",
+
+  "PRIMARY.NAMES.0": "Home",
+  "PRIMARY.NAMES.1": "About me",
+  "PRIMARY.NAMES.2": "Projects",
+  "PRIMARY.NAMES.3": "Contact",
+
+  "SECONDARY.NAMES.0": "About me",
+  "SECONDARY.NAMES.1": "Skills",
+  "SECONDARY.NAMES.2": "Habits",
+
+  "MIXED.NAMES.0": "Home",
+  "MIXED.NAMES.1": "About me",
+  "MIXED.NAMES.2": "Projects",
+  "MIXED.NAMES.3": "Contact",
+  "MIXED.NAMES.4": "Skills",
+  "MIXED.NAMES.5": "Habits"
+}

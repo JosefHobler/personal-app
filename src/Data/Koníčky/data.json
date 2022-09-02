@@ -1,60 +1,23 @@
-{
- "data": [
+[
   {
-    "image":
-      "web-development.webp",
-    "text": {
-      "heading": "Web development",
-      "body": "Web development jsem si oblíbil, protože mi umožňuje tvořit a přispívat tak společnosti. Každým dnes se zlepšuji a neplánuji v tom přestat."
-    }
+    "image": "web-development.webp"
   },
   {
-    "image":
-      "snowboarding.webp",
-    "text": {
-      "heading": "Snowboarding",
-      "body": "Už od malička jezdím a skáču na snowboardu a i přes nesčetné zranění jedu na hory s úsměvem na tváři."
-    }
+    "image": "snowboarding.webp"
   },
   {
-    "image": "fitness.jpg",
-    "text": {
-      "heading": "Fitness",
-      "body": "Již třetím rokem navštěvuji pravidelně fitness centrum, kde zdokonaluji svou fyzickou kondici a pročišťuji mysl."
-    }
+    "image": "fitness.jpg"
   },
   {
-    "image":
-      "crypto.webp",
-    "text": {
-      "heading": "Krypto",
-      "body": "Baví mě studovat krypto, blockchain, jednotlivé ekosystémy a zkoumat koncepty, které se z těchto technologií vyvíjí."
-    }
+    "image": "crypto.webp"
   },
   {
-    "image":
-      "personal-development.webp",
-    "text": {
-      "heading": "Osobní rozvoj",
-      "body": "Zdokonaluji se ve všech oblastech a hledám nejlepší cesty a metody, jak se dostat co nejefektivněji ke svým cílům."
-    }
+    "image": "personal-development.webp"
   },
   {
-    "image":
-      "programming.webp",
-    "text": {
-      "heading": "Programování",
-      "body": "Po celý svůj život jsem miloval logické myšlení a od doby, co jsem se naučil programovat, se od toho nemůžu odtrhnout."
-    }
+    "image": "programming.webp"
   },
   {
-    "image":
-      "math.jpg",
-    "text": {
-      "heading": "Matematika",
-      "body": "Vždy jsem v matematice vynikal a vyhrál několik školních soutěží, avšak až na střední škole mě matematika uchvátila."
-    }
+    "image": "math.jpg"
   }
 ]
-}
-

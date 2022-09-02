@@ -8,30 +8,52 @@ import dataJSON from "../../../Data/Projekty/data.json";
 import uuid from "react-native-uuid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper";
-import { JSONValuesProjekty } from "../../../setup";
+import { FormattedMessage } from "react-intl";
 interface Props {
   pagination: number;
 }
 const CustomSwiper: FC<Props> = ({ pagination }) => {
-  const { data }: JSONValuesProjekty = dataJSON;
   const mapProjects = () => {
-    return data.map(({ image, text: { body, heading }, link }) => {
+    return dataJSON.map(({ image, link }, index) => {
       return (
         <SwiperSlide key={uuid.v4() as string} className="animation-darken">
           <img
+            alt="Example Porject"
             className="animation-fadeIn delay-9  img-fluid"
             src={require(`../../../Assets/Projects/${image}`)}
           />
           <div className="animation-fadeIn delay-11 ">
             <h5 className="text-center pt-2 heading-font heading-color">
-              {heading}
+              <FormattedMessage
+                id={`PROJECTS.CAROUSEL.ITEM.TEXT.HEADING.${index}`}
+              />
             </h5>
-            <p className="px-3 text-font text-color custom-text">{body}</p>
+            <p className="px-3 text-font text-color custom-text">
+              <FormattedMessage
+                id={`PROJECTS.CAROUSEL.ITEM.TEXT.DESCRIPTION.${index}`}
+                values={{
+                  linkProClient: (word) => (
+                    <a
+                      style={{ color: "rgba(255,255,255,0.9)", textDecoration: "none" }}
+                      href="https://www.proclient.cz/"
+                      target="_blank" rel="noreferrer"
+                    >
+                      {word}
+                    </a>
+                  ),
+                }}
+              />
+            </p>
             <div
               className="position-absolute"
               style={{ right: "5px", bottom: "5px" }}
             >
-              <a className="text-font text-color custom-text" href={link}>
+              <a
+                className="text-font text-color custom-text"
+                href={link}
+                target="_blank"
+                rel="noreferrer"
+              >
                 {link}
               </a>
             </div>

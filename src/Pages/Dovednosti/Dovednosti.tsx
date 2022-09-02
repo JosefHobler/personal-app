@@ -24,8 +24,10 @@ import { OTHER_TECHNOLOGIES } from "../../setup";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
+  const intl = useIntl();
   const dispatch = useAppDispatch();
   const prevPage = useAppSelector((state) => state.pages.prevPage);
   const handlersHorizontal = useSwipeable({
@@ -85,7 +87,7 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
   return (
     <>
       <div className={animations}>
-        <BackgroundText text="Dovednosti" />
+        <BackgroundText text={intl.formatMessage({ id: "MIXED.NAMES.2" })} />
       </div>
 
       <Container
@@ -96,7 +98,7 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
           <div className="d-flex align-items-center w-100 justify-content-around">
             <div className=" text-center text-md-start">
               <h2 className={`heading-color heading-font ${fadeTopOrBottom}`}>
-                Primární technologie
+                <FormattedMessage id="SKILLS.HEADING.NAME" />
               </h2>
               <ul
                 className="p-0 animation-fadeIn delay-8"
@@ -109,7 +111,7 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
                   className={`heading-color heading-font delay-1 ${fadeTopOrBottom}
                 `}
                 >
-                  Další...
+                  <FormattedMessage id="SKILLS.HEADING.NAME.NEXT" />
                 </h3>
                 <ul
                   style={{ listStyle: "none" }}

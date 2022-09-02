@@ -1,0 +1,66 @@
+{
+  "COMMON.BUTTON.CONTACT": "Kontakt",
+  "COMMON.BUTTON.SEND": "Odeslat",
+
+  "DOMU.HEADING.NAME": "Josef Hobler",
+  "DOMU.PARAGRAPH.DESCRIPTION": "Jsem mladý ambiciózní junior front-end developer, který v týmu podpoří pozitivní a přátelskou atmosféru a bude plnit úkoly s nejvyšším nasazením.",
+
+  "PROJECTS.CAROUSEL.ITEM.TEXT.HEADING.0": "Osobní stránka",
+  "PROJECTS.CAROUSEL.ITEM.TEXT.DESCRIPTION.0": "Moje osobní webová stránka sloužící jako ukázka mé práce.",
+  "PROJECTS.CAROUSEL.ITEM.TEXT.HEADING.1": "Kurzovní lístek",
+  "PROJECTS.CAROUSEL.ITEM.TEXT.DESCRIPTION.1": "Projekt na ověření znalostí na brigádě v <linkProClient>PRO CLIENT</linkProClient>.",
+
+  "ABOUT.HEADING.PROFILE": "Profil",
+  "ABOUT.PARAGRAPH.PROFILE": "Motivovaný a pracovitý student hledající uplatnění v praxi. Sebevědomí, pracovitost a odhodlání dosahovat nejlepších výsledků v oblasti tvorby webových stránek. Ochotný učit se novým věcem a zlepšovat v navyklých.",
+  "ABOUT.HEADING.STUDY": "Vzdělání",
+  "ABOUT.PARAGRAPH.STUDY": "Studuji třetím rokem na <linkGyza>Gymnáziu v Zábřeze na Moravě</linkGyza>",
+  "ABOUT.HEADING.LANGUAGES": "Jazyky",
+  "ABOUT.HEADING.CZECH": "Čeština",
+  "ABOUT.HEADING.ENGLISH": "Angličtina",
+  "ABOUT.HEADING.SPANISH": "Španělština",
+
+  "SKILLS.HEADING.NAME": "Primární technologie",
+  "SKILLS.HEADING.NAME.NEXT": "Další...",
+
+  "HABITS.HEADING.0": "Tvorba webů",
+  "HABITS.PARAGRAPH.0": "Web development jsem si oblíbil, protože mi umožňuje tvořit a přispívat tak společnosti. Každým dnes se zlepšuji a neplánuji v tom přestat.",
+  "HABITS.HEADING.1": "Snowboarding",
+  "HABITS.PARAGRAPH.1": "Už od malička jezdím a skáču na snowboardu a i přes nesčetné zranění jedu na hory s úsměvem na tváři.",
+  "HABITS.HEADING.2": "Fitness",
+  "HABITS.PARAGRAPH.2": "Již třetím rokem navštěvuji pravidelně fitness centrum, kde zdokonaluji svou fyzickou kondici a pročišťuji mysl.",
+  "HABITS.HEADING.3": "Krypto & Blockchain",
+  "HABITS.PARAGRAPH.3": "Baví mě studovat krypto, blockchain, jednotlivé ekosystémy a zkoumat koncepty, které se z těchto technologií vyvíjí.",
+  "HABITS.HEADING.4": "Osobní rozvoj",
+  "HABITS.PARAGRAPH.4": "Zdokonaluji se ve všech oblastech a hledám nejlepší cesty a metody, jak se dostat co nejefektivněji ke svým cílům.",
+  "HABITS.HEADING.5": "Programování",
+  "HABITS.PARAGRAPH.5": "Po celý svůj život jsem miloval logické myšlení a od doby, co jsem se naučil programovat, se od toho nemůžu odtrhnout.",
+  "HABITS.HEADING.6": "Matematika",
+  "HABITS.PARAGRAPH.6": "Vždy jsem v matematice vynikal a vyhrál několik školních soutěží, avšak až na střední škole mě matematika uchvátila.",
+
+  "CONTACTS.FORM.NAME": "Jméno",
+  "CONTACTS.FORM.EMAIL": "Email",
+  "CONTACTS.FORM.SUBJECT": "Předmět",
+  "CONTACTS.FORM.MESSAGE": "Zpráva",
+  "CONTACTS.MAP.NAME": "Josef Hobler",
+  "CONTACTS.MAP.COUNTRY": "Česká republika",
+  "CONTACTS.MAP.CITY": "Leština",
+  "CONTACTS.MAP.COUNTY": "okres Šumperk",
+  "CONTACTS.MAP.REGION": "Olomoucký kraj",
+  "CONTACTS.MAP.EMAIL": "pepous.hoblik@gmail.com",
+
+  "PRIMARY.NAMES.0": "Domů",
+  "PRIMARY.NAMES.1": "O mně",
+  "PRIMARY.NAMES.2": "Projekty",
+  "PRIMARY.NAMES.3": "Kontakt",
+
+  "SECONDARY.NAMES.0": "O mně",
+  "SECONDARY.NAMES.1": "Dovednosti",
+  "SECONDARY.NAMES.2": "Koníčky",
+
+  "MIXED.NAMES.0": "Domů",
+  "MIXED.NAMES.1": "O mně",
+  "MIXED.NAMES.2": "Projekty",
+  "MIXED.NAMES.3": "Kontakt",
+  "MIXED.NAMES.4": "Dovednosti",
+  "MIXED.NAMES.5": "Koníčky"
+}

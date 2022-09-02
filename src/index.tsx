@@ -8,6 +8,8 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import "animate.css";
 import { Provider } from "react-redux";
 import store from "./Store/store";
+import { IntlProvider } from "react-intl";
+import IntlWrapper from "./IntlWrapper";
 
 const ORANGE_COLOR = "#FF3300";
 const DARK_COLOR = "#2A2727";
@@ -34,7 +36,9 @@ root.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <Router>
-        <App />
+        <IntlWrapper>
+          <App />
+        </IntlWrapper>
       </Router>
     </Provider>
   </ThemeProvider>

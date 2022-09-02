@@ -8,12 +8,7 @@ import { useSwipeable } from "react-swipeable";
 import { useAppDispatch } from "../../Hooks/useAppDispatch";
 import { useAppSelector } from "../../Hooks/useAppSelector";
 import { pageSliceAction } from "../../Store/pagesSlice";
-import {
-  displayResponsive,
-  JSONValuesKonicky,
-  PagesProps,
-  SCROLL_HORIZONTAL,
-} from "../../setup";
+import { displayResponsive, PagesProps, SCROLL_HORIZONTAL } from "../../setup";
 import dataJSON from "../../Data/Koníčky/data.json";
 import useWindowSize from "../../Hooks/useWindowSize";
 
@@ -25,9 +20,10 @@ import CardSmall from "../../Components/Koníčky/Cards/CardSmall";
 import CardHorizontalLarge from "../../Components/Koníčky/Cards/CardHorizontalLarge";
 import Container from "../../Components/Global/Container/Container";
 import useIsFirstTwoRenders from "../../Hooks/useIsFirstRender";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
-  const { data }: JSONValuesKonicky = dataJSON;
+  const intl = useIntl();
   const [cards, setCards] = useState([
     false,
     false,
@@ -98,18 +94,18 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
                delay-1 duration-3`}
             >
               <h5 className="text-center custom-text heading-font pt-2">
-                {data[i].text.heading}
+                <FormattedMessage id={`HABITS.HEADING.${i}`} />
               </h5>
               <p
                 className="custom-text"
                 style={{ marginTop: "-15px", transform: "scale(0.9)" }}
               >
-                {data[i].text.body}
+                <FormattedMessage id={`HABITS.PARAGRAPH.${i}`} />
               </p>
             </div>
           ) : (
             <img
-              src={require(`../../Assets/Konicky/${data[i].image}`)}
+              src={require(`../../Assets/Konicky/${dataJSON[i].image}`)}
               className={`img-fluid ${prevCards[i] ? "animation-fadeIn" : ""} ${
                 firstRenders ? "delay-5 duration-5" : "delay-1 duration-3"
               }`}
@@ -124,7 +120,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   return (
     <>
       <div className={animations}>
-        <BackgroundText text="Koníčky" />
+        <BackgroundText text={intl.formatMessage({ id: "MIXED.NAMES.3" })} />
       </div>
       <Container
         animations={animations}
@@ -142,7 +138,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
                 handleResponsiveness() === 0 ? "d-flex" : "d-none"
               } justify-content-center align-items-center`}
             >
-              <SimpleAccordion data={data} />
+              <SimpleAccordion />
             </div>
             {/*Grid template, MD*/}
             <div
@@ -177,39 +173,50 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
               >
                 <div className="grid-1">
                   <CardVerticalLarge
-                    image={data[0].image}
-                    text={data[0].text}
+                    image={dataJSON[0].image}
+                    heading={intl.formatMessage({ id: "HABITS.HEADING.0" })}
+                    body={intl.formatMessage({ id: "HABITS.PARAGRAPH.0" })}
                   />
                 </div>
                 <div className="grid-2">
                   <CardHorizontalLarge
-                    image={data[1].image}
-                    text={data[1].text}
+                    image={dataJSON[1].image}
+                    heading={intl.formatMessage({ id: "HABITS.HEADING.1" })}
+                    body={intl.formatMessage({ id: "HABITS.PARAGRAPH.1" })}
                   />
                 </div>
                 <div className="grid-3">
                   <CardVerticalLarge
-                    image={data[2].image}
-                    text={data[2].text}
+                    image={dataJSON[2].image}
+                    heading={intl.formatMessage({ id: "HABITS.HEADING.2" })}
+                    body={intl.formatMessage({ id: "HABITS.PARAGRAPH.2" })}
                   />
                 </div>
                 <div className="grid-4">
-                  <CardSmall text={data[3].text} />
+                  <CardSmall
+                    heading={intl.formatMessage({ id: "HABITS.HEADING.3" })}
+                    body={intl.formatMessage({ id: "HABITS.PARAGRAPH.3" })}
+                  />
                 </div>
                 <div className="grid-5">
                   <CardVerticalLarge
-                    image={data[4].image}
-                    text={data[4].text}
+                    image={dataJSON[4].image}
+                    heading={intl.formatMessage({ id: "HABITS.HEADING.4" })}
+                    body={intl.formatMessage({ id: "HABITS.PARAGRAPH.4" })}
                   />
                 </div>
                 <div className="grid-6">
                   <CardHorizontalLarge
-                    image={data[5].image}
-                    text={data[5].text}
+                    image={dataJSON[5].image}
+                    heading={intl.formatMessage({ id: "HABITS.HEADING.5" })}
+                    body={intl.formatMessage({ id: "HABITS.PARAGRAPH.5" })}
                   />
                 </div>
                 <div className="grid-7">
-                  <CardSmall text={data[6].text} />
+                  <CardSmall
+                    heading={intl.formatMessage({ id: "HABITS.HEADING.6" })}
+                    body={intl.formatMessage({ id: "HABITS.PARAGRAPH.6" })}
+                  />
                 </div>
               </div>
             </div>

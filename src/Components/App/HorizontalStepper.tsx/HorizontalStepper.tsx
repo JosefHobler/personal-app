@@ -1,8 +1,8 @@
 import { Key } from "react";
+import { FormattedMessage } from "react-intl";
 import uuid from "react-native-uuid";
 
 import { useAppSelector } from "../../../Hooks/useAppSelector";
-import { SECONDARY_NAMES } from "../../../setup";
 
 function HorizontalStepper() {
   const curPage = useAppSelector((state) => state.pages.curPage);
@@ -41,7 +41,7 @@ function HorizontalStepper() {
               }}
               className={` my-auto custom-text-pagination`}
             >
-              {SECONDARY_NAMES[i]}
+              <FormattedMessage id={`SECONDARY.NAMES.${i}`} />
             </p>
           </div>
           {i !== 2 && (

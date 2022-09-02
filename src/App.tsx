@@ -1,17 +1,19 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { MAIN_PAGES } from "./setup";
 
 import "./App.scss";
 import Logo from "./Components/Logo/Logo";
+import czechRepublic from "./Assets/SVGs/Flags/CzechRepublic.svg";
+import unitedStates from "./Assets/SVGs/Flags/UnitedStates.svg";
 
 import { useRefresh } from "./Hooks/useRefresh";
 import { useSwipeable } from "react-swipeable";
 import { useAppSelector } from "./Hooks/useAppSelector";
 import { useAppDispatch } from "./Hooks/useAppDispatch";
 import { pageSliceAction } from "./Store/pagesSlice";
-import { NAMES, SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "./setup";
+import { SCROLL_HORIZONTAL, SCROLL_VERTICAL } from "./setup";
 import useIsFirstRender from "./Hooks/useIsFirstRender";
 
 import About from "./Pages/About/About";
@@ -26,6 +28,8 @@ import TransitionPage from "./Components/App/TransitionPage/TransitionPage";
 import MouseScroll from "./Components/Global/VerticalPointer/MouseScroll";
 import VerticalStepper from "./Components/App/VerticalStepper/VerticalStepper";
 import HorizontalStepper from "./Components/App/HorizontalStepper.tsx/HorizontalStepper";
+import { LocaleContext } from "./IntlWrapper";
+import { useIntl } from "react-intl";
 
 function App() {
   const wait = useRef(false);
@@ -37,11 +41,14 @@ function App() {
   const scroll = useRef<SCROLL_HORIZONTAL | SCROLL_VERTICAL>(
     SCROLL_HORIZONTAL.null
   );
+  const intl = useIntl();
   const curPage = useAppSelector((state) => state.pages.curPage);
   const dispatch = useAppDispatch();
   const refresh = useRefresh();
   const history = useNavigate();
   const firstRender = useIsFirstRender();
+
+  const { handleSelectLang, locale } = useContext(LocaleContext)!;
 
   // Handle mobile swipe
   const handlersVertical = useSwipeable({
@@ -59,7 +66,7 @@ function App() {
     setTimeout(() => {
       wait.current = false;
       refresh();
-    }, 1850);
+    }, 2200);
     return undefined;
   }
 
@@ -87,7 +94,7 @@ function App() {
     setTimeout(() => {
       wait.current = false;
       refresh();
-    }, 1850);
+    }, 2200);
   }
 
   // Handling page flow
@@ -160,7 +167,7 @@ function App() {
     if (lastRender.current) return;
     const timeout = setTimeout(() => {
       history(MAIN_PAGES[curPage]);
-    }, 1850);
+    }, 2200);
     return () => clearTimeout(timeout);
   }, [curPage]);
 
@@ -185,7 +192,10 @@ function App() {
   return (
     <>
       {wait.current && (
-        <TransitionPage direction={scroll.current} text={NAMES[curPage]} />
+        <TransitionPage
+          direction={scroll.current}
+          text={intl.formatMessage({ id: `MIXED.NAMES.${curPage}` })}
+        />
       )}
       <Logo />
       <div
@@ -197,28 +207,59 @@ function App() {
         <div className="accessible-page">
           <Routes>
             <Route path="/" element={<Domů />} />
-            <Route element={<About />} path="/Omne">
+            <Route element={<About />} path="/About">
               <Route
                 element={<Omně sidewaysScroll={sidewaysScroll} />}
-                path="/Omne"
+                path="/About"
               />
               <Route
                 element={<Dovednosti sidewaysScroll={sidewaysScroll} />}
-                path="/Omne/Dovednosti"
+                path="/About/Skills"
               />
               <Route
                 element={<Koníčky sidewaysScroll={sidewaysScroll} />}
-                path="/Omne/Konicky"
+                path="/About/Habits"
               />
             </Route>
-            <Route element={<Projekty />} path="/Projekty" />
-            <Route element={<Kontakt />} path="/Kontakt" />
+            <Route element={<Projekty />} path="/Projects" />
+            <Route element={<Kontakt />} path="/Contact" />
             <Route element={<Domů />} />
           </Routes>
         </div>
         <div ref={mouseScrollRef}>
           <MouseScroll onClick={handleScroll} />
         </div>
+      </div>
+      <div
+        className="position-absolute top-0 m-2"
+        style={{ right: "10px", zIndex: 1001, color: "rgba(255,255,255,0.5)" }}
+      >
+        <img
+          style={{ opacity: locale === "cs" ? 0.7 : 0.3 }}
+          onClick={() => {
+            if (locale !== "cs") {
+              handleSelectLang("cs");
+            }
+          }}
+          className="me-2 flag-hover"
+          width="20px"
+          height="20px"
+          src={czechRepublic}
+          alt="Czech Republic"
+        />
+        <img
+          onClick={() => {
+            if (locale === "cs") {
+              handleSelectLang("en");
+            }
+          }}
+          style={{ opacity: locale !== "cs" ? 0.7 : 0.3 }}
+          className="flag-hover"
+          width="20px"
+          height="20px"
+          src={unitedStates}
+          alt="United States"
+        />
       </div>
       {wait.current && (
         <div

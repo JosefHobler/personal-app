@@ -15,16 +15,8 @@ import {
 import uuid from "react-native-uuid";
 import { faBitcoin, faChrome } from "@fortawesome/free-brands-svg-icons";
 import useIsFirstTwoRenders from "../../../Hooks/useIsFirstRender";
-
-interface Props {
-  data: {
-    image: string;
-    text: {
-      heading: string;
-      body: string;
-    };
-  }[];
-}
+import dataJSON from "../../../Data/Koníčky/data.json";
+import { FormattedMessage } from "react-intl";
 
 const ICONS = [
   <FontAwesomeIcon icon={faChrome} />,
@@ -36,7 +28,7 @@ const ICONS = [
   <FontAwesomeIcon icon={faCalculator} />,
 ];
 
-const SimpleAccordion: React.FC<Props> = ({ data }) => {
+const SimpleAccordion: React.FC = () => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const firstRender = useIsFirstTwoRenders();
   const handleChange =
@@ -49,9 +41,7 @@ const SimpleAccordion: React.FC<Props> = ({ data }) => {
       className="w-100 h-100 d-flex flex-column align-items-center justify-content-center"
       style={{ transform: "scale(0.9)" }}
     >
-      {data.map((element, index) => {
-        const { heading, body } = element.text;
-
+      {dataJSON.map((element: { image: string }, index: number) => {
         return (
           <Accordion
             key={uuid.v4() as string}
@@ -77,11 +67,13 @@ const SimpleAccordion: React.FC<Props> = ({ data }) => {
                 className="heading-font custom-text"
               >
                 <p>{ICONS[index]}</p>
-                <p>{heading}</p>
+                <FormattedMessage id={`HABITS.HEADING.${index}`} />
               </div>
             </AccordionSummary>
             <AccordionDetails className="p-0 px-2 m-0">
-              <p className="custom-text text-font">{body}</p>
+              <p className="custom-text text-font">
+                <FormattedMessage id={`HABITS.PARAGRAPH.${index}`} />
+              </p>
             </AccordionDetails>
           </Accordion>
         );

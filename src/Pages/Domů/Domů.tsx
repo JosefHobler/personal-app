@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FormattedMessage, useIntl } from "react-intl";
 
 import Image2 from "../../Assets/MainImages/Image2.png";
 
@@ -13,6 +14,7 @@ import Container from "../../Components/Global/Container/Container";
 const Domů = () => {
   const dispatch = useAppDispatch();
   const prevPage = useAppSelector((state) => state.pages.prevPage);
+  const intl = useIntl();
 
   let animations = prevPage === 0 ? "animation-fadeOut" : "";
 
@@ -24,7 +26,7 @@ const Domů = () => {
   return (
     <>
       <div className={animations}>
-        <BackgroundText text="Domů" />
+        <BackgroundText text={intl.formatMessage({id: "MIXED.NAMES.0"})} />
       </div>
       <Container animations={animations}>
         <div className="d-flex justify-content-around align-items-center accessible-page ">
@@ -37,14 +39,12 @@ const Domů = () => {
                 fadeTopOrBottom === "animation-downEntry" ? "delay-2" : ""
               }`}
             >
-              Josef Hobler
+              <FormattedMessage id="DOMU.HEADING.NAME" />
             </h1>
             <p
               className={`mb-3 custom-text text-width-5 text-color text-font ${fadeTopOrBottom} delay-1`}
             >
-              Jsem mladý ambiciózní junior front-end developer, který v týmu
-              podpoří pozitivní a přátelskou atmosféru a bude plnit úkoly s
-              nejvyšším nasazením.
+              <FormattedMessage id="DOMU.PARAGRAPH.DESCRIPTION" />
             </p>
             <div
               className={`${fadeTopOrBottom} ${
@@ -56,7 +56,10 @@ const Domů = () => {
                 style={{ all: "unset" }}
                 to="/Kontakt"
               >
-                <CTAButton padding={3} text="Kontakt" />
+                <CTAButton
+                  padding={3}
+                  text={<FormattedMessage id="COMMON.BUTTON.CONTACT" />}
+                />
               </Link>
             </div>
           </div>

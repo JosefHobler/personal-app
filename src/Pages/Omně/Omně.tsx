@@ -17,8 +17,10 @@ import BackgroundText from "../../Components/Global/BackgroundText/BackgroundTex
 import CustomizedRating from "../../Components/Dovednosti/CustomizedRating";
 import Arrow from "../../Components/Global/HorizontalPointer/Arrow";
 import Container from "../../Components/Global/Container/Container";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
+  const intl = useIntl();
   const [image, setImage] = useState(Image1);
   const dispatch = useAppDispatch();
   const prevPage = useAppSelector((state) => state.pages.prevPage);
@@ -59,7 +61,7 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
   return (
     <>
       <div className={animations}>
-        <BackgroundText text="O mně" />
+        <BackgroundText text={intl.formatMessage({ id: "MIXED.NAMES.1" })} />
       </div>
       <Container
         animations={animations}
@@ -74,7 +76,7 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                 ${fadeTopOrBottom === "animation-downEntry" ? "delay-2" : ""}
                 `}
                 >
-                  Profil
+                  <FormattedMessage id="ABOUT.HEADING.PROFILE" />
                 </h2>
                 <p
                   className={`custom-text text-width-5 text-font text-color animation-fadeIn
@@ -85,10 +87,7 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                 }
                 `}
                 >
-                  Motivovaný a pracovitý student hledající uplatnění v praxi.
-                  Sebevědomí, pracovitost a odhodlání dosahovat nejlepších
-                  výsledků v oblasti tvorby webových stránek. Ochotný učit se
-                  novým věcem a zlepšovat v navyklých.
+                  <FormattedMessage id="ABOUT.PARAGRAPH.PROFILE" />
                 </p>
               </div>
               <div>
@@ -96,22 +95,28 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                   className={`heading-font heading-color ${fadeTopOrBottom} delay-1
                 `}
                 >
-                  Vzdělání
+                  <FormattedMessage id="ABOUT.HEADING.STUDY" />
                 </h2>
                 <p
                   className={`custom-text text-font text-color  animation-fadeIn 
                 delay-9
                 `}
                 >
-                  Studuji třetím rokem na{" "}
-                  <a
-                    target="_blank"
-                    href="https://gyza.cz/"
-                    className="text-info text-color"
-                  >
-                    Gymnáziu v Zábřeze na Moravě
-                  </a>
-                  .
+                  <FormattedMessage
+                    id="ABOUT.PARAGRAPH.STUDY"
+                    values={{
+                      linkGyza: (word) => (
+                        <a
+                          className="text-info text-color"
+                          href="https://www.proclient.cz/"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {word}
+                        </a>
+                      ),
+                    }}
+                  />
                 </p>
               </div>
               <div>
@@ -120,7 +125,7 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                   ${fadeTopOrBottom === "animation-downEntry" ? "" : "delay-2"}
                 `}
                 >
-                  Jazyky
+                  <FormattedMessage id="ABOUT.HEADING.LANGUAGES" />
                 </h2>
                 <div
                   className={`
@@ -132,15 +137,21 @@ const Omně: FC<PagesProps> = ({ sidewaysScroll }) => {
                 animation-fadeIn`}
                 >
                   <div className="d-flex align-items-start gap-3 custom-text">
-                    <p className="text-font text-color mb-1">Čeština</p>
+                    <p className="text-font text-color mb-1">
+                      <FormattedMessage id="ABOUT.HEADING.CZECH" />
+                    </p>
                     <CustomizedRating value={4} />
                   </div>
                   <div className="d-flex align-items-start gap-3 custom-text">
-                    <p className="text-font text-color mb-1">Angličtina</p>
+                    <p className="text-font text-color mb-1">
+                      <FormattedMessage id="ABOUT.HEADING.ENGLISH" />
+                    </p>
                     <CustomizedRating value={3.5} />
                   </div>
                   <div className="d-flex align-items-start gap-3 custom-text">
-                    <p className="text-font text-color">Španělština</p>
+                    <p className="text-font text-color">
+                      <FormattedMessage id="ABOUT.HEADING.SPANISH" />
+                    </p>
                     <CustomizedRating value={1} />
                   </div>
                 </div>

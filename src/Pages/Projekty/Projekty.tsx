@@ -3,8 +3,10 @@ import { useAppSelector } from "../../Hooks/useAppSelector";
 import BackgroundText from "../../Components/Global/BackgroundText/BackgroundText";
 import Container from "../../Components/Global/Container/Container";
 import CustomSwiper from "../../Components/Projekty/Swiper/CustomSwiper";
+import { useIntl } from "react-intl";
 
 const Projekty = () => {
+  const intl = useIntl();
   const prevPage = useAppSelector((state) => state.pages.prevPage);
 
   let animations = prevPage === 2 ? "animation-fadeOut" : "";
@@ -17,7 +19,7 @@ const Projekty = () => {
   return (
     <>
       <div className={animations}>
-        <BackgroundText text="Projekty" />
+        <BackgroundText text={intl.formatMessage({ id: "MIXED.NAMES.4" })} />
       </div>
       {/* Swiper template, XS */}
       <div

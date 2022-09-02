@@ -3,13 +3,11 @@ import { FC } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 
 interface Props {
-  text: {
-    heading: string;
-    body: string;
-  };
+  heading: string;
+  body: string;
 }
 
-const CardSmall: FC<Props> = ({ text: { heading, body } }) => {
+const CardSmall: FC<Props> = ({ heading, body }) => {
   return (
     <Card className="w-100 h-100">
       <CardContent className="animation-fadeIn delay-7 duration-5">

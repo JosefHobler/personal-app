@@ -9,6 +9,7 @@ import BackgroundText from "../../Components/Global/BackgroundText/BackgroundTex
 import CTAButton from "../../Components/Global/CallToAction/CTAButton";
 import Container from "../../Components/Global/Container/Container";
 import { useRefresh } from "../../Hooks/useRefresh";
+import { FormattedMessage, useIntl } from "react-intl";
 
 const Kontakt = () => {
   const [name, setName] = useState("");
@@ -19,6 +20,7 @@ const Kontakt = () => {
   const { width: windowWidth } = useWindowSize();
   const contactRef = useRef<HTMLFormElement>(null);
   const refresh = useRefresh();
+  const intl = useIntl();
 
   let animations = prevPage === 3 ? "animation-fadeOut" : "";
   let fadeTopOrBottom = "animation-downEntry";
@@ -75,7 +77,7 @@ const Kontakt = () => {
   return (
     <>
       <div className={animations}>
-        <BackgroundText text="Kontakt" />
+        <BackgroundText text={intl.formatMessage({id: "MIXED.NAMES.5"})} />
       </div>
       <Container animations={animations}>
         <div className="accessible-page d-flex justify-content-center align-items-center">
@@ -99,7 +101,9 @@ const Kontakt = () => {
                         value={name}
                         type="text"
                         onChange={(e) => setName(e.target.value)}
-                        placeholder="Jméno"
+                        placeholder={intl.formatMessage({
+                          id: "CONTACTS.FORM.NAME",
+                        })}
                       />
                       <input
                         className={`w-100 p-2 rounded  ${fadeTopOrBottom} ${
@@ -112,7 +116,9 @@ const Kontakt = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
+                        placeholder={intl.formatMessage({
+                          id: "CONTACTS.FORM.EMAIL",
+                        })}
                       />
                     </div>
                     <div style={{ height: "7%" }}>
@@ -127,7 +133,9 @@ const Kontakt = () => {
                         type="text"
                         value={subject}
                         onChange={(e) => setSubject(e.target.value)}
-                        placeholder="Předmět"
+                        placeholder={intl.formatMessage({
+                          id: "CONTACTS.FORM.SUBJECT",
+                        })}
                       />
                     </div>
                     <div
@@ -149,7 +157,9 @@ const Kontakt = () => {
                         value={message}
                         name="message"
                         onChange={(e) => setMessage(e.target.value)}
-                        placeholder="Zpráva"
+                        placeholder={intl.formatMessage({
+                          id: "CONTACTS.FORM.MESSAGE",
+                        })}
                       ></textarea>
                     </div>
                     <div
@@ -167,7 +177,7 @@ const Kontakt = () => {
                         <CTAButton
                           onClick={sendEmail}
                           rounded={true}
-                          text="Odeslat"
+                          text={<FormattedMessage id="COMMON.BUTTON.SEND" />}
                         />
                       </div>
                       <div
@@ -175,25 +185,21 @@ const Kontakt = () => {
                         style={{ color: "white", fontSize: "0.7rem" }}
                       >
                         <span className="lead delay-5 animation-fadeIn">
-                          Josef Hobler
+                          <FormattedMessage id="CONTACTS.MAP.NAME" />
                         </span>
                         <br />
                         <span className="delay-6 animation-fadeIn">
-                          Česká republika,
+                          <FormattedMessage id="CONTACTS.MAP.COUNTRY" />,
                         </span>
                         <br />
-
                         <span className="delay-7 animation-fadeIn">
-                          Lomená 193
-                        </span>
-                        <br />
-                        <span className="delay-8 animation-fadeIn">
-                          Olomoucký kraj, Leština
+                          <FormattedMessage id="CONTACTS.MAP.REGION" />,{" "}
+                          <FormattedMessage id="CONTACTS.MAP.CITY" />
                         </span>
                         <br />
                         <br />
-                        <span className="delay-9  animation-fadeIn">
-                          pepous.hoblik@gmail.com
+                        <span className="delay-8  animation-fadeIn">
+                          <FormattedMessage id="CONTACTS.MAP.EMAIL" />,
                         </span>
                       </div>
                     </div>
@@ -227,14 +233,14 @@ const Kontakt = () => {
                       className="lead delay-5  animation-fadeIn heading-font"
                       style={{ color: "rgba(0, 0, 0, 0.87)" }}
                     >
-                      Josef Hobler
+                      <FormattedMessage id="CONTACTS.MAP.NAME" />,
                     </span>
                     <br />
                     <span
                       className="delay-6  animation-fadeIn"
                       style={{ color: "rgba(0, 0, 0, 0.6)" }}
                     >
-                      Czech Republic,
+                      <FormattedMessage id="CONTACTS.MAP.COUNTRY" />,
                     </span>
                     <br />
 
@@ -242,28 +248,28 @@ const Kontakt = () => {
                       className="delay-7  animation-fadeIn"
                       style={{ color: "rgba(0, 0, 0, 0.6)" }}
                     >
-                      Leština
+                      <FormattedMessage id="CONTACTS.MAP.CITY" />
                     </span>
                     <br />
                     <span
                       className="delay-8  animation-fadeIn"
                       style={{ color: "rgba(0, 0, 0, 0.6)" }}
                     >
-                      okres Šumperk
+                      <FormattedMessage id="CONTACTS.MAP.COUNTY" />
                     </span>
                     <br />
                     <span
                       className="delay-9  animation-fadeIn"
                       style={{ color: "rgba(0, 0, 0, 0.6)" }}
                     >
-                      Olomoucký kraj
+                      <FormattedMessage id="CONTACTS.MAP.REGION" />
                     </span>
                     <br />
                     <span
                       className="delay-10  animation-fadeIn"
-                      style={{ color: "rgba(0, 0, 0, 0.8)" }}
+                      style={{ color: "rgba(0, 0, 0, 0.6)" }}
                     >
-                      pepous.hoblik@gmail.com
+                      <FormattedMessage id="CONTACTS.MAP.EMAIL" />
                     </span>
                   </div>
                 </MapContainer>
@@ -274,7 +280,11 @@ const Kontakt = () => {
                 fadeTopOrBottom === "animation-upEntry" ? "delay-3" : ""
               } d-none d-sm-block justify-content-between justify-content-md-start`}
             >
-              <CTAButton onClick={sendEmail} rounded={true} text="Odeslat" />
+              <CTAButton
+                onClick={sendEmail}
+                rounded={true}
+                text={<FormattedMessage id="COMMON.BUTTON.SEND" />}
+              />
             </div>
           </div>
         </div>

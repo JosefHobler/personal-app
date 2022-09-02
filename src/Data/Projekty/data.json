@@ -1,22 +1,10 @@
-
-{"data":[
-
+[
     {
-      "image": "screenshot1.png",
-      "link": "https://josefhobler.netlify.app",  
-      "text": {
-        "heading": "Osobní stránka",
-        "body": "Moje osobní webová stránka sloužící jako ukázka mé práce."
-      }
+        "link": "https://josefhobler.netlify.app",
+        "image": "screenshot1.png"
     },
     {
-      "image": "ComingSoon.jpg",
-      "link": "#",  
-      "text": {
-        "heading": "Coming soon...",
-        "body": " "
-      }
+        "link": "https://www.kurzymen.cz",
+        "image": "screenshot2.png"
     }
-  ]
-  }
-  
+]
