@@ -11,6 +11,8 @@ import Container from "../../Components/Global/Container/Container";
 import { useRefresh } from "../../Hooks/useRefresh";
 import { FormattedMessage, useIntl } from "react-intl";
 import useDocumentTitle from "../../Hooks/useDocumentTitle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPhone } from "@fortawesome/free-solid-svg-icons";
 
 const Kontakt = () => {
   useDocumentTitle("Contact | Josef Hobler");
@@ -91,7 +93,23 @@ const Kontakt = () => {
               <div className="col-md-5 col-sm-6 col-lg-5 h-100">
                 <form onSubmit={sendEmail} className="h-100" ref={contactRef}>
                   <div className="d-flex flex-column gap-1 h-100">
-                    <div className="d-flex gap-1" style={{ height: "7%" }}>
+                    <div
+                      className="d-flex gap-1 position-relative"
+                      style={{ height: "7%" }}
+                    >
+                      <div
+                        style={{ top: "-25px", right: 0, color: "white" }}
+                        className="position-absolute d-flex align-items-center  animation-fadeIn delay-8 duration-3"
+                      >
+                        <FontAwesomeIcon
+                          color="secondary"
+                          className="me-2 orange-shadow orange-color"
+                          icon={faPhone}
+                        />
+                        +420<span className="mx-1">732</span>
+                        <span className="me-1">578</span>
+                        <span className="me-1">524</span>
+                      </div>
                       <input
                         name="from_name"
                         className={`w-100 p-2 rounded ${fadeTopOrBottom} ${
@@ -191,7 +209,7 @@ const Kontakt = () => {
                         </span>
                         <br />
                         <span className="delay-6 animation-fadeIn">
-                          <FormattedMessage id="CONTACTS.MAP.COUNTRY" />,
+                          <FormattedMessage id="CONTACTS.MAP.COUNTRY" />
                         </span>
                         <br />
                         <span className="delay-7 animation-fadeIn">
@@ -199,9 +217,13 @@ const Kontakt = () => {
                           <FormattedMessage id="CONTACTS.MAP.CITY" />
                         </span>
                         <br />
+                        <span className="delay-8 animation-fadeIn">
+                          <FormattedMessage id="CONTACTS.MAP.COUNTY" />
+                        </span>
                         <br />
-                        <span className="delay-8  animation-fadeIn">
-                          <FormattedMessage id="CONTACTS.MAP.EMAIL" />,
+                        <br />
+                        <span className="delay-9 animation-fadeIn">
+                          <FormattedMessage id="CONTACTS.MAP.EMAIL" />
                         </span>
                       </div>
                     </div>

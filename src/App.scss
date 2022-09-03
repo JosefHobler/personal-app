@@ -92,6 +92,10 @@ body {
   color: #cccccc !important;
 }
 
+.orange-color {
+  color: var(--secondary-color) !important;
+}
+
 // Animations
 @mixin animation-mixin(
   $animation-name: none,

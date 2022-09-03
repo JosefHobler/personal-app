@@ -36,7 +36,7 @@ const Dovednosti: FC<PagesProps> = ({ sidewaysScroll }) => {
     onSwipedLeft: () => handleRight(),
     onSwipedRight: () => handleLeft(),
     delta: 100,
-  });f
+  });
 
   let animations = prevPage === 4 ? "animation-fadeOut" : "";
 
