@@ -103,12 +103,24 @@ const Kontakt = () => {
                       >
                         <FontAwesomeIcon
                           color="secondary"
-                          className="me-2 orange-shadow orange-color"
+                          className={`me-2 orange-shadow orange-color ${fadeTopOrBottom} ${
+                            fadeTopOrBottom === "animation-upEntry"
+                              ? ""
+                              : "delay-4"
+                          }`}
                           icon={faPhone}
                         />
-                        +420<span className="mx-1">732</span>
-                        <span className="me-1">578</span>
-                        <span className="me-1">524</span>
+                        <div
+                          className={`${fadeTopOrBottom} ${
+                            fadeTopOrBottom === "animation-upEntry"
+                              ? ""
+                              : "delay-4"
+                          }`}
+                        >
+                          +420<span className="mx-1">732</span>
+                          <span className="me-1">578</span>
+                          <span className="me-1">524</span>
+                        </div>
                       </div>
                       <input
                         name="from_name"

@@ -66,7 +66,7 @@ function App() {
     setTimeout(() => {
       wait.current = false;
       refresh();
-    }, 2200);
+    }, 1850);
     return undefined;
   }
 
@@ -94,7 +94,7 @@ function App() {
     setTimeout(() => {
       wait.current = false;
       refresh();
-    }, 2200);
+    }, 1850);
   }
 
   // Handling page flow
@@ -167,7 +167,7 @@ function App() {
     if (lastRender.current) return;
     const timeout = setTimeout(() => {
       history(MAIN_PAGES[curPage]);
-    }, 2200);
+    }, 1850);
     return () => clearTimeout(timeout);
   }, [curPage]);
 
