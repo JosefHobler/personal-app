@@ -1,6 +1,8 @@
 import { FC } from "react";
 
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import snowboarding from "../../../Assets/Konicky/snowboarding.webp";
+import programming from "../../../Assets/Konicky/programming.webp";
 
 interface Props {
   image: string;
@@ -9,6 +11,9 @@ interface Props {
 }
 
 const CardHorizontalLarge: FC<Props> = ({ image, heading, body }) => {
+  console.log(image);
+  const imageToShow = image === "snowboarding" ? snowboarding : programming;
+
   return (
     <Card className="w-100 h-100 d-flex">
       <CardMedia
@@ -18,7 +23,7 @@ const CardHorizontalLarge: FC<Props> = ({ image, heading, body }) => {
           height: "25vh",
           width: "calc(75vw / 4)",
         }}
-        image={require(`${process.env.REACT_APP_CLIENT_URL}/Assets/Konicky/${image}`)}
+        image={imageToShow}
         alt={heading}
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>

@@ -23,8 +23,15 @@ import useIsFirstTwoRenders from "../../Hooks/useIsFirstRender";
 import { FormattedMessage, useIntl } from "react-intl";
 import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
+import snowboarding from "../../Assets/Konicky/snowboarding.webp";
+import programming from "../../Assets/Konicky/programming.webp";
+import webdevelopment from "../../Assets/Konicky/web-development.webp";
+import fitness from "../../Assets/Konicky/fitness.jpg";
+import crypto from "../../Assets/Konicky/crypto.webp";
+import math from "../../Assets/Konicky/math.jpg";
+import personaldevelopment from "../../Assets/Konicky/personal-development.webp";
+
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
-  console.log(process.env.REACT_APP_CLIENT_URL);
   useDocumentTitle("Habits | Josef Hobler");
   const intl = useIntl();
   const [cards, setCards] = useState([
@@ -77,6 +84,28 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
   const cardCreatorMD = (lowerLimit: number, upperLimit: number) => {
     let content = [];
     for (let i = lowerLimit; i < upperLimit; i++) {
+      let imageToShow = webdevelopment;
+      switch (dataJSON[i].image) {
+        case "snowboarding":
+          imageToShow = snowboarding;
+          break;
+        case "fitness":
+          imageToShow = fitness;
+          break;
+        case "crypto":
+          imageToShow = crypto;
+          break;
+        case "personaldevelopment":
+          imageToShow = personaldevelopment;
+          break;
+        case "programming":
+          imageToShow = programming;
+          break;
+        case "math":
+          imageToShow = math;
+          break;
+      }
+
       content.push(
         <Card
           key={uuid.v4() as Key}
@@ -108,7 +137,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
             </div>
           ) : (
             <img
-              src={require(`${process.env.REACT_APP_CLIENT_URL}/Assets/Konicky/${dataJSON[i].image}`)}
+              src={imageToShow}
               className={`img-fluid ${prevCards[i] ? "animation-fadeIn" : ""} ${
                 firstRenders ? "delay-5 duration-5" : "delay-1 duration-3"
               }`}
