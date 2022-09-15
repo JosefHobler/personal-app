@@ -1,10 +1,10 @@
 export const MAIN_PAGES = [
   "/",
-  "/About",
-  "/Projects",
-  "/Contact",
-  "/About/Skills",
-  "/About/Habits",
+  "/about",
+  "/projects",
+  "/contact",
+  "/about/skills",
+  "/about/habits",
 ];
 
 export enum SCROLL_VERTICAL {

@@ -16,7 +16,7 @@ const CardVerticalLarge: FC<Props> = ({ image, heading, body }) => {
           className="animation-fadeIn delay-5 duration-5"
           component="img"
           alt={heading}
-          image={require(`../../../Assets/Konicky/${image}`)}
+          image={require(`${process.env.REACT_APP_CLIENT_URL}/Assets/Konicky/${image}`)}
         />
       </div>
       <CardContent className="animation-fadeIn delay-7 duration-5">

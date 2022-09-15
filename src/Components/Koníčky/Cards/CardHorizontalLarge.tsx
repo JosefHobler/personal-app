@@ -18,7 +18,7 @@ const CardHorizontalLarge: FC<Props> = ({ image, heading, body }) => {
           height: "25vh",
           width: "calc(75vw / 4)",
         }}
-        image={require(`../../../Assets/Konicky/${image}`)}
+        image={require(`${process.env.REACT_APP_CLIENT_URL}/Assets/Konicky/${image}`)}
         alt={heading}
       />
       <Box sx={{ display: "flex", flexDirection: "column" }}>

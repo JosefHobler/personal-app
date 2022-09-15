@@ -24,6 +24,7 @@ import { FormattedMessage, useIntl } from "react-intl";
 import useDocumentTitle from "../../Hooks/useDocumentTitle";
 
 const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
+  console.log(process.env.REACT_APP_CLIENT_URL);
   useDocumentTitle("Habits | Josef Hobler");
   const intl = useIntl();
   const [cards, setCards] = useState([
@@ -107,7 +108,7 @@ const Koníčky: FC<PagesProps> = ({ sidewaysScroll }) => {
             </div>
           ) : (
             <img
-              src={require(`../../Assets/Konicky/${dataJSON[i].image}`)}
+              src={require(`${process.env.REACT_APP_CLIENT_URL}/Assets/Konicky/${dataJSON[i].image}`)}
               className={`img-fluid ${prevCards[i] ? "animation-fadeIn" : ""} ${
                 firstRenders ? "delay-5 duration-5" : "delay-1 duration-3"
               }`}
