@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/personal-app/static/css/main.c369a1d4.css",
+    "main.js": "/personal-app/static/js/main.9a505e38.js",
+    "static/js/787.5c7a1ca7.chunk.js": "/personal-app/static/js/787.5c7a1ca7.chunk.js",
+    "static/media/fitness.jpg": "/personal-app/static/media/fitness.1c7e75cc4a91d36d948c.jpg",
+    "static/media/Image3.png": "/personal-app/static/media/Image3.1c19710594f43593b08f.png",
+    "static/media/math.jpg": "/personal-app/static/media/math.1b5dc8b73832ec6fff3f.jpg",
+    "static/media/Image4.png": "/personal-app/static/media/Image4.9642a1f3c6819bf3eaa9.png",
+    "static/media/Image2.png": "/personal-app/static/media/Image2.f7255db0a7064acd0e84.png",
+    "static/media/screenshot2.png": "/personal-app/static/media/screenshot2.faaff6119c786d2513c4.png",
+    "static/media/web-development.webp": "/personal-app/static/media/web-development.d1debc801e56d2731166.webp",
+    "static/media/snowboarding.webp": "/personal-app/static/media/snowboarding.bfb8988931a54870f730.webp",
+    "static/media/Image5.png": "/personal-app/static/media/Image5.00cf79cdf71abde5e836.png",
+    "static/media/Image1.png": "/personal-app/static/media/Image1.f9cff6a144c4d5b8d627.png",
+    "static/media/screenshot1.png": "/personal-app/static/media/screenshot1.2e444ce7ea1f0f9e0db3.png",
+    "static/media/programming.webp": "/personal-app/static/media/programming.d0b8627063c5dbec65da.webp",
+    "static/media/crypto.webp": "/personal-app/static/media/crypto.1fc506025312aba6fb92.webp",
+    "static/media/UnitedStates.svg": "/personal-app/static/media/UnitedStates.a4482e8de9e2ecc7e2fa9ca2efc1a286.svg",
+    "static/media/personal-development.webp": "/personal-app/static/media/personal-development.bb39330c78258b02a27c.webp",
+    "index.html": "/personal-app/index.html",
+    "static/media/CzechRepublic.svg": "/personal-app/static/media/CzechRepublic.743bc12c0ea86cbbd4caae06e980b8a3.svg",
+    "static/media/logo.svg": "/personal-app/static/media/logo.97bfe1041279ed4a241a407d9d651726.svg",
+    "main.c369a1d4.css.map": "/personal-app/static/css/main.c369a1d4.css.map",
+    "main.9a505e38.js.map": "/personal-app/static/js/main.9a505e38.js.map",
+    "787.5c7a1ca7.chunk.js.map": "/personal-app/static/js/787.5c7a1ca7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c369a1d4.css",
+    "static/js/main.9a505e38.js"
+  ]
+}

@@ -207,22 +207,22 @@ function App() {
         <div className="accessible-page">
           <Routes>
             <Route path="/" element={<Domů />} />
-            <Route element={<About />} path="/About">
+            <Route element={<About />} path="/about">
               <Route
                 element={<Omně sidewaysScroll={sidewaysScroll} />}
-                path="/About"
+                path="/about"
               />
               <Route
                 element={<Dovednosti sidewaysScroll={sidewaysScroll} />}
-                path="/About/Skills"
+                path="/about/skills"
               />
               <Route
                 element={<Koníčky sidewaysScroll={sidewaysScroll} />}
-                path="/About/Habits"
+                path="/about/habits"
               />
             </Route>
-            <Route element={<Projekty />} path="/Projects" />
-            <Route element={<Kontakt />} path="/Contact" />
+            <Route element={<Projekty />} path="/projects" />
+            <Route element={<Kontakt />} path="/contact" />
             <Route element={<Domů />} />
           </Routes>
         </div>
